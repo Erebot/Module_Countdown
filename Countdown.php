@@ -16,7 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('modules/Countdown/src/game.php');
+include_once(dirname(__FILE__).'/src/game.php');
 
 class   ErebotModule_Countdown
 extends ErebotModuleBase
