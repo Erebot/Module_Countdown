@@ -89,7 +89,11 @@ ${summary}
         <include name="**/*.php"/>
     </fileset>
 
-    <target name="all" depends="i18n" description=""/>
+    <target name="all" depends="parser,i18n" description=""/>
+
+    <target name="parser" description="">
+        <exec command="phplemon -q -s src/parser.y"/>
+    </target>
 
     <!-- Internationalization -->
     <target name="i18n" depends="compile_catalog"/>
