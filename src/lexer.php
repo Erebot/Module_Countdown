@@ -16,7 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('modules/Countdown/src/parser.php');
+include_once(__DIR__.'/parser.php');
 
 class CountdownLexer
 {
