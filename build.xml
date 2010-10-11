@@ -216,6 +216,7 @@ Generic_Sniffs_Files_LineEndingsSniff
     <target name="qa_coverage" description="" depends="qa_test">
         <mkdir dir="doc"/>
         <mkdir dir="doc/coverage"/>
+        <php expression="class ErebotModuleBase {}"/>
         <coverage-report outfile="${qa.coverage-tmp}">
             <report todir="doc/coverage" styledir="/usr/share/php/data/phing/etc/"/>
         </coverage-report>
