@@ -81,7 +81,7 @@ ${summary}
     }
     ]]></adhoc-task>
 
-    <fileset id="sources">
+    <fileset dir="." id="sources">
         <include name="src/**/*.php"/>
         <include name="*.php"/>
     </fileset>
