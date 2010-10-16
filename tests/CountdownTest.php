@@ -84,20 +84,21 @@ extends PHPUnit_Framework_TestCase
         $this->countdown->proposeFormula($obj);
     }
 
-    public function testSolverGivesBestFormula()
-    {
-        $this->markTestIncomplete('No solver yet');
+    /// @FIXME: this could really be useful, to nag players ;p
+#    public function testSolverGivesBestFormula()
+#    {
+#        $this->markTestIncomplete('No solver yet');
 
-        $solver     = $this->countdown->solve();
-        $this->countdown->proposeFormula($solver);
+#        $solver     = $this->countdown->solve();
+#        $this->countdown->proposeFormula($solver);
 
-        $numbers    = $this->countdown->getNumbers();
-        $obj        = new CountdownFormula('foo', implode('+', $numbers));
-        $this->countdown->proposeFormula($obj);
-        $obj        = new CountdownFormula('foo', implode('*', $numbers));
-        $this->countdown->proposeFormula($obj);
-        $this->assertSame($solver, $this->countdown->getBestProposal());
-    }
+#        $numbers    = $this->countdown->getNumbers();
+#        $obj        = new CountdownFormula('foo', implode('+', $numbers));
+#        $this->countdown->proposeFormula($obj);
+#        $obj        = new CountdownFormula('foo', implode('*', $numbers));
+#        $this->countdown->proposeFormula($obj);
+#        $this->assertSame($solver, $this->countdown->getBestProposal());
+#    }
 
     public function testReturnsBestProposedFormula()
     {
