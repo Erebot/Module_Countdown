@@ -88,6 +88,8 @@ ${summary}
 
     <fileset dir="tests/" id="tests">
         <include name="**/*.php"/>
+        <exclude name="testenv/**/*.php"/>
+        <exclude name="Core/**/*.php"/>
     </fileset>
 
     <target name="all" depends="parser,i18n" description=""/>
