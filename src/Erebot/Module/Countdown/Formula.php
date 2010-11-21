@@ -16,9 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(__DIR__.'/lexer.php');
-
-class CountdownFormula
+class Erebot_Module_Countdown_Formula
 {
     protected $lexer;
     protected $owner;
@@ -27,12 +25,12 @@ class CountdownFormula
     public function __construct($owner, $formula)
     {
         if (!is_string($formula) || $formula == '')
-            throw new ECountdownFormulaMustBeAString();
+            throw new Erebot_Module_Countdown_FormulaMustBeAStringException();
 
         $this->owner        =   $owner;
         $this->formula      =   $formula;
         $formula            =   str_replace(' ', '', $formula);
-        $this->lexer        =   new CountdownLexer($formula);
+        $this->lexer        =   new Erebot_Module_Countdown_Lexer($formula);
     }
 
     public function __destruct()
@@ -61,4 +59,3 @@ class CountdownFormula
     }
 }
 
-?>

@@ -16,9 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(__DIR__.'/parser.php');
-
-class CountdownLexer
+class Erebot_Module_Countdown_Lexer
 {
     protected $formula;
     protected $length;
@@ -37,7 +35,7 @@ class CountdownLexer
         $this->position = 0;
         $this->numbers  = array();
 
-        $this->parser   = new CountdownParser();
+        $this->parser   = new Erebot_Module_Countdown_Parser();
         $this->tokenize();
     }
 
@@ -47,12 +45,12 @@ class CountdownLexer
     protected function tokenize()
     {
         $operators = array(
-            '(' =>  CountdownParser::TK_PAR_OPEN,
-            ')' =>  CountdownParser::TK_PAR_CLOSE,
-            '+' =>  CountdownParser::TK_OP_ADD,
-            '-' =>  CountdownParser::TK_OP_SUB,
-            '*' =>  CountdownParser::TK_OP_MUL,
-            '/' =>  CountdownParser::TK_OP_DIV,
+            '(' =>  Erebot_Module_Countdown_Parser::TK_PAR_OPEN,
+            ')' =>  Erebot_Module_Countdown_Parser::TK_PAR_CLOSE,
+            '+' =>  Erebot_Module_Countdown_Parser::TK_OP_ADD,
+            '-' =>  Erebot_Module_Countdown_Parser::TK_OP_SUB,
+            '*' =>  Erebot_Module_Countdown_Parser::TK_OP_MUL,
+            '/' =>  Erebot_Module_Countdown_Parser::TK_OP_DIV,
 
         );
 
@@ -70,11 +68,14 @@ class CountdownLexer
                 $this->position += strlen($matches[0]);
                 $integer            = (int) $matches[0];
                 $this->numbers[]    = $integer;
-                $this->parser->doParse(CountdownParser::TK_INTEGER, $integer);
+                $this->parser->doParse(
+                    Erebot_Module_Countdown_Parser::TK_INTEGER,
+                    $integer
+                );
                 continue;
             }
 
-            // This will like result in an exception
+            // This will likely result in an exception
             // being thrown, which is actually good!
             $this->parser->doParse(0, 0);
         }
@@ -84,4 +85,3 @@ class CountdownLexer
     }
 }
 
-?>

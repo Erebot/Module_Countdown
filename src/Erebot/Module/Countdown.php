@@ -16,13 +16,14 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(dirname(__FILE__).'/src/game.php');
-
-class   ErebotModule_Countdown
-extends ErebotModuleBase
+class   Erebot_Module_Countdown
+extends Erebot_Module_Base
 {
     static protected $_metadata = array(
-        'requires'  =>  array('TriggerRegistry', 'Helper'),
+        'requires'  =>  array(
+            'Erebot_Module_TriggerRegistry',
+            'Erebot_Module_Helper',
+        ),
     );
     protected $_trigger;
     protected $_startHandler;
@@ -35,10 +36,10 @@ extends ErebotModuleBase
     {
         if ($flags & self::RELOAD_HANDLERS) {
             $registry   = $this->_connection->getModule(
-                'TriggerRegistry',
-                ErebotConnection::MODULE_BY_NAME
+                'Erebot_Module_TriggerRegistry',
+                Erebot_Connection::MODULE_BY_NAME
             );
-            $matchAny  = ErebotUtils::getVStatic($registry, 'MATCH_ANY');
+            $matchAny  = Erebot_Utils::getVStatic($registry, 'MATCH_ANY');
 
             if (!($flags & self::RELOAD_INIT)) {
                 $this->connection->removeEventHandler($this->startHandler);
@@ -51,39 +52,39 @@ extends ErebotModuleBase
                 throw new Exception($this->_translator->gettext(
                     'Could not register Countdown trigger'));
 
-            $targets    = new ErebotEventTargets(ErebotEventTargets::ORDER_ALLOW_DENY);
+            $targets    = new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY);
             $targets->addRule(
-                ErebotEventTargets::TYPE_ALLOW,
-                ErebotEventTargets::MATCH_ALL,
-                ErebotEventTargets::MATCH_CHANNEL);
+                Erebot_EventTarget::TYPE_ALLOW,
+                Erebot_EventTarget::MATCH_ALL,
+                Erebot_EventTarget::MATCH_CHANNEL);
 
-            $filter                 = new ErebotTextFilter(
+            $filter                 = new Erebot_TextFilter(
                                             $this->_mainCfg,
-                                            ErebotTextFilter::TYPE_STATIC,
+                                            Erebot_TextFilter::TYPE_STATIC,
                                             $trigger, TRUE);
-            $this->_startHandler    = new ErebotEventHandler(
+            $this->_startHandler    = new Erebot_EventHandler(
                                                 array($this, 'handleCountdown'),
-                                                'ErebotEventTextChan',
+                                                'Erebot_Event_ChanText',
                                                 $targets, $filter);
             $this->_connection->addEventHandler($this->_startHandler);
 
-            $targets            = new ErebotEventTargets(ErebotEventTargets::ORDER_ALLOW_DENY);
-            $filter             = new ErebotTextFilter(
+            $targets            = new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY);
+            $filter             = new Erebot_TextFilter(
                                         $this->_mainCfg,
-                                        ErebotTextFilter::TYPE_REGEXP,
+                                        Erebot_TextFilter::TYPE_REGEXP,
                                         self::FORMULA_FILTER, FALSE);
-            $this->_rawHandler  = new ErebotEventHandler(
+            $this->_rawHandler  = new Erebot_EventHandler(
                                             array($this, 'handleRawText'),
-                                            'ErebotEventTextChan',
+                                            'Erebot_Event_ChanText',
                                             $targets, $filter);
             $this->_connection->addEventHandler($this->_rawHandler);
             $this->registerHelpMethod(array($this, 'getHelp'));
         }
     }
 
-    public function getHelp(iErebotEventMessageText &$event, $words)
+    public function getHelp(Erebot_Interface_Event_TextMessage &$event, $words)
     {
-        if ($event instanceof iErebotEventPrivate) {
+        if ($event instanceof Erebot_Interface_Event_Private) {
             $target = $event->getSource();
             $chan   = NULL;
         }
@@ -103,7 +104,7 @@ Provides the <b><var name="trigger"/></b> command which starts
 a new Countdown game where contestants must propose a formula
 to be as close as possible to a given number.
 ');
-            $formatter = new ErebotStyling($msg, $translator);
+            $formatter = new Erebot_Styling($msg, $translator);
             $formatter->assign('trigger', $trigger);
             $this->sendMessage($target, $formatter->render());
             return TRUE;
@@ -119,7 +120,7 @@ Starts a new Countdown game. Given a set of numbers and a target result,
 contestants must propose formulae to be as close as possible to the result.
 The first one to get the target result or the closest result wins the game.
 ");
-            $formatter = new ErebotStyling($msg, $translator);
+            $formatter = new Erebot_Styling($msg, $translator);
             $formatter->assign('trigger', $trigger);
             $this->sendMessage($target, $formatter->render());
 
@@ -128,14 +129,14 @@ Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - 7').
 The four basic operators (+, -, *, /) and parenthesis are supported.
 Non-integral divisions (eg. 5/2) are forbidden.
 ");
-            $formatter = new ErebotStyling($msg, $translator);
+            $formatter = new Erebot_Styling($msg, $translator);
             $this->sendMessage($target, $formatter->render());
 
             return TRUE;
         }
     }
 
-    public function handleCountdown(iErebotEvent &$event)
+    public function handleCountdown(Erebot_Interface_Event_Generic &$event)
     {
         $chan       = $event->getChan();
         $translator = $this->getTranslator($chan);
@@ -147,7 +148,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
                             '</b> using the following numbers: '.
                             '<for from="numbers" item="number"><b><var '.
                             'name="number"/></b></for>.');
-            $tpl    = new ErebotStyling($msg, $translator);
+            $tpl    = new Erebot_Styling($msg, $translator);
             $tpl->assign('target',      $game->getTarget());
             $tpl->assign('numbers',     $game->getNumbers());
             $this->sendMessage($chan, $tpl->render());
@@ -158,7 +159,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
             $msg    = $translator->gettext('So far, <b><var name="nick"/></b> has '.
                             'achieved <b><var name="result"/></b> using this '.
                             'formula: <b><var name="formula"/></b>');
-            $tpl    = new ErebotStyling($msg, $translator);
+            $tpl    = new Erebot_Styling($msg, $translator);
             $tpl->assign('nick',    $best->getOwner());
             $tpl->assign('result',  $best->getResult());
             $tpl->assign('formula', $best->getFormula());
@@ -172,20 +173,20 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $allowed    = $this->parseString('allowed', '1 2 3 4 5 6 7 8 9 10 25 50 75 100');
         $allowed    = array_map('intval', array_filter(explode(' ', $allowed)));
 
-        $game   =   new Countdown($minTarget, $maxTarget, $nbNumbers, $allowed);
+        $game   =   new Erebot_Module_Countdown_Game($minTarget, $maxTarget, $nbNumbers, $allowed);
         $delay  =   $this->parseInt('delay', 60);
         $msg    =   $translator->gettext('A new Countdown game has been started. '.
                         'You must get <b><var name="target"/></b> using the '.
                         'following numbers <for from="numbers" item="number">'.
                         '<b><var name="number"/></b></for>. You have <var '.
                         'name="delay"/> seconds to make suggestions.');
-        $tpl    = new ErebotStyling($msg, $translator);
+        $tpl    = new Erebot_Styling($msg, $translator);
         $tpl->assign('target',  $game->getTarget());
         $tpl->assign('numbers', $game->getNumbers());
         $tpl->assign('delay',   $delay);
         $this->sendMessage($chan, $tpl->render());
 
-        $timer  = new ErebotTimer(array($this, 'handleTimeOut'), $delay, FALSE);
+        $timer  = new Erebot_Timer(array($this, 'handleTimeOut'), $delay, FALSE);
         $this->_game[$chan] = array(
             'game'  => $game,
             'timer' => $timer,
@@ -193,12 +194,14 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $this->addTimer($timer);
 
         $targets =& $this->_rawHandler->getTargets();
-        $targets->addRule(  ErebotEventTargets::TYPE_ALLOW,
-                            ErebotEventTargets::MATCH_ALL,
-                            $chan);
+        $targets->addRule(
+            Erebot_EventTarget::TYPE_ALLOW,
+            Erebot_EventTarget::MATCH_ALL,
+            $chan
+        );
     }
 
-    public function handleRawText(iErebotEvent &$event)
+    public function handleRawText(Erebot_Interface_Event_Generic &$event)
     {
         $chan       = $event->getChan();
         $nick       = $event->getSource();
@@ -206,26 +209,21 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $translator = $this->getTranslator($chan);
 
         try {
-            $formula = new CountdownFormula($nick, $text);
+            $formula = new Erebot_Module_Countdown_Formula($nick, $text);
         }
-        catch (ECountdownFormulaMustBeAString $e) {
+        catch (Erebot_Module_Countdown_FormulaMustBeAStringException $e) {
             throw new Exception($translator->gettext(
                 'Expected the formula to be a string'));
         }
-        catch (ECountdownInvalidToken $e) {
-            return $this->sendMessage($chan, sprintf($translator->gettext(
-                'Invalid token near "%1$s" at offset %2$d'),
-                $e->getExcerpt(), $e->getPosition()));
-        }
-        catch (ECountdownDivisionByZero $e) {
+        catch (Erebot_Module_Countdown_DivisionByZeroException $e) {
             return $this->sendMessage($chan, $translator->gettext(
                 'Division by zero'));
         }
-        catch (ECountdownNonIntegralDivision $e) {
+        catch (Erebot_Module_Countdown_NonIntegralDivisionException $e) {
             return $this->sendMessage($chan, $translator->gettext(
                 'Non integral division'));
         }
-        catch (ECountdownSyntaxError $e) {
+        catch (Erebot_Module_Countdown_SyntaxErrorException $e) {
             return $this->sendMessage($chan, $translator->gettext(
                 'Syntax error'));
         }
@@ -234,7 +232,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
         try {
             $best = $game->proposeFormula($formula);
         }
-        catch (ECountdownNoSuchNumberOrAlreadyUsed $e) {
+        catch (Erebot_Module_Countdown_UnavailableNumberException $e) {
             return $this->sendMessage($chan, $translator->gettext(
                 'No such number or number already used'));
         }
@@ -244,7 +242,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
                 $msg    =   $translator->gettext('<b>BINGO! <var name="nick"/></b> '.
                                 'has achieved <b><var name="result"/></b> with '.
                                 'this formula: <b><var name="formula"/></b>.');
-                $tpl    = new ErebotStyling($msg, $translator);
+                $tpl    = new Erebot_Styling($msg, $translator);
                 $tpl->assign('nick',    $nick);
                 $tpl->assign('result',  $formula->getResult());
                 $tpl->assign('formula', $formula->getFormula());
@@ -252,9 +250,11 @@ Non-integral divisions (eg. 5/2) are forbidden.
 
                 $this->removeTimer($this->_game[$chan]['timer']);
                 $targets =& $this->_rawHandler->getTargets();
-                $targets->removeRule(   ErebotEventTargets::TYPE_ALLOW,
-                                        ErebotEventTargets::MATCH_ALL,
-                                        $chan);
+                $targets->removeRule(
+                    Erebot_EventTarget::TYPE_ALLOW,
+                    Erebot_EventTarget::MATCH_ALL,
+                    $chan
+                );
                 unset($this->_game[$chan]);
                 return;
             }
@@ -262,7 +262,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
             $msg    = $translator->gettext(
                 'Congratulations <b><var name="nick"/></b>! You\'re '.
                 'the closest with <b><var name="result"/></b>.');
-            $tpl    = new ErebotStyling($msg, $translator);
+            $tpl    = new Erebot_Styling($msg, $translator);
             $tpl->assign('nick',    $nick);
             $tpl->assign('result',  $formula->getResult());
             $this->sendMessage($chan, $tpl->render());
@@ -272,13 +272,13 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $msg    =   $translator->gettext('Not bad <b><var name="nick"/></b>, you '.
                         'actually got <b><var name="result"/></b>, but this '.
                         'is not the best formula... Try again ;)');
-        $tpl    = new ErebotStyling($msg, $translator);
+        $tpl    = new Erebot_Styling($msg, $translator);
         $tpl->assign('nick',    $nick);
         $tpl->assign('result',  $formula->getResult());
         $this->sendMessage($chan, $tpl->render());
     }
 
-    public function handleTimeOut(iErebotTimer &$timer)
+    public function handleTimeOut(Erebot_Interface_Timer &$timer)
     {
         $chan = $game = NULL;
         foreach ($this->_game as $key => &$data) {
@@ -295,9 +295,11 @@ Non-integral divisions (eg. 5/2) are forbidden.
 
         $translator = $this->getTranslator($chan);
         $targets =& $this->_rawHandler->getTargets();
-        $targets->removeRule(   ErebotEventTargets::TYPE_ALLOW,
-                                ErebotEventTargets::MATCH_ALL,
-                                $chan);
+        $targets->removeRule(
+            Erebot_EventTarget::TYPE_ALLOW,
+            Erebot_EventTarget::MATCH_ALL,
+            $chan
+        );
         unset($this->_game[$chan]);
         unset($key, $data);
 
@@ -313,7 +315,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
                         '</b> who wins this Countdown game. <b><var name="'.
                         'nick"/></b> has got <b><var name="result"/></b> with '.
                         'this formula: <b><var name="formula"/></b>.');
-        $tpl    = new ErebotStyling($msg, $translator);
+        $tpl    = new Erebot_Styling($msg, $translator);
         $tpl->assign('nick',    $best->getOwner());
         $tpl->assign('result',  $best->getResult());
         $tpl->assign('formula', $best->getFormula());

@@ -16,8 +16,6 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(dirname(dirname(__FILE__)).'/src/formula.php');
-
 class   CountdownFormulaTest
 extends PHPUnit_Framework_TestCase
 {
@@ -25,20 +23,20 @@ extends PHPUnit_Framework_TestCase
 
     /**
      * The formula parser expects a string as its input.
-     * @expectedException ECountdownFormulaMustBeAString
+     * @expectedException Erebot_Module_Countdown_FormulaMustBeAStringException
      */
     public function testFormulaParsing()
     {
-        new CountdownFormula('foo', 42);
+        new Erebot_Module_Countdown_Formula('foo', 42);
     }
 
     /**
      * Using an empty string should throw an error.
-     * @expectedException ECountdownFormulaMustBeAString
+     * @expectedException Erebot_Module_Countdown_FormulaMustBeAStringException
      */
     public function testFormulaParsing2()
     {
-        new CountdownFormula('foo', '');
+        new Erebot_Module_Countdown_Formula('foo', '');
     }
 
     /**
@@ -48,7 +46,7 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing3()
     {
         $formula    = '42';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(42, $obj->getResult());
     }
 
@@ -58,7 +56,7 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing4()
     {
         $formula    = '40 + 2';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(42, $obj->getResult());
     }
 
@@ -68,7 +66,7 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing5()
     {
         $formula    = '6 * 7';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(42, $obj->getResult());
     }
 
@@ -78,7 +76,7 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing6()
     {
         $formula    = '45 - 3';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(42, $obj->getResult());
     }
 
@@ -88,7 +86,7 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing7()
     {
         $formula    = '42 / 6';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(7, $obj->getResult());
     }
 
@@ -98,18 +96,18 @@ extends PHPUnit_Framework_TestCase
     public function testFormulaParsing8()
     {
         $formula    = '2 + 2 * 20';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(42, $obj->getResult());
 
         $formula    = '(2 + 2) * 20';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertSame(80, $obj->getResult());
     }
 
     public function testGettingNumbersUsedInFormula()
     {
         $formula    = '1 + 2 * 42 / 7 + 1';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $numbers    = $obj->getNumbers();
         $used       = array(1, 2, 42, 7, 1);
         sort($used);
@@ -121,14 +119,14 @@ extends PHPUnit_Framework_TestCase
     public function testGetFormula()
     {
         $formula    = '1 + 2 * 42 / 7 + 1';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertEquals($formula, $obj->getFormula());
     }
 
     public function testGetOwner()
     {
         $formula    = '1 + 2 * 42 / 7 + 1';
-        $obj        = new CountdownFormula('foo', $formula);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
         $this->assertEquals('foo', $obj->getOwner());
     }
 }

@@ -16,33 +16,31 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once(dirname(dirname(__FILE__)).'/src/game.php');
-
 class   CountdownStub
-extends Countdown
+extends Erebot_Module_Countdown_Game
 {
     public function __construct()
     {
         parent::__construct(100, 110, 7, array(1));
-        $this->min = 7;
-        $this->max = 10;
+        $this->_min = 7;
+        $this->_max = 10;
     }
 }
 
 class   CountdownTest
 extends PHPUnit_Framework_TestCase
 {
-    protected $countdown = NULL;
+    protected $_countdown = NULL;
 
     public function setUp()
     {
-        $this->countdown = new Countdown();
+        $this->_countdown = new Erebot_Module_Countdown_Game();
     }
 
     public function tearDown()
     {
-        unset($this->countdown);
-        $this->countdown = NULL;
+        unset($this->_countdown);
+        $this->_countdown = NULL;
     }
 
     /**
@@ -52,7 +50,7 @@ extends PHPUnit_Framework_TestCase
      */
     public function testGetNumbers()
     {
-        $numbers    = $this->countdown->getNumbers();
+        $numbers    = $this->_countdown->getNumbers();
         $allowed    = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 25, 50, 75, 100);
         foreach ($numbers as $number)
             $this->assertContains($number, $allowed,
@@ -65,7 +63,7 @@ extends PHPUnit_Framework_TestCase
      */
     public function testGetTarget()
     {
-        $target         = $this->countdown->getTarget();
+        $target         = $this->_countdown->getTarget();
         $expectedType   = PHPUnit_Framework_Constraint_IsType::TYPE_INT;
         $this->assertType($expectedType, $target);
         $this->assertGreaterThanOrEqual(100, $target);
@@ -73,55 +71,39 @@ extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException ECountdownNoSuchNumberOrAlreadyUsed
+     * @expectedException Erebot_Module_Countdown_UnavailableNumberException
      */
     public function testCannotReuseNumber()
     {
-        $numbers    = $this->countdown->getNumbers();
+        $numbers    = $this->_countdown->getNumbers();
         $numbers[]  = $numbers[0];
         $formula    = implode(' + ', $numbers);
-        $obj        = new CountdownFormula('foo', $formula);
-        $this->countdown->proposeFormula($obj);
+        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
+        $this->_countdown->proposeFormula($obj);
     }
-
-    /// @FIXME: this could really be useful, to nag players ;p
-#    public function testSolverGivesBestFormula()
-#    {
-#        $this->markTestIncomplete('No solver yet');
-
-#        $solver     = $this->countdown->solve();
-#        $this->countdown->proposeFormula($solver);
-
-#        $numbers    = $this->countdown->getNumbers();
-#        $obj        = new CountdownFormula('foo', implode('+', $numbers));
-#        $this->countdown->proposeFormula($obj);
-#        $obj        = new CountdownFormula('foo', implode('*', $numbers));
-#        $this->countdown->proposeFormula($obj);
-#        $this->assertSame($solver, $this->countdown->getBestProposal());
-#    }
 
     public function testReturnsBestProposedFormula()
     {
-        unset($this->countdown);
-        $this->countdown = new CountdownStub();
+        unset($this->_countdown);
+        $this->_countdown = new CountdownStub();
 
-        $obj        = new CountdownFormula('foo', '1+1');
-        $this->countdown->proposeFormula($obj);
-        $this->assertSame($obj, $this->countdown->getBestProposal());
+        $obj        = new Erebot_Module_Countdown_Formula('foo', '1+1');
+        $this->_countdown->proposeFormula($obj);
+        $this->assertSame($obj, $this->_countdown->getBestProposal());
 
-        $numbers    = $this->countdown->getNumbers();
+        $numbers    = $this->_countdown->getNumbers();
         $formula    = implode(' + ', $numbers);
-        $obj        = new CountdownFormula('bar', $formula);
-        $this->countdown->proposeFormula($obj);
-        $this->assertSame($obj, $this->countdown->getBestProposal());
+        $obj        = new Erebot_Module_Countdown_Formula('bar', $formula);
+        $this->_countdown->proposeFormula($obj);
+        $this->assertSame($obj, $this->_countdown->getBestProposal());
     }
 
     /**
-     * @expectedException ECountdownSyntaxError
+     * @expectedException Erebot_Module_Countdown_SyntaxErrorException
      */
     public function testInvalidSyntax()
     {
-        $obj        = new CountdownFormula('foo', 'foo');
+        $obj        = new Erebot_Module_Countdown_Formula('foo', 'foo');
     }
 }
 

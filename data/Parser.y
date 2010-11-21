@@ -1,6 +1,6 @@
-%name CountdownParser_
-%declare_class {class CountdownParser}
-%syntax_error { throw new ECountdownSyntaxError(); }
+%name Erebot_Module_Countdown_Parser_
+%declare_class {class Erebot_Module_Countdown_Parser}
+%syntax_error { throw new Erebot_Module_Countdown_SyntaxErrorException(); }
 %token_prefix TK_
 %include_class {
     private $_formulaResult = NULL;
@@ -18,10 +18,10 @@ expr(res) ::= expr(opd1) OP_SUB expr(opd2). { res = opd1 - opd2; }
 expr(res) ::= expr(opd1) OP_MUL expr(opd2). { res = opd1 * opd2; }
 expr(res) ::= expr(opd1) OP_DIV expr(opd2). {
     if (!opd2)
-        throw new ECountdownDivisionByZero();
+        throw new Erebot_Module_Countdown_DivisionByZeroException();
 
     if (opd1 % opd2)
-        throw new ECountdownNonIntegralDivision();
+        throw new Erebot_Module_Countdown_NonIntegralDivisionException();
 
     res = opd1 / opd2;
 }

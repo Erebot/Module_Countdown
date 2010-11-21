@@ -16,8 +16,8 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class   ECountdownInvalidValue
-extends Exception
+class   Erebot_Module_Countdown_InvalidValueException
+extends Erebot_Module_Countdown_Exception
 {
     public function __construct($location, $expected, $given)
     {
@@ -47,19 +47,3 @@ extends Exception
     }
 }
 
-class   ECountdownNoSuchNumberOrAlreadyUsed
-extends Exception {}
-
-class   ECountdownFormulaMustBeAString
-extends Exception {}
-
-class   ECountdownDivisionByZero
-extends Exception {}
-
-class   ECountdownNonIntegralDivision
-extends Exception {}
-
-class   ECountdownSyntaxError
-extends Exception {}
-
-?>

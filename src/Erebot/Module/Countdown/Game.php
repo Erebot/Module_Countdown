@@ -16,20 +16,7 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-if (!defined('__DIR__')) {
-  class __FILE_CLASS__ {
-    function  __toString() {
-      $X = debug_backtrace();
-      return dirname($X[1]['file']);
-    }
-  }
-  define('__DIR__', new __FILE_CLASS__);
-} 
-
-include_once(__DIR__.'/formula.php');
-include_once(__DIR__.'/exceptions.php');
-
-class Countdown
+class Erebot_Module_Countdown_Game
 {
     protected $numbers;
     protected $target;
@@ -46,33 +33,74 @@ class Countdown
 
     public function __construct($minTarget = 100, $maxTarget = 999, $nbNumbers = 7, $allowedNumbers = NULL)
     {
+        /// @TODO: refactor checks to avoid redundancy.
         if (!is_int($minTarget))
-            throw new ECountdownInvalidValue('$minTarget', 'integer', typeof($minTarget));
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$minTarget',
+                'integer',
+                typeof($minTarget)
+            );
         if ($minTarget < 100)
-            throw new ECountdownInvalidValue('$minTarget', 'number >= 100', $minTarget);
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$minTarget',
+                'number >= 100',
+                $minTarget
+            );
         $this->minTarget = $minTarget;
 
         if (!is_int($maxTarget))
-            throw new ECountdownInvalidValue('$maxTarget', 'integer', typeof($maxTarget));
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$maxTarget',
+                'integer',
+                typeof($maxTarget)
+            );
         if ($maxTarget <= $this->minTarget)
-            throw new ECountdownInvalidValue('$maxTarget', 'number > minTarget', $maxTarget);
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$maxTarget',
+                'number > minTarget',
+                $maxTarget
+            );
         $this->maxTarget = $maxTarget;
 
         if (!is_int($nbNumbers))
-            throw new ECountdownInvalidValue('$nbNumbers', 'integer', typeof($nbNumbers));
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$nbNumbers',
+                'integer',
+                typeof($nbNumbers)
+            );
         if ($nbNumbers < 1)
-            throw new ECountdownInvalidValue('$nbNumbers', 'number > 1', $nbNumbers);
+            throw new Erebot_Module_Countdown_InvalidValue(
+                '$nbNumbers',
+                'number > 1',
+                $nbNumbers
+            );
 
         if ($allowedNumbers !== NULL) {
             if (!is_array($allowedNumbers))
-                throw new ECountdownInvalidValue('$allowedNumbers', 'array', typeof($allowedNumbers));
+                throw new Erebot_Module_Countdown_InvalidValue(
+                    '$allowedNumbers',
+                    'array',
+                    typeof($allowedNumbers)
+                );
             if (!count($allowedNumbers))
-                throw new ECountdownInvalidValue('$allowedNumbers', 'non-empty array', 'empty array');
+                throw new Erebot_Module_Countdown_InvalidValue(
+                    '$allowedNumbers',
+                    'non-empty array',
+                    'empty array'
+                );
             foreach ($allowedNumbers as $allowedNumber) {
                 if (!is_int($allowedNumber))
-                    throw new ECountdownInvalidValue('$allowedNumbers', 'array of int', 'array with '.typeof($allowedNumber));
+                    throw new Erebot_Module_Countdown_InvalidValue(
+                        '$allowedNumbers',
+                        'array of int',
+                        'array of '.typeof($allowedNumber)
+                    );
                 if ($allowedNumber < 1)
-                    throw new ECountdownInvalidValue('$allowedNumbers', 'array of int >= 1', $allowedNumber);
+                    throw new Erebot_Module_Countdown_InvalidValue(
+                        '$allowedNumbers',
+                        'array of int >= 1',
+                        $allowedNumber
+                    );
             }
             $this->allowedNumbers = $allowedNumbers;
         }
@@ -107,7 +135,8 @@ class Countdown
         return $this->bestProposal;
     }
 
-    public function proposeFormula(CountdownFormula &$formula)
+    /// @TODO: write an interface for formulae and use it there.
+    public function proposeFormula(Erebot_Module_Countdown_Formula &$formula)
     {
         $gameNumbers    = $this->numbers;
         $formulaNumbers = $formula->getNumbers();
@@ -115,7 +144,7 @@ class Countdown
         foreach ($formulaNumbers as $number) {
             $key = array_search($number, $gameNumbers);
             if ($key === FALSE)
-                throw new ECountdownNoSuchNumberOrAlreadyUsed();
+                throw new Erebot_Module_Countdown_UnavailableNumberException();
             unset($gameNumbers[$key]);
         }
 
@@ -135,4 +164,3 @@ class Countdown
     }
 }
 
-?>
