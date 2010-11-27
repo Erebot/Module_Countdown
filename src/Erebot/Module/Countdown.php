@@ -36,8 +36,7 @@ extends Erebot_Module_Base
     {
         if ($flags & self::RELOAD_HANDLERS) {
             $registry   = $this->_connection->getModule(
-                'Erebot_Module_TriggerRegistry',
-                Erebot_Connection::MODULE_BY_NAME
+                'Erebot_Module_TriggerRegistry'
             );
             $matchAny  = Erebot_Utils::getVStatic($registry, 'MATCH_ANY');
 
@@ -95,7 +94,7 @@ extends Erebot_Module_Base
         $trigger    = $this->parseString('trigger', 'countdown');
 
         $bot        =&  $this->_connection->getBot();
-        $moduleName =   strtolower($bot->moduleClassToName($this));
+        $moduleName =   strtolower(get_class());
         $nbArgs     =   count($words);
 
         if ($nbArgs == 1 && $words[0] == $moduleName) {
