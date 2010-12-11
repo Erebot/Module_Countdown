@@ -21,15 +21,5 @@
         <exec command="PHP_PEAR_INSTALL_DIR=/usr/share/php/ phplemon -q -s src/Erebot/Module/Countdown/Parser.y"/>
     </target>
 
-    <target name="qa_test" description="" depends="qa_pre_coverage">
-        <phpunit
-            codecoverage="true"
-            bootstrap="../../../autoloader.php"
-            >
-            <formatter type="plain" usefile="false"/>
-            <batchtest><fileset refid="tests"/></batchtest>
-        </phpunit>
-    </target>
-
     <import file="buildenv/build.xml"/>
 </project>
