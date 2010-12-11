@@ -17,7 +17,7 @@
     <target name="all" depends="parser,i18n" description=""/>
 
     <target name="parser" description="">
-        <exec command="ln -sf ../../../../data/Parser.y ./" dir="src/Erebot/Module/Countdown"/>
+        <exec command="ln -sf ../../../../data/Parser.y src/Erebot/Module/Countdown/"/>
         <exec command="PHP_PEAR_INSTALL_DIR=/usr/share/php/ phplemon -q -s src/Erebot/Module/Countdown/Parser.y"/>
     </target>
 
