@@ -51,31 +51,29 @@ extends Erebot_Module_Base
                 throw new Exception($this->_translator->gettext(
                     'Could not register Countdown trigger'));
 
-            $targets    = new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY);
+            $targets = new Erebot_EventTarget(
+                Erebot_EventTarget::ORDER_ALLOW_DENY
+            );
             $targets->addRule(
                 Erebot_EventTarget::TYPE_ALLOW,
                 Erebot_EventTarget::MATCH_ALL,
-                Erebot_EventTarget::MATCH_CHANNEL);
+                Erebot_EventTarget::MATCH_CHANNEL
+            );
 
-            $filter                 = new Erebot_TextFilter(
-                                            $this->_mainCfg,
-                                            Erebot_TextFilter::TYPE_STATIC,
-                                            $trigger, TRUE);
             $this->_startHandler    = new Erebot_EventHandler(
-                                                array($this, 'handleCountdown'),
-                                                'Erebot_Event_ChanText',
-                                                $targets, $filter);
+                array($this, 'handleCountdown'),
+                'Erebot_Event_ChanText',
+                $targets,
+                new Erebot_TextFilter_Static($trigger, TRUE)
+            );
             $this->_connection->addEventHandler($this->_startHandler);
 
-            $targets            = new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY);
-            $filter             = new Erebot_TextFilter(
-                                        $this->_mainCfg,
-                                        Erebot_TextFilter::TYPE_REGEXP,
-                                        self::FORMULA_FILTER, FALSE);
             $this->_rawHandler  = new Erebot_EventHandler(
-                                            array($this, 'handleRawText'),
-                                            'Erebot_Event_ChanText',
-                                            $targets, $filter);
+                array($this, 'handleRawText'),
+                'Erebot_Event_ChanText',
+                new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY),
+                new Erebot_TextFilter_Regex(self::FORMULA_FILTER, FALSE)
+            );
             $this->_connection->addEventHandler($this->_rawHandler);
             $this->registerHelpMethod(array($this, 'getHelp'));
         }
