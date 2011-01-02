@@ -185,7 +185,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
         );
         $this->addTimer($timer);
 
-        $filter =& $this->_rawHandler->getFilter();
+        $filter = $this->_rawHandler->getFilter();
         $filter[0]->addFilter($this->_game[$chan]['filter']);
         unset($filter);
     }
@@ -238,7 +238,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
                 $this->sendMessage($chan, $tpl->render());
 
                 $this->removeTimer($this->_game[$chan]['timer']);
-                $filter =& $this->_rawHandler->getFilter();
+                $filter = $this->_rawHandler->getFilter();
                 $filter[0]->removeFilter($this->_game[$chan]['filter']);
                 unset($this->_game[$chan], $filter);
                 return;
@@ -279,7 +279,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
             return;
 
         $translator = $this->getTranslator($chan);
-        $filter =& $this->_rawHandler->getFilter();
+        $filter = $this->_rawHandler->getFilter();
         $filter[0]->removeFilter($this->_game[$chan]['filter']);
         unset($filter, $this->_game[$chan]);
         unset($key, $data);
