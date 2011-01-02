@@ -33,7 +33,7 @@ extends Erebot_Module_Countdown_Game
     }
 }
 
-class   CountdownTest
+class   CountdownGameTest
 extends PHPUnit_Framework_TestCase
 {
     protected $_countdown = NULL;

@@ -51,28 +51,22 @@ extends Erebot_Module_Base
                 throw new Exception($this->_translator->gettext(
                     'Could not register Countdown trigger'));
 
-            $targets = new Erebot_EventTarget(
-                Erebot_EventTarget::ORDER_ALLOW_DENY
-            );
-            $targets->addRule(
-                Erebot_EventTarget::TYPE_ALLOW,
-                Erebot_EventTarget::MATCH_ALL,
-                Erebot_EventTarget::MATCH_CHANNEL
-            );
-
             $this->_startHandler    = new Erebot_EventHandler(
                 array($this, 'handleCountdown'),
-                'Erebot_Event_ChanText',
-                $targets,
-                new Erebot_TextFilter_Static($trigger, TRUE)
+                new Erebot_Event_Match_All(
+                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                    new Erebot_Event_Match_TextStatic($trigger, TRUE)
+                )
             );
             $this->_connection->addEventHandler($this->_startHandler);
 
             $this->_rawHandler  = new Erebot_EventHandler(
                 array($this, 'handleRawText'),
-                'Erebot_Event_ChanText',
-                new Erebot_EventTarget(Erebot_EventTarget::ORDER_ALLOW_DENY),
-                new Erebot_TextFilter_Regex(self::FORMULA_FILTER, FALSE)
+                new Erebot_Event_Match_All(
+                    new Erebot_Event_Match_Any(),
+                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
+                    new Erebot_Event_Match_TextRegex(self::FORMULA_FILTER)
+                )
             );
             $this->_connection->addEventHandler($this->_rawHandler);
             $this->registerHelpMethod(array($this, 'getHelp'));
@@ -185,17 +179,15 @@ Non-integral divisions (eg. 5/2) are forbidden.
 
         $timer  = new Erebot_Timer(array($this, 'handleTimeOut'), $delay, FALSE);
         $this->_game[$chan] = array(
-            'game'  => $game,
-            'timer' => $timer,
+            'game'      => $game,
+            'timer'     => $timer,
+            'filter'    => new Erebot_Event_Match_Chan($chan)
         );
         $this->addTimer($timer);
 
-        $targets =& $this->_rawHandler->getTargets();
-        $targets->addRule(
-            Erebot_EventTarget::TYPE_ALLOW,
-            Erebot_EventTarget::MATCH_ALL,
-            $chan
-        );
+        $filter =& $this->_rawHandler->getFilter();
+        $filter[0]->addFilter($this->_game[$chan]['filter']);
+        unset($filter);
     }
 
     public function handleRawText(Erebot_Interface_Event_Generic &$event)
@@ -246,13 +238,9 @@ Non-integral divisions (eg. 5/2) are forbidden.
                 $this->sendMessage($chan, $tpl->render());
 
                 $this->removeTimer($this->_game[$chan]['timer']);
-                $targets =& $this->_rawHandler->getTargets();
-                $targets->removeRule(
-                    Erebot_EventTarget::TYPE_ALLOW,
-                    Erebot_EventTarget::MATCH_ALL,
-                    $chan
-                );
-                unset($this->_game[$chan]);
+                $filter =& $this->_rawHandler->getFilter();
+                $filter[0]->removeFilter($this->_game[$chan]['filter']);
+                unset($this->_game[$chan], $filter);
                 return;
             }
 
@@ -291,13 +279,9 @@ Non-integral divisions (eg. 5/2) are forbidden.
             return;
 
         $translator = $this->getTranslator($chan);
-        $targets =& $this->_rawHandler->getTargets();
-        $targets->removeRule(
-            Erebot_EventTarget::TYPE_ALLOW,
-            Erebot_EventTarget::MATCH_ALL,
-            $chan
-        );
-        unset($this->_game[$chan]);
+        $filter =& $this->_rawHandler->getFilter();
+        $filter[0]->removeFilter($this->_game[$chan]['filter']);
+        unset($filter, $this->_game[$chan]);
         unset($key, $data);
 
         $best =& $game->getBestProposal();
