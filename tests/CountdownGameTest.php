@@ -70,8 +70,7 @@ extends PHPUnit_Framework_TestCase
     public function testGetTarget()
     {
         $target         = $this->_countdown->getTarget();
-        $expectedType   = PHPUnit_Framework_Constraint_IsType::TYPE_INT;
-        $this->assertType($expectedType, $target);
+        $this->assertTrue(is_int($target));
         $this->assertGreaterThanOrEqual(100, $target);
         $this->assertLessThanOrEqual(   999, $target);
     }
