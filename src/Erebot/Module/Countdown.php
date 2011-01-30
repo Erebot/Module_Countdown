@@ -32,7 +32,7 @@ extends Erebot_Module_Base
 
     const FORMULA_FILTER    = '@^[\\(\\)\\-\\+\\*/0-9 ]+$@';
 
-    public function reload($flags)
+    public function _reload($flags)
     {
         if ($flags & self::RELOAD_HANDLERS) {
             $registry   = $this->_connection->getModule(
@@ -70,6 +70,18 @@ extends Erebot_Module_Base
             );
             $this->_connection->addEventHandler($this->_rawHandler);
             $this->registerHelpMethod(array($this, 'getHelp'));
+        }
+
+        if ($flags & self::RELOAD_MEMBERS) {
+            $this->_game = array();
+        }
+    }
+
+    protected function _unload()
+    {
+        foreach ($this->_game as $entry) {
+            if (isset($entry['timer']))
+                $this->removeTimer($entry['timer']);
         }
     }
 
