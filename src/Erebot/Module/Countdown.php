@@ -189,7 +189,11 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $tpl->assign('delay',   $delay);
         $this->sendMessage($chan, $tpl->render());
 
-        $timer  = new Erebot_Timer(array($this, 'handleTimeOut'), $delay, FALSE);
+        $timer  = new Erebot_Timer(
+            array($this, 'handleTimeOut'),
+            $delay, FALSE,
+            array($chan)
+        );
         $this->_game[$chan] = array(
             'game'      => $game,
             'timer'     => $timer,
@@ -275,20 +279,11 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $this->sendMessage($chan, $tpl->render());
     }
 
-    public function handleTimeOut(Erebot_Interface_Timer &$timer)
+    public function handleTimeOut(Erebot_Interface_Timer $timer, $chan)
     {
-        $chan = $game = NULL;
-        foreach ($this->_game as $key => &$data) {
-            if ($data['timer'] === $timer) {
-                $chan =     $key;
-                $game =&    $data['game'];
-                break;
-            }
-        }
-
         $this->removeTimer($timer);
-        if ($chan === NULL)
-            return;
+        if (!isset($this->_game[$chan])) return;
+        $game =& $this->_game[$chan]['game'];
 
         $translator = $this->getTranslator($chan);
         $filter = $this->_rawHandler->getFilter();
