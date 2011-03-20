@@ -18,7 +18,7 @@
 
     <target name="parser" description="">
         <exec command="ln -sf ../../../../data/Parser.y src/Erebot/Module/Countdown/"/>
-        <exec command="PHP_PEAR_INSTALL_DIR=/usr/share/php/ phplemon -q -s src/Erebot/Module/Countdown/Parser.y"/>
+        <exec command="PHP_PEAR_INSTALL_DIR=/usr/share/php/ phplemon -q -s src/Erebot/Module/Countdown/Parser.y" logoutput="true"/>
     </target>
 
     <import file="buildenv/build.xml"/>
