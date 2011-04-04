@@ -85,9 +85,9 @@ extends Erebot_Module_Base
         }
     }
 
-    public function getHelp(Erebot_Interface_Event_TextMessage &$event, $words)
+    public function getHelp(Erebot_Interface_Event_Base_TextMessage $event, $words)
     {
-        if ($event instanceof Erebot_Interface_Event_Private) {
+        if ($event instanceof Erebot_Interface_Event_Base_Private) {
             $target = $event->getSource();
             $chan   = NULL;
         }
@@ -139,7 +139,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
         }
     }
 
-    public function handleCountdown(Erebot_Interface_Event_Generic &$event)
+    public function handleCountdown(Erebot_Interface_Event_ChanText $event)
     {
         $chan       = $event->getChan();
         $translator = $this->getTranslator($chan);
@@ -206,7 +206,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
         unset($filter);
     }
 
-    public function handleRawText(Erebot_Interface_Event_Generic &$event)
+    public function handleRawText(Erebot_Interface_Event_ChanText $event)
     {
         $chan       = $event->getChan();
         $nick       = $event->getSource();
