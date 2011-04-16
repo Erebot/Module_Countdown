@@ -22,8 +22,8 @@ msgstr       "\n"
      "doivent proposer des formules approchant au maximum d'un nombre donné.\n"
 #
 msgid   "game.winner"
-msgstr       "Félicitations à <b><var name=\"nick\"/></b> qui gagne cette "
-     "partie de Countdown. <b><var name=\"nick\"/></b> a obtenu <b><var "
+msgstr       "Félicitations à <b><var name=\"nick\"/></b> qui remporte cette "
+     "partie des Chiffres et des Lettres. <b><var name=\"nick\"/></b> a obtenu <b><var "
      "name=\"result\"/></b> avec cette formule : <b><var name=\"formula\"/"
      "></b>."
 #
@@ -36,7 +36,7 @@ msgid   "game.timeout"
 msgstr       "Délai dépassé ! Personne n'a fait de proposition. :("
 #
 msgid   "game.start"
-msgstr       "Une nouvelle partie de Countdown commence. Vous devez obtenir "
+msgstr       "Une nouvelle partie des Chiffres et des Lettres commence. Vous devez obtenir "
      "<b><var name=\"target\"/></b> grâce aux nombres suivants : <for from="
      "\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>. Vous "
      "avez <var name=\"delay\"/> secondes pour faire des propositions."
@@ -60,7 +60,7 @@ msgstr       "Félicitations <b><var name=\"nick\"/></b> ! Vous êtes le plus "
      "proche avec <b><var name=\"result\"/></b>."
 #
 msgid   "error.trigger"
-msgstr       "Impossible d'enregistrer le déclencheur pour le jeu Countdown"
+msgstr       "Impossible d'enregistrer le déclencheur pour le jeu des Chiffres et des Lettres"
 #
 msgid   "error.syntax"
 msgstr       "Erreur de syntaxe"
