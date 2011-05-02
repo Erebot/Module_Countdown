@@ -29,7 +29,7 @@ msgstr       "Félicitations à <b><var name=\"nick\"/></b> qui remporte cette "
 #
 msgid   "game.try-again"
 msgstr       "Pas mal <b><var name=\"nick\"/></b>, vous avez obtenu <b><var "
-     "name=\"result\"/></b>, mais ce n'est pas la meilleur formule... "
+     "name=\"result\"/></b>, mais ce n'est pas la meilleure formule... "
      "Réessayez ;)"
 #
 msgid   "game.timeout"
