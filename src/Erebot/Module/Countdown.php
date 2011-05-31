@@ -97,9 +97,9 @@ extends Erebot_Module_Base
         $translator = $this->getTranslator($chan);
         $trigger    = $this->parseString('trigger', 'countdown');
 
-        $bot        =&  $this->_connection->getBot();
-        $moduleName =   strtolower(get_class());
-        $nbArgs     =   count($words);
+        $bot        = $this->_connection->getBot();
+        $moduleName = strtolower(get_class());
+        $nbArgs     = count($words);
 
         if ($nbArgs == 1 && $words[0] == $moduleName) {
             $msg = $translator->gettext('
