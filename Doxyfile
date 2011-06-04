@@ -1,7 +1,7 @@
 # Doxyfile 1.5.8
 
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = ErebotModule_Countdown
+PROJECT_NAME           = $(COMPONENT_NAME)
 PROJECT_NUMBER         = $(COMPONENT_VERSION)
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO
@@ -30,6 +30,7 @@ ALIASES               += "i{1}=\htmlonly <em>\1</em> \endhtmlonly\latexonly\text
 ALIASES               += "b{1}=\htmlonly <strong>\1</strong> \endhtmlonly\latexonly\textbf{\1}\endlatexonly"
 ALIASES               += "FIXME=\xrefitem FIXME \"Known issues\" \"Known Issues\""
 ALIASES               += "HACK=\xrefitem HACK \"Dirty hacks\" \"Dirty Hacks\""
+ALIASES               += "format{1}=\par Format\n<tt>\1</tt>\n"
 
 OPTIMIZE_OUTPUT_FOR_C  = NO
 OPTIMIZE_OUTPUT_JAVA   = NO
@@ -103,7 +104,7 @@ FILTER_PATTERNS        =
 FILTER_SOURCE_FILES    = NO
 
 EXCLUDE_SYMLINKS       = YES
-EXCLUDE_PATTERNS       = 
+EXCLUDE_PATTERNS       = */src/Erebot/Module/Countdown/Parser.php
 EXCLUDE_SYMBOLS        = 
 
 EXAMPLE_PATH           = 
@@ -125,10 +126,7 @@ ALPHABETICAL_INDEX     = YES
 COLS_IN_ALPHA_INDEX    = 3
 
 IGNORE_PREFIX          = $ \
-                         Erebot \
-                         AErebot \
-                         iErebot \
-                         EErebot
+                         Erebot
 
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
