@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <project name="Erebot_Module_Countdown" description="" default="all">
-    <property name="locales"            value="fr_FR,en_US"/>
-    <property name="version"            value="0.3.2"/>
-    <property name="email"              value="clicky@erebot.net"/>
-    <property name="qa.coverage.force"  value="false"/>
+    <property name="qa.coverage.force" value="false"/>
 
     <fileset dir="src/" id="sources">
         <include name="**/*.php"/>
