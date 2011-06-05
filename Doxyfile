@@ -185,7 +185,7 @@ PREDEFINED             =
 EXPAND_AS_DEFINED      = 
 SKIP_FUNCTION_MACROS   = YES
 
-GENERATE_TAGFILE       = Countdown.tagfile
+GENERATE_TAGFILE       = $(COMPONENT_NAME).tagfile
 ALLEXTERNALS           = YES
 EXTERNAL_GROUPS        = YES
 
