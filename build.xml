@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <project name="Erebot_Module_Countdown" description="" default="all">
     <property name="qa.coverage.force" value="false"/>
+    <property name="tagfiles" value="Erebot"/>
 
     <fileset dir="src/" id="sources">
         <include name="**/*.php"/>
