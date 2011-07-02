@@ -22,31 +22,39 @@ require_once(
     DIRECTORY_SEPARATOR . 'bootstrap.php'
 );
 
-class   CountdownParserTokenTest
+class   CountdownSolverTest
 extends PHPUnit_Framework_TestCase
 {
-    public function testParserTokenCreation()
+    public function problems()
     {
-        // Preload Erebot_Module_Countdown_Parser so that underlying
-        // classes like Erebot_Module_Countdown_Parser_yyToken become available.
-        class_exists('Erebot_Module_Countdown_Parser');
-        $obj = new Erebot_Module_Countdown_Parser_yyToken('foo');
-        $this->assertEquals('foo', (string) $obj);
+        return array(
+            # Exact solution.
+            array(
+                array(10, 1, 25, 1),
+                286,
+                "((25+1)*(10+1))",
+                286
+            ),
 
-        $obj[] = array('token');
-        $this->assertEquals(TRUE, isset($obj[0]));
-        $this->assertEquals("token", $obj[0]);
+            # Close solution.
+            array(
+                array(100, 25, 4, 3),
+                599,
+                "((100+(25*4))*3)",
+                600
+            ),
+        );
+    }
 
-        unset($obj[0]);
-        $this->assertEquals(FALSE, isset($obj[0]));
-
-        $obj2 = new Erebot_Module_Countdown_Parser_yyToken($obj);
-        $obj2 = new Erebot_Module_Countdown_Parser_yyToken('foo', $obj2);
-        $obj2[] = NULL;
-        $obj2[0] = NULL;
-        $obj2[42] = 'foo';
-
-        $obj[42] = $obj2;
+    /**
+     * @dataProvider problems
+     */
+    public function testSolver($numbers, $target, $formula, $result)
+    {
+        $solver = new Erebot_Module_Countdown_Solver($target, $numbers);
+        $best   = $solver->solve();
+        $this->assertEquals($formula, (string) $best);
+        $this->assertEquals($result, $best->getValue());
     }
 }
 

@@ -309,6 +309,39 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $tpl->assign('formula', $best->getFormula());
         $this->sendMessage($chan, $tpl->render());
 
+        $target = $game->getTarget();
+        if ($this->parseBool('solver', FALSE) && $best->getResult() != $target) {
+            $solverCls = $this->parseString(
+                'solver_class',
+                'Erebot_Module_Countdown_Solver'
+            );
+
+            if (!class_exists($solverCls)) {
+                unset($chan, $game);
+                return;
+            }
+
+            $solver = new $solverCls($target, $game->getNumbers());
+            if (!($solver instanceof Erebot_Module_Countdown_Solver_Interface)) {
+                unset($chan, $game);
+                return;
+            }
+
+            $best   = $solver->solve();
+            // Make sure the solver actually found a better result
+            // before nagging the players.
+            if (abs($best->getValue() - $target) < abs($best->getResult() - $target)) {
+                $msg = $translator->gettext(
+                    'However, a better result could be achieved (<var name="result"/>) '.
+                    'by using this formula: <b><var name="formula"/></b>.'
+                );
+                $tpl    = new Erebot_Styling($msg, $translator);
+                $tpl->assign('result',  $best->getValue());
+                $tpl->assign('formula', (string) $best);
+                $this->sendMessage($chan, $tpl->render());
+            }
+        }
+
         unset($chan, $game);
     }
 }
