@@ -19,12 +19,6 @@
 class   Erebot_Module_Countdown
 extends Erebot_Module_Base
 {
-    static protected $_metadata = array(
-        'requires'  =>  array(
-            'Erebot_Module_TriggerRegistry',
-            'Erebot_Module_Helper',
-        ),
-    );
     protected $_trigger;
     protected $_startHandler;
     protected $_rawHandler;
