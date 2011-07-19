@@ -184,7 +184,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $this->sendMessage($chan, $tpl->render());
 
         $timer  = new Erebot_Timer(
-            array($this, 'handleTimeOut'),
+            new Erebot_Callable(array($this, 'handleTimeOut')),
             $delay, FALSE,
             array($chan)
         );
