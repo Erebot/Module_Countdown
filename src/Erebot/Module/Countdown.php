@@ -46,7 +46,7 @@ extends Erebot_Module_Base
                     'Could not register Countdown trigger'));
 
             $this->_startHandler    = new Erebot_EventHandler(
-                array($this, 'handleCountdown'),
+                new Erebot_Callable(array($this, 'handleCountdown')),
                 new Erebot_Event_Match_All(
                     new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
                     new Erebot_Event_Match_TextStatic($trigger, TRUE)
@@ -55,7 +55,7 @@ extends Erebot_Module_Base
             $this->_connection->addEventHandler($this->_startHandler);
 
             $this->_rawHandler  = new Erebot_EventHandler(
-                array($this, 'handleRawText'),
+                new Erebot_Callable(array($this, 'handleRawText')),
                 new Erebot_Event_Match_All(
                     new Erebot_Event_Match_Any(),
                     new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
