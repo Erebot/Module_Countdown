@@ -133,7 +133,10 @@ Non-integral divisions (eg. 5/2) are forbidden.
         }
     }
 
-    public function handleCountdown(Erebot_Interface_Event_ChanText $event)
+    public function handleCountdown(
+        Erebot_Interface_EventHandler   $handler,
+        Erebot_Interface_Event_ChanText $event
+    )
     {
         $chan       = $event->getChan();
         $translator = $this->getTranslator($chan);
@@ -200,7 +203,10 @@ Non-integral divisions (eg. 5/2) are forbidden.
         unset($filter);
     }
 
-    public function handleRawText(Erebot_Interface_Event_ChanText $event)
+    public function handleRawText(
+        Erebot_Interface_EventHandler   $handler,
+        Erebot_Interface_Event_ChanText $event
+    )
     {
         $chan       = $event->getChan();
         $nick       = $event->getSource();
