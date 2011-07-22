@@ -104,7 +104,12 @@ class Erebot_Module_Countdown_Game
             }
             $this->allowedNumbers = $allowedNumbers;
         }
+        $this->bestProposal = NULL;
+        $this->_chooseNumbers();
+    }
 
+    protected function _chooseNumbers()
+    {
         $this->numbers = array();
         for ($i = 0; $i < $nbNumbers; $i++) {
             $key = array_rand($this->allowedNumbers);
@@ -112,7 +117,6 @@ class Erebot_Module_Countdown_Game
         }
 
         $this->target       = mt_rand($this->minTarget, $this->maxTarget);
-        $this->bestProposal = NULL;
     }
 
     public function __destruct()
