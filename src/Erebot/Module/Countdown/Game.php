@@ -105,10 +105,10 @@ class Erebot_Module_Countdown_Game
             $this->allowedNumbers = $allowedNumbers;
         }
         $this->bestProposal = NULL;
-        $this->_chooseNumbers();
+        $this->_chooseNumbers($nbNumbers);
     }
 
-    protected function _chooseNumbers()
+    protected function _chooseNumbers($nbNumbers)
     {
         $this->numbers = array();
         for ($i = 0; $i < $nbNumbers; $i++) {
