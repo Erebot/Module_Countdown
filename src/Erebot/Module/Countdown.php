@@ -41,9 +41,11 @@ extends Erebot_Module_Base
 
             $trigger        = $this->parseString('trigger', 'countdown');
             $this->_trigger = $registry->registerTriggers($trigger, $matchAny);
-            if ($this->_trigger === NULL)
-                throw new Exception($this->_translator->gettext(
+            if ($this->_trigger === NULL) {
+                $translator = $this->getTranslator(FALSE);
+                throw new Exception($translator->gettext(
                     'Could not register Countdown trigger'));
+            }
 
             $this->_startHandler    = new Erebot_EventHandler(
                 new Erebot_Callable(array($this, 'handleCountdown')),
