@@ -1,0 +1,6 @@
+[submodule "buildenv"]
+	path = buildenv
+	url = git://github.com/fpoirotte/Erebot_Buildenv.git
+[submodule "tests/testenv"]
+	path = tests/testenv
+	url = git://github.com/fpoirotte/Erebot_Testenv.git
