@@ -4,3 +4,6 @@
 [submodule "tests/testenv"]
 	path = tests/testenv
 	url = git://github.com/fpoirotte/Erebot_Testenv.git
+[submodule "vendor/Erebot_API"]
+	path = vendor/Erebot_API
+	url = git://github.com/fpoirotte/Erebot_API.git
