@@ -15,8 +15,10 @@
     <target name="all" depends="parser,i18n" description=""/>
 
     <target name="parser" description="">
-        <exec command="ln -sf ../../../../data/Parser.y src/Erebot/Module/Countdown/"/>
-        <exec command="PHP_PEAR_INSTALL_DIR=/usr/share/php/ phplemon -q -s src/Erebot/Module/Countdown/Parser.y" logoutput="true"/>
+        <exec command="echo '${phing.project.name}' | sed -e s^_^/^g" escape="false" outputProperty="module_dir"/>
+        <exec command="ln -sf ../../../../data/Parser.y src/${module_dir}/"/>
+        <exec command="pear config-get php_dir system" outputProperty="php_dir"/>
+        <exec command="PHP_PEAR_INSTALL_DIR=${php_dir} phplemon -q -s src/${module_dir}/Parser.y" logoutput="true"/>
     </target>
 
     <import file="buildenv/build.xml"/>
