@@ -16,11 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(
-    dirname(__FILE__) .
-    DIRECTORY_SEPARATOR . 'testenv' .
-    DIRECTORY_SEPARATOR . 'bootstrap.php'
-);
+if (!defined('TESTENV_DIR'))
+    define(
+        'TESTENV_DIR',
+        dirname(__FILE__) . DIRECTORY_SEPARATOR . 'testenv'
+    );
+require_once(TESTENV_DIR . DIRECTORY_SEPARATOR . 'bootstrap.php');
 
 class   CountdownStub
 extends Erebot_Module_Countdown_Game
