@@ -1,0 +1,11 @@
+/src/Erebot/Module/Countdown/Parser.php
+/src/Erebot/Module/Countdown/Parser.y
+
+/data/i18n/*/LC_MESSAGES/*.mo
+/docs
+/*.pem
+/*.phar
+/*.pubkey
+/*.tgz
+/*.tagfile
+
