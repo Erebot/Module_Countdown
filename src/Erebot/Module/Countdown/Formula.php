@@ -18,44 +18,44 @@
 
 class Erebot_Module_Countdown_Formula
 {
-    protected $lexer;
-    protected $owner;
-    protected $formula;
+    protected $_lexer;
+    protected $_owner;
+    protected $_formula;
 
     public function __construct($owner, $formula)
     {
         if (!is_string($formula) || $formula == '')
             throw new Erebot_Module_Countdown_FormulaMustBeAStringException();
 
-        $this->owner        =   $owner;
-        $this->formula      =   $formula;
-        $formula            =   str_replace(' ', '', $formula);
-        $this->lexer        =   new Erebot_Module_Countdown_Lexer($formula);
+        $this->_owner   = $owner;
+        $this->_formula = $formula;
+        $formula        = str_replace(' ', '', $formula);
+        $this->_lexer   = new Erebot_Module_Countdown_Lexer($formula);
     }
 
     public function __destruct()
     {
-        unset($this->lexer);
+        unset($this->_lexer);
     }
 
     public function getResult()
     {
-        return $this->lexer->getResult();
+        return $this->_lexer->getResult();
     }
 
     public function getNumbers()
     {
-        return $this->lexer->getNumbers();
+        return $this->_lexer->getNumbers();
     }
 
     public function getFormula()
     {
-        return $this->formula;
+        return $this->_formula;
     }
 
     public function getOwner()
     {
-        return $this->owner;
+        return $this->_owner;
     }
 }
 

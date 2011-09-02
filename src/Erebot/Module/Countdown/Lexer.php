@@ -18,31 +18,37 @@
 
 class Erebot_Module_Countdown_Lexer
 {
-    protected $formula;
-    protected $length;
-    protected $position;
-    protected $skip;
-    protected $parser;
-    protected $numbers;
+    protected $_formula;
+    protected $_length;
+    protected $_position;
+    protected $_skip;
+    protected $_parser;
+    protected $_numbers;
 
     // Allow stuff such as "1234".
     const PATT_INTEGER  = '/^[0-9]+/';
 
     public function __construct($formula)
     {
-        $this->formula  = $formula;
-        $this->length   = strlen($formula);
-        $this->position = 0;
-        $this->numbers  = array();
-
-        $this->parser   = new Erebot_Module_Countdown_Parser();
-        $this->tokenize();
+        $this->_formula     = $formula;
+        $this->_length      = strlen($formula);
+        $this->_position    = 0;
+        $this->_numbers     = array();
+        $this->_parser      = new Erebot_Module_Countdown_Parser();
+        $this->_tokenize();
     }
 
-    public function getResult()     { return $this->parser->getResult(); }
-    public function getNumbers()    { return $this->numbers; }
+    public function getResult()
+    {
+        return $this->_parser->getResult();
+    }
 
-    protected function tokenize()
+    public function getNumbers()
+    {
+        return $this->_numbers;
+    }
+
+    protected function _tokenize()
     {
         $operators = array(
             '(' =>  Erebot_Module_Countdown_Parser::TK_PAR_OPEN,
@@ -54,21 +60,21 @@ class Erebot_Module_Countdown_Lexer
 
         );
 
-        while ($this->position < $this->length) {
-            $c          = $this->formula[$this->position];
-            $subject    = substr($this->formula, $this->position);
+        while ($this->_position < $this->_length) {
+            $c          = $this->_formula[$this->_position];
+            $subject    = substr($this->_formula, $this->_position);
 
             if (isset($operators[$c])) {
-                $this->parser->doParse($operators[$c], $c);
-                $this->position++;
+                $this->_parser->doParse($operators[$c], $c);
+                $this->_position++;
                 continue;
             }
 
             if (preg_match(self::PATT_INTEGER, $subject, $matches)) {
-                $this->position += strlen($matches[0]);
-                $integer            = (int) $matches[0];
-                $this->numbers[]    = $integer;
-                $this->parser->doParse(
+                $this->_position += strlen($matches[0]);
+                $integer = (int) $matches[0];
+                $this->_numbers[] = $integer;
+                $this->_parser->doParse(
                     Erebot_Module_Countdown_Parser::TK_INTEGER,
                     $integer
                 );
@@ -77,11 +83,11 @@ class Erebot_Module_Countdown_Lexer
 
             // This will likely result in an exception
             // being thrown, which is actually good!
-            $this->parser->doParse(0, 0);
+            $this->_parser->doParse(0, 0);
         }
 
         // End of tokenization.
-        $this->parser->doParse(0, 0);
+        $this->_parser->doParse(0, 0);
     }
 }
 

@@ -17,5 +17,7 @@
 */
 
 class   Erebot_Module_Countdown_UnavailableNumberException
-extends Erebot_Module_Countdown_Exception {}
+extends Erebot_Module_Countdown_Exception
+{
+}
 

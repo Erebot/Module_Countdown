@@ -18,20 +18,25 @@
 
 class Erebot_Module_Countdown_Game
 {
-    protected $numbers;
-    protected $target;
+    protected $_numbers;
+    protected $_target;
 
-    protected $bestProposal;
+    protected $_bestProposal;
 
-    protected $allowedNumbers = array(
+    protected $_allowedNumbers = array(
         1, 2,  3,  4,  5,  6,   7,
         8, 9, 10, 25, 50, 75, 100,
     );
 
-    protected $minTarget;
-    protected $maxTarget;
+    protected $_minTarget;
+    protected $_maxTarget;
 
-    public function __construct($minTarget = 100, $maxTarget = 999, $nbNumbers = 7, $allowedNumbers = NULL)
+    public function __construct(
+        $minTarget          = 100,
+        $maxTarget          = 999,
+        $nbNumbers          = 7,
+        $allowedNumbers     = NULL
+    )
     {
         /// @TODO: refactor checks to avoid redundancy.
         if (!is_int($minTarget))
@@ -46,7 +51,7 @@ class Erebot_Module_Countdown_Game
                 'number >= 100',
                 $minTarget
             );
-        $this->minTarget = $minTarget;
+        $this->_minTarget = $minTarget;
 
         if (!is_int($maxTarget))
             throw new Erebot_Module_Countdown_InvalidValue(
@@ -54,13 +59,13 @@ class Erebot_Module_Countdown_Game
                 'integer',
                 typeof($maxTarget)
             );
-        if ($maxTarget <= $this->minTarget)
+        if ($maxTarget <= $this->_minTarget)
             throw new Erebot_Module_Countdown_InvalidValue(
                 '$maxTarget',
                 'number > minTarget',
                 $maxTarget
             );
-        $this->maxTarget = $maxTarget;
+        $this->_maxTarget = $maxTarget;
 
         if (!is_int($nbNumbers))
             throw new Erebot_Module_Countdown_InvalidValue(
@@ -102,47 +107,47 @@ class Erebot_Module_Countdown_Game
                         $allowedNumber
                     );
             }
-            $this->allowedNumbers = $allowedNumbers;
+            $this->_allowedNumbers = $allowedNumbers;
         }
-        $this->bestProposal = NULL;
+        $this->_bestProposal = NULL;
         $this->_chooseNumbers($nbNumbers);
     }
 
     protected function _chooseNumbers($nbNumbers)
     {
-        $this->numbers = array();
+        $this->_numbers = array();
         for ($i = 0; $i < $nbNumbers; $i++) {
-            $key = array_rand($this->allowedNumbers);
-            $this->numbers[] = $this->allowedNumbers[$key];
+            $key = array_rand($this->_allowedNumbers);
+            $this->_numbers[] = $this->_allowedNumbers[$key];
         }
 
-        $this->target       = mt_rand($this->minTarget, $this->maxTarget);
+        $this->_target = mt_rand($this->_minTarget, $this->_maxTarget);
     }
 
     public function __destruct()
     {
-        unset($this->bestProposal);
+        unset($this->_bestProposal);
     }
 
     public function getNumbers()
     {
-        return $this->numbers;
+        return $this->_numbers;
     }
 
     public function getTarget()
     {
-        return $this->target;
+        return $this->_target;
     }
 
     public function & getBestProposal()
     {
-        return $this->bestProposal;
+        return $this->_bestProposal;
     }
 
     /// @TODO: write an interface for formulae and use it there.
     public function proposeFormula(Erebot_Module_Countdown_Formula &$formula)
     {
-        $gameNumbers    = $this->numbers;
+        $gameNumbers    = $this->_numbers;
         $formulaNumbers = $formula->getNumbers();
 
         foreach ($formulaNumbers as $number) {
@@ -152,15 +157,15 @@ class Erebot_Module_Countdown_Game
             unset($gameNumbers[$key]);
         }
 
-        if ($this->bestProposal === NULL) {
-            $this->bestProposal =&  $formula;
+        if ($this->_bestProposal === NULL) {
+            $this->_bestProposal =&  $formula;
             return TRUE;
         }
 
-        $oldDst = abs($this->bestProposal->getResult() - $this->target);
-        $newDst = abs($formula->getResult() - $this->target);
+        $oldDst = abs($this->_bestProposal->getResult() - $this->_target);
+        $newDst = abs($formula->getResult() - $this->_target);
         if ($newDst < $oldDst) {
-            $this->bestProposal =&  $formula;
+            $this->_bestProposal =&  $formula;
             return TRUE;
         }
 

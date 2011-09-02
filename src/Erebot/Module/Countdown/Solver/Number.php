@@ -24,7 +24,9 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
     public function __construct($value)
     {
         if (!is_int($value) || $value <= 0)
-            throw new Erebot_Module_Countdown_Exception('Not a strictly positive integer');
+            throw new Erebot_Module_Countdown_Exception(
+                'Not a strictly positive integer'
+            );
         $this->_value = $value;
     }
 

@@ -25,16 +25,23 @@ implements  Erebot_Module_Countdown_Solver_Interface
 
     public function __construct($target, $numbers)
     {
-        if (!is_int($target) || $target <= 0)
-            throw new Erebot_Module_Countdown_Exception('Invalid target number');
-        if (!is_array($numbers))
-            throw new Erebot_Module_Countdown_Exception('An array of numbers was expected');
+        if (!is_int($target) || $target <= 0) {
+            throw new Erebot_Module_Countdown_Exception(
+                'Invalid target number'
+            );
+        }
+        if (!is_array($numbers)) {
+            throw new Erebot_Module_Countdown_Exception(
+                'An array of numbers was expected'
+            );
+        }
 
         $this->_target  = $target;
         $this->_numbers = array();
         rsort($numbers, SORT_NUMERIC);
         foreach ($numbers as $number)
-            $this->_numbers[] = new Erebot_Module_Countdown_Solver_Number($number);
+            $this->_numbers[] =
+                new Erebot_Module_Countdown_Solver_Number($number);
     }
 
     protected function _sortSet($a, $b)
@@ -58,18 +65,25 @@ implements  Erebot_Module_Countdown_Solver_Interface
                     for ($j = 0; $j < $i; $j++) {
                         foreach ($operators as $operator) {
                             try {
-                                $result = new Erebot_Module_Countdown_Solver_Operation(
-                                    $set[$j], $set[$i], $operator);
-                                $distance = abs($result->getValue() - $this->_target);
+                                $result =
+                                    new Erebot_Module_Countdown_Solver_Operation(
+                                        $set[$j], $set[$i], $operator
+                                    );
+                                $distance = abs(
+                                    $result->getValue() -
+                                    $this->_target
+                                );
 
                                 if (!$distance) {
                                     $best = $result;
                                     break 5;
                                 }
 
-                                if ($best === NULL || $distance < $bestDistance) {
-                                    $best           = $result;
-                                    $bestDistance   = abs($best->getValue() - $this->_target);
+                                if ($best === NULL ||
+                                    $distance < $bestDistance) {
+                                    $best = $result;
+                                    $bestDistance =
+                                        abs($best->getValue() - $this->_target);
                                 }
 
                                 if ($nbNumbers == 2)

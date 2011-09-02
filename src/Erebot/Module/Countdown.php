@@ -43,8 +43,11 @@ extends Erebot_Module_Base
             $this->_trigger = $registry->registerTriggers($trigger, $matchAny);
             if ($this->_trigger === NULL) {
                 $translator = $this->getTranslator(FALSE);
-                throw new Exception($translator->gettext(
-                    'Could not register Countdown trigger'));
+                throw new Exception(
+                    $translator->gettext(
+                        'Could not register Countdown trigger'
+                    )
+                );
             }
 
             $this->_startHandler    = new Erebot_EventHandler(
@@ -98,11 +101,11 @@ extends Erebot_Module_Base
         $nbArgs     = count($words);
 
         if ($nbArgs == 1 && $words[0] == $moduleName) {
-            $msg = $translator->gettext('
-Provides the <b><var name="trigger"/></b> command which starts
-a new Countdown game where contestants must propose a formula
-to be as close as possible to a given number.
-');
+            $msg = $translator->gettext(
+                'Provides the <b><var name="trigger"/></b> command which '.
+                'starts a new Countdown game where contestants must propose '.
+                'a formula to be as close as possible to a given number.'
+            );
             $formatter = new Erebot_Styling($msg, $translator);
             $formatter->assign('trigger', $trigger);
             $this->sendMessage($target, $formatter->render());
@@ -113,21 +116,23 @@ to be as close as possible to a given number.
             return FALSE;
 
         if ($words[1] == $trigger) {
-            $msg = $translator->gettext("
-<b>Usage:</b> !<var name='trigger'/>.
-Starts a new Countdown game. Given a set of numbers and a target result,
-contestants must propose formulae to be as close as possible to the result.
-The first one to get the target result or the closest result wins the game.
-");
+            $msg = $translator->gettext(
+                "<b>Usage:</b> !<var name='trigger'/>. Starts a new Countdown ".
+                "game. Given a set of numbers and a target result, ".
+                "contestants must propose formulae to be as close as possible ".
+                "to the result. The first one to get the target result or the ".
+                "closest result wins the game."
+            );
             $formatter = new Erebot_Styling($msg, $translator);
             $formatter->assign('trigger', $trigger);
             $this->sendMessage($target, $formatter->render());
 
-            $msg = $translator->gettext("
-Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - 7').
-The four basic operators (+, -, *, /) and parenthesis are supported.
-Non-integral divisions (eg. 5/2) are forbidden.
-");
+            $msg = $translator->gettext(
+                "Formulae must be given with the usual notation ".
+                "(eg. '(100+2) * 4 /2 - 7'). The four basic operators ".
+                "(+, -, *, /) and parenthesis are supported. Non-integral ".
+                "divisions (eg. 5/2) are forbidden."
+            );
             $formatter = new Erebot_Styling($msg, $translator);
             $this->sendMessage($target, $formatter->render());
 
@@ -146,24 +151,28 @@ Non-integral divisions (eg. 5/2) are forbidden.
         if (isset($this->_game[$chan])) {
             // Display current status.
             $game   =&  $this->_game[$chan]['game'];
-            $msg    =   $translator->gettext('You must get <b><var name="target"/>'.
-                            '</b> using the following numbers: '.
-                            '<for from="numbers" item="number"><b><var '.
-                            'name="number"/></b></for>.');
-            $tpl    = new Erebot_Styling($msg, $translator);
-            $tpl->assign('target',      $game->getTarget());
-            $tpl->assign('numbers',     $game->getNumbers());
+            $msg    =   $translator->gettext(
+                'You must get <b><var name="target"/>'.
+                '</b> using the following numbers: '.
+                '<for from="numbers" item="number"><b><var '.
+                'name="number"/></b></for>.'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('target', $game->getTarget());
+            $tpl->assign('numbers', $game->getNumbers());
             $this->sendMessage($chan, $tpl->render());
             $best = $game->getBestProposal();
             if ($best === NULL)
                 return;
 
-            $msg    = $translator->gettext('So far, <b><var name="nick"/></b> has '.
-                            'achieved <b><var name="result"/></b> using this '.
-                            'formula: <b><var name="formula"/></b>');
-            $tpl    = new Erebot_Styling($msg, $translator);
-            $tpl->assign('nick',    $best->getOwner());
-            $tpl->assign('result',  $best->getResult());
+            $msg = $translator->gettext(
+                'So far, <b><var name="nick"/></b> has '.
+                'achieved <b><var name="result"/></b> using this '.
+                'formula: <b><var name="formula"/></b>'
+            );
+            $tpl = new Erebot_Styling($msg, $translator);
+            $tpl->assign('nick', $best->getOwner());
+            $tpl->assign('result', $best->getResult());
             $tpl->assign('formula', $best->getFormula());
             $this->sendMessage($chan, $tpl->render());
             return;
@@ -172,20 +181,25 @@ Non-integral divisions (eg. 5/2) are forbidden.
         $minTarget  = $this->parseInt('minimum', 100);
         $maxTarget  = $this->parseInt('maximum', 999);
         $nbNumbers  = $this->parseInt('numbers', 7);
-        $allowed    = $this->parseString('allowed', '1 2 3 4 5 6 7 8 9 10 25 50 75 100');
+        $allowed    = $this->parseString(
+            'allowed',
+            '1 2 3 4 5 6 7 8 9 10 25 50 75 100'
+        );
         $allowed    = array_map('intval', array_filter(explode(' ', $allowed)));
 
         $game   =   new Erebot_Module_Countdown_Game($minTarget, $maxTarget, $nbNumbers, $allowed);
         $delay  =   $this->parseInt('delay', 60);
-        $msg    =   $translator->gettext('A new Countdown game has been started. '.
-                        'You must get <b><var name="target"/></b> using the '.
-                        'following numbers <for from="numbers" item="number">'.
-                        '<b><var name="number"/></b></for>. You have <var '.
-                        'name="delay"/> seconds to make suggestions.');
+        $msg    =   $translator->gettext(
+            'A new Countdown game has been started. '.
+            'You must get <b><var name="target"/></b> using the '.
+            'following numbers <for from="numbers" item="number">'.
+            '<b><var name="number"/></b></for>. You have <var '.
+            'name="delay"/> seconds to make suggestions.'
+        );
         $tpl    = new Erebot_Styling($msg, $translator);
-        $tpl->assign('target',  $game->getTarget());
+        $tpl->assign('target', $game->getTarget());
         $tpl->assign('numbers', $game->getNumbers());
-        $tpl->assign('delay',   $delay);
+        $tpl->assign('delay', $delay);
         $this->sendMessage($chan, $tpl->render());
 
         $timer  = new Erebot_Timer(
@@ -219,20 +233,29 @@ Non-integral divisions (eg. 5/2) are forbidden.
             $formula = new Erebot_Module_Countdown_Formula($nick, $text);
         }
         catch (Erebot_Module_Countdown_FormulaMustBeAStringException $e) {
-            throw new Exception($translator->gettext(
-                'Expected the formula to be a string'));
+            throw new Exception(
+                $translator->gettext(
+                    'Expected the formula to be a string'
+                )
+            );
         }
         catch (Erebot_Module_Countdown_DivisionByZeroException $e) {
-            return $this->sendMessage($chan, $translator->gettext(
-                'Division by zero'));
+            return $this->sendMessage(
+                $chan,
+                $translator->gettext('Division by zero')
+            );
         }
         catch (Erebot_Module_Countdown_NonIntegralDivisionException $e) {
-            return $this->sendMessage($chan, $translator->gettext(
-                'Non integral division'));
+            return $this->sendMessage(
+                $chan,
+                $translator->gettext('Non integral division')
+            );
         }
         catch (Erebot_Module_Countdown_SyntaxErrorException $e) {
-            return $this->sendMessage($chan, $translator->gettext(
-                'Syntax error'));
+            return $this->sendMessage(
+                $chan,
+                $translator->gettext('Syntax error')
+            );
         }
 
         $game   =&  $this->_game[$chan]['game'];
@@ -240,18 +263,22 @@ Non-integral divisions (eg. 5/2) are forbidden.
             $best = $game->proposeFormula($formula);
         }
         catch (Erebot_Module_Countdown_UnavailableNumberException $e) {
-            return $this->sendMessage($chan, $translator->gettext(
-                'No such number or number already used'));
+            return $this->sendMessage(
+                $chan,
+                $translator->gettext('No such number or number already used')
+            );
         }
 
         if ($best) {
             if ($formula->getResult() == $game->getTarget()) {
-                $msg    =   $translator->gettext('<b>BINGO! <var name="nick"/></b> '.
-                                'has achieved <b><var name="result"/></b> with '.
-                                'this formula: <b><var name="formula"/></b>.');
+                $msg    =   $translator->gettext(
+                    '<b>BINGO! <var name="nick"/></b> '.
+                    'has achieved <b><var name="result"/></b> with '.
+                    'this formula: <b><var name="formula"/></b>.'
+                );
                 $tpl    = new Erebot_Styling($msg, $translator);
-                $tpl->assign('nick',    $nick);
-                $tpl->assign('result',  $formula->getResult());
+                $tpl->assign('nick', $nick);
+                $tpl->assign('result', $formula->getResult());
                 $tpl->assign('formula', $formula->getFormula());
                 $this->sendMessage($chan, $tpl->render());
 
@@ -262,22 +289,25 @@ Non-integral divisions (eg. 5/2) are forbidden.
                 return;
             }
 
-            $msg    = $translator->gettext(
-                'Congratulations <b><var name="nick"/></b>! You\'re '.
-                'the closest with <b><var name="result"/></b>.');
+            $msg = $translator->gettext(
+                'Congratulations <b><var name="nick"/></b>! '.
+                'You\'re the closest with <b><var name="result"/></b>.'
+            );
             $tpl    = new Erebot_Styling($msg, $translator);
-            $tpl->assign('nick',    $nick);
-            $tpl->assign('result',  $formula->getResult());
+            $tpl->assign('nick', $nick);
+            $tpl->assign('result', $formula->getResult());
             $this->sendMessage($chan, $tpl->render());
             return;
         }
 
-        $msg    =   $translator->gettext('Not bad <b><var name="nick"/></b>, you '.
-                        'actually got <b><var name="result"/></b>, but this '.
-                        'is not the best formula... Try again ;)');
-        $tpl    = new Erebot_Styling($msg, $translator);
-        $tpl->assign('nick',    $nick);
-        $tpl->assign('result',  $formula->getResult());
+        $msg = $translator->gettext(
+            'Not bad <b><var name="nick"/></b>, you '.
+            'actually got <b><var name="result"/></b>, but this '.
+            'is not the best formula... Try again ;)'
+        );
+        $tpl = new Erebot_Styling($msg, $translator);
+        $tpl->assign('nick', $nick);
+        $tpl->assign('result', $formula->getResult());
         $this->sendMessage($chan, $tpl->render());
     }
 
@@ -295,24 +325,29 @@ Non-integral divisions (eg. 5/2) are forbidden.
 
         $best =& $game->getBestProposal();
         if ($best === NULL) {
-            $msg = $translator->gettext("Time's up! Nobody has made any suggestion. :(");
+            $msg = $translator->gettext(
+                "Time's up! Nobody has made any suggestion. :("
+            );
             $this->sendMessage($chan, $msg);
             unset($chan, $game);
             return;
         }
 
-        $msg    =   $translator->gettext('Congratulations to <b><var name="nick"/>'.
-                        '</b> who wins this Countdown game. <b><var name="'.
-                        'nick"/></b> has got <b><var name="result"/></b> with '.
-                        'this formula: <b><var name="formula"/></b>.');
-        $tpl    = new Erebot_Styling($msg, $translator);
-        $tpl->assign('nick',    $best->getOwner());
-        $tpl->assign('result',  $best->getResult());
+        $msg =   $translator->gettext(
+            'Congratulations to <b><var name="nick"/>'.
+            '</b> who wins this Countdown game. <b><var name="'.
+            'nick"/></b> has got <b><var name="result"/></b> with '.
+            'this formula: <b><var name="formula"/></b>.'
+        );
+        $tpl = new Erebot_Styling($msg, $translator);
+        $tpl->assign('nick', $best->getOwner());
+        $tpl->assign('result', $best->getResult());
         $tpl->assign('formula', $best->getFormula());
         $this->sendMessage($chan, $tpl->render());
 
         $target = $game->getTarget();
-        if ($this->parseBool('solver', FALSE) && $best->getResult() != $target) {
+        if ($this->parseBool('solver', FALSE) &&
+            $best->getResult() != $target) {
             $solverCls = $this->parseString(
                 'solver_class',
                 'Erebot_Module_Countdown_Solver'
@@ -338,7 +373,7 @@ Non-integral divisions (eg. 5/2) are forbidden.
                     'by using this formula: <b><var name="formula"/></b>.'
                 );
                 $tpl    = new Erebot_Styling($msg, $translator);
-                $tpl->assign('result',  $best->getValue());
+                $tpl->assign('result', $best->getValue());
                 $tpl->assign('formula', (string) $best);
                 $this->sendMessage($chan, $tpl->render());
             }

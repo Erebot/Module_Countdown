@@ -42,12 +42,16 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
                 break;
             case '*':
                 if ($operand2->getValue() == 1)
-                    throw new Erebot_Module_Countdown_Solver_SkipException('Skipped');
+                    throw new Erebot_Module_Countdown_Solver_SkipException(
+                        'Skipped'
+                    );
                 $this->_value = $operand1->getValue() * $operand2->getValue();
                 break;
             case '/':
                 if ($operand2->getValue() == 1)
-                    throw new Erebot_Module_Countdown_Solver_SkipException('Skipped');
+                    throw new Erebot_Module_Countdown_Solver_SkipException(
+                        'Skipped'
+                    );
                 $this->_value = $operand1->getValue() / $operand2->getValue();
                 break;
             default:

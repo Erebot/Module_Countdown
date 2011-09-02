@@ -5,6 +5,7 @@
 
     <fileset dir="src/" id="sources">
         <include name="**/*.php"/>
+        <exclude name="**/Parser.php"/>
     </fileset>
 
     <fileset dir="tests/" id="tests">

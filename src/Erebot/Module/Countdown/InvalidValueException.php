@@ -26,8 +26,10 @@ extends Erebot_Module_Countdown_Exception
         $this->givenData    = $given;
 
         parent::__construct(
-            sprintf("Invalid value, expected %s, got %s for %s",
-                $this->expectedData, $this->givenData, $this->location)
+            sprintf(
+                "Invalid value, expected %s, got %s for %s",
+                $this->expectedData, $this->givenData, $this->location
+            )
         );
     }
 
