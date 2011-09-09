@@ -16,8 +16,12 @@
     <target name="all" depends="parser,i18n" description=""/>
 
     <target name="parser" description="">
-        <exec command="echo '${phing.project.name}' | sed -e s^_^/^g" escape="false" outputProperty="module_dir"/>
-        <exec command="ln -sf ../../../../data/Parser.y src/${module_dir}/"/>
+        <php function="str_replace" returnProperty="module_dir">
+            <param value="_"/>
+            <param value="/"/>
+            <param value="${phing.project.name}"/>
+        </php>
+        <copy file="../../../../data/Parser.y" todir="src/${module_dir}/"/>
         <exec command="pear config-get php_dir system" outputProperty="php_dir"/>
         <php function="putenv">
             <param value="PHP_PEAR_INSTALL_DIR=${php_dir}"/>
@@ -31,6 +35,7 @@
                 </php>
             </then>
         </if>
+        <delete file="src/${module_dir}/Parser.y"/>
     </target>
 
     <import file="buildenv/build.xml"/>
