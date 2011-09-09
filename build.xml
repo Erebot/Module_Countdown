@@ -19,7 +19,18 @@
         <exec command="echo '${phing.project.name}' | sed -e s^_^/^g" escape="false" outputProperty="module_dir"/>
         <exec command="ln -sf ../../../../data/Parser.y src/${module_dir}/"/>
         <exec command="pear config-get php_dir system" outputProperty="php_dir"/>
-        <exec command="PHP_PEAR_INSTALL_DIR=${php_dir} phplemon -q -s src/${module_dir}/Parser.y" logoutput="true"/>
+        <php function="putenv">
+            <param value="PHP_PEAR_INSTALL_DIR=${php_dir}"/>
+        </php>
+        <exec command="phplemon -q -s src/${module_dir}/Parser.y" logoutput="true"/>
+        <if>
+            <isset property="env.LANG"/>
+            <then>
+                <php function="putenv">
+                    <param value="PHP_PEAR_INSTALL_DIR=${env.PHP_PEAR_INSTALL_DIR}"/>
+                </php>
+            </then>
+        </if>
     </target>
 
     <import file="buildenv/build.xml"/>
