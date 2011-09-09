@@ -21,7 +21,7 @@
             <param value="/"/>
             <param value="${phing.project.name}"/>
         </php>
-        <copy file="../../../../data/Parser.y" todir="src/${module_dir}/"/>
+        <copy file="data/Parser.y" todir="src/${module_dir}/"/>
         <exec command="pear config-get php_dir system" outputProperty="php_dir"/>
         <php function="putenv">
             <param value="PHP_PEAR_INSTALL_DIR=${php_dir}"/>
