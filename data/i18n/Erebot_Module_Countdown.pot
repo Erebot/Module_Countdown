@@ -6,7 +6,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: Erebot_Module_Countdown 0.1.0\n"
         "Report-Msgid-Bugs-To: i18n@erebot.net\n"
-        "POT-Creation-Date: 2011-09-10 00:09+0200\n"
+        "POT-Creation-Date: 2011-11-05 21:31+0100\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr  ""
 # File: src/Erebot/Module/Countdown.php, line: 131
 msgid   "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - "
         "7'). The four basic operators (+, -, *, /) and parenthesis are "
-        "supported. Non-integral divisions (eg. 5/2) are forbidden."
+        "supported. Divisions with a remainder (eg. 5/2) are forbidden."
 msgstr  ""
 #
 # File: src/Erebot/Module/Countdown.php, line: 372

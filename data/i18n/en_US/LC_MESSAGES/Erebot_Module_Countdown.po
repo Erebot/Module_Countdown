@@ -2,7 +2,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: Erebot 0.5.0\n"
         "Report-Msgid-Bugs-To: i18n@erebot.net\n"
-        "POT-Creation-Date: 2011-09-10 00:09+0200\n"
+        "POT-Creation-Date: 2011-11-05 21:31+0100\n"
         "PO-Revision-Date: 2011-04-14 01:37+0200\n"
         "Last-Translator: \n"
         "Language-Team: \n"
@@ -60,10 +60,10 @@ msgstr  "Expected the formula to be a string"
 # File: src/Erebot/Module/Countdown.php, line: 131
 msgid   "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - "
         "7'). The four basic operators (+, -, *, /) and parenthesis are "
-        "supported. Non-integral divisions (eg. 5/2) are forbidden."
+        "supported. Divisions with a remainder (eg. 5/2) are forbidden."
 msgstr  "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - "
         "7'). The four basic operators (+, -, *, /) and parenthesis are "
-        "supported. Non-integral divisions (eg. 5/2) are forbidden."
+        "supported. Divisions with a remainder (eg. 5/2) are forbidden."
 #
 # File: src/Erebot/Module/Countdown.php, line: 337
 msgid   "However, a better result could be achieved (<var name=\"result\"/>) "
@@ -107,52 +107,3 @@ msgid   "You must get <b><var name=\"target\"/></b> using the following "
 msgstr  "You must get <b><var name=\"target\"/></b> using the following "
         "numbers: <for from=\"numbers\" item=\"number\"><b><var name=\"number"
         "\"/></b></for>."
-#
-#
-#
-#
-#
-#~ msgid        "\n"
-#~      "<b>Usage:</b> !<var name='trigger'/>.\n"
-#~      "Starts a new Countdown game. Given a set of numbers and a target "
-#~      "result,\n"
-#~      "contestants must propose formulae to be as close as possible to the "
-#~      "result.\n"
-#~      "The first one to get the target result or the closest result wins the "
-#~      "game.\n"
-#~ msgstr       "\n"
-#~      "<b>Usage:</b> !<var name='trigger'/>.\n"
-#~      "Starts a new Countdown game. Given a set of numbers and a target "
-#~      "result,\n"
-#~      "contestants must propose formulae to be as close as possible to the "
-#~      "result.\n"
-#~      "The first one to get the target result or the closest result wins the "
-#~      "game.\n"
-#
-#
-#
-#
-#
-#~ msgid        "\n"
-#~      "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - "
-#~      "7').\n"
-#~      "The four basic operators (+, -, *, /) and parenthesis are supported.\n"
-#~      "Non-integral divisions (eg. 5/2) are forbidden.\n"
-#~ msgstr       "\n"
-#~      "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - "
-#~      "7').\n"
-#~      "The four basic operators (+, -, *, /) and parenthesis are supported.\n"
-#~      "Non-integral divisions (eg. 5/2) are forbidden.\n"
-#
-#
-#
-#
-#
-#~ msgid        "\n"
-#~      "Provides the <b><var name=\"trigger\"/></b> command which starts\n"
-#~      "a new Countdown game where contestants must propose a formula\n"
-#~      "to be as close as possible to a given number.\n"
-#~ msgstr       "\n"
-#~      "Provides the <b><var name=\"trigger\"/></b> command which starts\n"
-#~      "a new Countdown game where contestants must propose a formula\n"
-#~      "to be as close as possible to a given number.\n"

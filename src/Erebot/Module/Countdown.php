@@ -130,8 +130,8 @@ extends Erebot_Module_Base
             $msg = $translator->gettext(
                 "Formulae must be given with the usual notation ".
                 "(eg. '(100+2) * 4 /2 - 7'). The four basic operators ".
-                "(+, -, *, /) and parenthesis are supported. Non-integral ".
-                "divisions (eg. 5/2) are forbidden."
+                "(+, -, *, /) and parenthesis are supported. Divisions ".
+                "with a remainder (eg. 5/2) are forbidden."
             );
             $formatter = new Erebot_Styling($msg, $translator);
             $this->sendMessage($target, $formatter->render());
