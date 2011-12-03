@@ -42,11 +42,9 @@ extends Erebot_Module_Base
             $trigger        = $this->parseString('trigger', 'countdown');
             $this->_trigger = $registry->registerTriggers($trigger, $matchAny);
             if ($this->_trigger === NULL) {
-                $translator = $this->getTranslator(FALSE);
+                $fmt = $this->getFormatter(FALSE);
                 throw new Exception(
-                    $translator->gettext(
-                        'Could not register Countdown trigger'
-                    )
+                    $fmt->_('Could not register Countdown trigger')
                 );
             }
 
@@ -93,22 +91,20 @@ extends Erebot_Module_Base
         else
             $target = $chan = $event->getChan();
 
-        $translator = $this->getTranslator($chan);
+        $fmt        = $this->getFormatter($chan);
         $trigger    = $this->parseString('trigger', 'countdown');
-
         $bot        = $this->_connection->getBot();
         $moduleName = strtolower(get_class());
         $nbArgs     = count($words);
 
         if ($nbArgs == 1 && $words[0] == $moduleName) {
-            $msg = $translator->gettext(
+            $msg = $fmt->_(
                 'Provides the <b><var name="trigger"/></b> command which '.
                 'starts a new Countdown game where contestants must propose '.
-                'a formula to be as close as possible to a given number.'
+                'a formula to be as close as possible to a given number.',
+                array('trigger' => $trigger)
             );
-            $formatter = new Erebot_Styling($msg, $translator);
-            $formatter->assign('trigger', $trigger);
-            $this->sendMessage($target, $formatter->render());
+            $this->sendMessage($target, $msg);
             return TRUE;
         }
 
@@ -116,26 +112,23 @@ extends Erebot_Module_Base
             return FALSE;
 
         if ($words[1] == $trigger) {
-            $msg = $translator->gettext(
+            $msg = $fmt->_(
                 "<b>Usage:</b> !<var name='trigger'/>. Starts a new Countdown ".
                 "game. Given a set of numbers and a target result, ".
                 "contestants must propose formulae to be as close as possible ".
                 "to the result. The first one to get the target result or the ".
-                "closest result wins the game."
+                "closest result wins the game.",
+                array('trigger' => $trigger)
             );
-            $formatter = new Erebot_Styling($msg, $translator);
-            $formatter->assign('trigger', $trigger);
-            $this->sendMessage($target, $formatter->render());
+            $this->sendMessage($target, $msg);
 
-            $msg = $translator->gettext(
+            $msg = $fmt->_(
                 "Formulae must be given with the usual notation ".
                 "(eg. '(100+2) * 4 /2 - 7'). The four basic operators ".
                 "(+, -, *, /) and parenthesis are supported. Divisions ".
                 "with a remainder (eg. 5/2) are forbidden."
             );
-            $formatter = new Erebot_Styling($msg, $translator);
-            $this->sendMessage($target, $formatter->render());
-
+            $this->sendMessage($target, $msg);
             return TRUE;
         }
     }
@@ -145,36 +138,38 @@ extends Erebot_Module_Base
         Erebot_Interface_Event_ChanText $event
     )
     {
-        $chan       = $event->getChan();
-        $translator = $this->getTranslator($chan);
+        $chan   = $event->getChan();
+        $fmt    = $this->getFormatter($chan);
 
         if (isset($this->_game[$chan])) {
             // Display current status.
             $game   =&  $this->_game[$chan]['game'];
-            $msg    =   $translator->gettext(
+            $msg    =   $fmt->_(
                 'You must get <b><var name="target"/>'.
                 '</b> using the following numbers: '.
                 '<for from="numbers" item="number"><b><var '.
-                'name="number"/></b></for>.'
+                'name="number"/></b></for>.',
+                array(
+                    'target' => $game->getTarget(),
+                    'numbers' => $game->getNumbers(),
+                )
             );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('target', $game->getTarget());
-            $tpl->assign('numbers', $game->getNumbers());
-            $this->sendMessage($chan, $tpl->render());
+            $this->sendMessage($chan, $msg);
             $best = $game->getBestProposal();
             if ($best === NULL)
                 return;
 
-            $msg = $translator->gettext(
+            $msg = $fmt->_(
                 'So far, <b><var name="nick"/></b> has '.
                 'achieved <b><var name="result"/></b> using this '.
-                'formula: <b><var name="formula"/></b>'
+                'formula: <b><var name="formula"/></b>',
+                array(
+                    'nick' => $best->getOwner(),
+                    'result' => $best->getResult(),
+                    'formula' => $best->getFormula(),
+                )
             );
-            $tpl = new Erebot_Styling($msg, $translator);
-            $tpl->assign('nick', $best->getOwner());
-            $tpl->assign('result', $best->getResult());
-            $tpl->assign('formula', $best->getFormula());
-            $this->sendMessage($chan, $tpl->render());
+            $this->sendMessage($chan, $msg);
             return;
         }
 
@@ -189,18 +184,19 @@ extends Erebot_Module_Base
 
         $game   =   new Erebot_Module_Countdown_Game($minTarget, $maxTarget, $nbNumbers, $allowed);
         $delay  =   $this->parseInt('delay', 60);
-        $msg    =   $translator->gettext(
+        $msg    =   $fmt->_(
             'A new Countdown game has been started. '.
             'You must get <b><var name="target"/></b> using the '.
             'following numbers <for from="numbers" item="number">'.
             '<b><var name="number"/></b></for>. You have <var '.
-            'name="delay"/> seconds to make suggestions.'
+            'name="delay"/> seconds to make suggestions.',
+            array(
+                'target' => $game->getTarget(),
+                'numbers' => $game->getNumbers(),
+                'delay' => $delay,
+            )
         );
-        $tpl    = new Erebot_Styling($msg, $translator);
-        $tpl->assign('target', $game->getTarget());
-        $tpl->assign('numbers', $game->getNumbers());
-        $tpl->assign('delay', $delay);
-        $this->sendMessage($chan, $tpl->render());
+        $this->sendMessage($chan, $msg);
 
         $timer  = new Erebot_Timer(
             new Erebot_Callable(array($this, 'handleTimeOut')),
@@ -224,37 +220,36 @@ extends Erebot_Module_Base
         Erebot_Interface_Event_ChanText $event
     )
     {
-        $chan       = $event->getChan();
-        $nick       = $event->getSource();
-        $text       = (string) $event->getText();
-        $translator = $this->getTranslator($chan);
+        $chan   = $event->getChan();
+        $nick   = $event->getSource();
+        $text   = (string) $event->getText();
+        $fmt    = $this->getFormatter($chan);
 
         try {
             $formula = new Erebot_Module_Countdown_Formula($nick, $text);
         }
         catch (Erebot_Module_Countdown_FormulaMustBeAStringException $e) {
-            throw new Exception(
-                $translator->gettext(
-                    'Expected the formula to be a string'
-                )
+            return $this->sendMessage(
+                $chan,
+                $fmt->_('Expected the formula to be a string')
             );
         }
         catch (Erebot_Module_Countdown_DivisionByZeroException $e) {
             return $this->sendMessage(
                 $chan,
-                $translator->gettext('Division by zero')
+                $fmt->_('Division by zero')
             );
         }
         catch (Erebot_Module_Countdown_NonIntegralDivisionException $e) {
             return $this->sendMessage(
                 $chan,
-                $translator->gettext('Non integral division')
+                $fmt->_('Non integral division')
             );
         }
         catch (Erebot_Module_Countdown_SyntaxErrorException $e) {
             return $this->sendMessage(
                 $chan,
-                $translator->gettext('Syntax error')
+                $fmt->_('Syntax error')
             );
         }
 
@@ -265,22 +260,23 @@ extends Erebot_Module_Base
         catch (Erebot_Module_Countdown_UnavailableNumberException $e) {
             return $this->sendMessage(
                 $chan,
-                $translator->gettext('No such number or number already used')
+                $fmt->_('No such number or number already used')
             );
         }
 
         if ($best) {
             if ($formula->getResult() == $game->getTarget()) {
-                $msg    =   $translator->gettext(
+                $msg = $fmt->_(
                     '<b>BINGO! <var name="nick"/></b> '.
                     'has achieved <b><var name="result"/></b> with '.
-                    'this formula: <b><var name="formula"/></b>.'
+                    'this formula: <b><var name="formula"/></b>.',
+                    array(
+                        'nick' => $nick,
+                        'result' => $formula->getResult(),
+                        'formula' => $formula->getFormula(),
+                    )
                 );
-                $tpl    = new Erebot_Styling($msg, $translator);
-                $tpl->assign('nick', $nick);
-                $tpl->assign('result', $formula->getResult());
-                $tpl->assign('formula', $formula->getFormula());
-                $this->sendMessage($chan, $tpl->render());
+                $this->sendMessage($chan, $msg);
 
                 $this->removeTimer($this->_game[$chan]['timer']);
                 $filter = $this->_rawHandler->getFilter();
@@ -289,26 +285,28 @@ extends Erebot_Module_Base
                 return;
             }
 
-            $msg = $translator->gettext(
+            $msg = $fmt->_(
                 'Congratulations <b><var name="nick"/></b>! '.
-                'You\'re the closest with <b><var name="result"/></b>.'
+                'You\'re the closest with <b><var name="result"/></b>.',
+                array(
+                    'nick' => $nick,
+                    'result' => $formula->getResult(),
+                )
             );
-            $tpl    = new Erebot_Styling($msg, $translator);
-            $tpl->assign('nick', $nick);
-            $tpl->assign('result', $formula->getResult());
-            $this->sendMessage($chan, $tpl->render());
+            $this->sendMessage($chan, $msg);
             return;
         }
 
-        $msg = $translator->gettext(
+        $msg = $fmt->_(
             'Not bad <b><var name="nick"/></b>, you '.
             'actually got <b><var name="result"/></b>, but this '.
-            'is not the best formula... Try again ;)'
+            'is not the best formula... Try again ;)',
+            array(
+                'nick' => $nick,
+                'result' => $formula->getResult(),
+            )
         );
-        $tpl = new Erebot_Styling($msg, $translator);
-        $tpl->assign('nick', $nick);
-        $tpl->assign('result', $formula->getResult());
-        $this->sendMessage($chan, $tpl->render());
+        $this->sendMessage($chan, $msg);
     }
 
     public function handleTimeOut(Erebot_Interface_Timer $timer, $chan)
@@ -317,7 +315,7 @@ extends Erebot_Module_Base
         if (!isset($this->_game[$chan])) return;
         $game =& $this->_game[$chan]['game'];
 
-        $translator = $this->getTranslator($chan);
+        $fmt    = $this->getFormatter($chan);
         $filter = $this->_rawHandler->getFilter();
         $filter[0]->remove($this->_game[$chan]['filter']);
         unset($filter, $this->_game[$chan]);
@@ -325,25 +323,24 @@ extends Erebot_Module_Base
 
         $best =& $game->getBestProposal();
         if ($best === NULL) {
-            $msg = $translator->gettext(
-                "Time's up! Nobody has made any suggestion. :("
-            );
+            $msg = $fmt->_("Time's up! Nobody has made any suggestion. :(");
             $this->sendMessage($chan, $msg);
             unset($chan, $game);
             return;
         }
 
-        $msg =   $translator->gettext(
+        $msg =   $fmt->_(
             'Congratulations to <b><var name="nick"/>'.
             '</b> who wins this Countdown game. <b><var name="'.
             'nick"/></b> has got <b><var name="result"/></b> with '.
-            'this formula: <b><var name="formula"/></b>.'
+            'this formula: <b><var name="formula"/></b>.',
+            array(
+                'nick' => $best->getOwner(),
+                'result' => $best->getResult(),
+                'formula' => $best->getFormula(),
+            )
         );
-        $tpl = new Erebot_Styling($msg, $translator);
-        $tpl->assign('nick', $best->getOwner());
-        $tpl->assign('result', $best->getResult());
-        $tpl->assign('formula', $best->getFormula());
-        $this->sendMessage($chan, $tpl->render());
+        $this->sendMessage($chan, $msg);
 
         $target = $game->getTarget();
         if ($this->parseBool('solver', FALSE) &&
@@ -367,15 +364,18 @@ extends Erebot_Module_Base
             $best   = $solver->solve();
             // Make sure the solver actually found a better result
             // before nagging the players.
-            if (abs($best->getValue() - $target) < abs($best->getResult() - $target)) {
-                $msg = $translator->gettext(
-                    'However, a better result could be achieved (<var name="result"/>) '.
-                    'by using this formula: <b><var name="formula"/></b>.'
+            if (abs($best->getValue() - $target) <
+                abs($best->getResult() - $target)) {
+                $msg = $fmt->_(
+                    'However, a better result could be achieved '.
+                    '(<var name="result"/>) by using this formula: '.
+                    '<b><var name="formula"/></b>.',
+                    array(
+                        'result' => $best->getValue(),
+                        'formula' => (string) $best,
+                    )
                 );
-                $tpl    = new Erebot_Styling($msg, $translator);
-                $tpl->assign('result', $best->getValue());
-                $tpl->assign('formula', (string) $best);
-                $this->sendMessage($chan, $tpl->render());
+                $this->sendMessage($chan, $msg);
             }
         }
 
