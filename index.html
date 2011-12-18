@@ -1,82 +1,116 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
 
-  <title>fpoirotte/Erebot_Module_Countdown @ GitHub</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #3865e8;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #000000;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #c79a17; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #c79a17; }
-    h3 { text-align: center; color: #c79a17; }
-    a { color: #c79a17; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="https://github.com/fpoirotte/Erebot_Module_Countdown"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="https://github.com/fpoirotte/Erebot_Module_Countdown/zipball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/zip.png"></a>
-      <a href="https://github.com/fpoirotte/Erebot_Module_Countdown/tarball/master">
-        <img border="0" width="90" src="https://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="https://github.com/fpoirotte/Erebot_Module_Countdown">Erebot_Module_Countdown</a>
-      <span class="small">by <a href="https://github.com/fpoirotte">fpoirotte</a></span></h1>
-
-    <div class="description">
-      Countdown game for Erebot
-    </div>
-
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
+    <title>Welcome to the documentation for Erebot_Module_Countdown! &mdash; Erebot_Module_Countdown v0.1.0.snapshot38 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0.snapshot38',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within Erebot_Module_Countdown v0.1.0.snapshot38 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="top" title="Erebot_Module_Countdown v0.1.0.snapshot38 documentation" href="#" />
+    <link rel="next" title="Installation" href="generic/Installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="generic/Installation.html" title="Installation"
+             accesskey="N">next</a></li>
+        <li><a href="#">Erebot_Module_Countdown v0.1.0.snapshot38 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
 
-    
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-the-documentation-for-erebot-module-countdown">
+<h1>Welcome to the documentation for Erebot_Module_Countdown!<a class="headerlink" href="#welcome-to-the-documentation-for-erebot-module-countdown" title="Permalink to this headline">¶</a></h1>
+<p>Erebot_Module_Countdown is a module for <a class="reference external" href="https://www.erebot.net/">Erebot</a> that provides a game inspired
+by the TV show with the same name.
+Given a set of numbers and a target number, contestants have 60 seconds
+to propose formulae that produce the target number using only number
+from the given set and the four basic operators (+, -, <a href="#id1"><span class="problematic" id="id2">*</span></a>, /).</p>
+<p>The winner is the one that managed to get the target number exactly or who
+got the closest result.</p>
+<p>The listing below shows a game played in french.</p>
+<div class="highlight-irc"><div class="highlight"><pre><span class="cp">17:29:20 </span><span class="nt">&lt; Erebot&gt; </span>Une nouvelle partie des Chiffres et des Lettres commence. Vous devez obtenir 965 grâce aux nombres suivants : 4, 2, 75, 25, 10, 7 &amp; 8. Vous avez 60 secondes pour faire des propositions.
+<span class="cp">17:29:31 </span><span class="nt">&lt; foobar&gt; </span>(75+25-4)*10
+<span class="cp">17:29:31 </span><span class="nt">&lt; Erebot&gt; </span>Félicitations foobar ! Vous êtes le plus proche avec 960.
+<span class="cp">17:29:37 </span><span class="nt">&lt; foobar&gt; </span>(75+25-4)*10+7-2
+<span class="cp">17:29:37 </span><span class="nt">&lt; Erebot&gt; </span>BINGO ! foobar a obtenu 965 avec cette formule : (75+25-4)*10+7-2.
+</pre></div>
+</div>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="generic/Installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="generic/Installation.html#installation-from-erebot-s-pear-channel">Installation from Erebot&#8217;s PEAR channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic/Installation.html#installation-using-phar-archives">Installation using PHAR archives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic/Installation.html#installation-from-source">Installation from source</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
-    
 
-    
-
-    
-
-    
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="https://github.com/fpoirotte/Erebot_Module_Countdown/zipball/master">zip</a> or
-      <a href="https://github.com/fpoirotte/Erebot_Module_Countdown/tarball/master">tar formats.
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="generic/Installation.html"
+                        title="next chapter">Installation</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
     </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/fpoirotte/Erebot_Module_Countdown</pre>
-    </p>
-
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="generic/Installation.html" title="Installation"
+             >next</a></li>
+        <li><a href="#">Erebot_Module_Countdown v0.1.0.snapshot38 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
     <div class="footer">
-      get the source code on GitHub : <a href="https://github.com/fpoirotte/Erebot_Module_Countdown">fpoirotte/Erebot_Module_Countdown</a>
+        &copy; Copyright 2011, Erebot.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
     </div>
-
-  </div>
-
-</body>
+  </body>
 </html>

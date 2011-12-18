@@ -1,0 +1,218 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; Erebot_Module_Countdown v0.1.0.snapshot38 documentation</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.0.snapshot38',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within Erebot_Module_Countdown v0.1.0.snapshot38 documentation"
+          href="../_static/opensearch.xml"/>
+    <link rel="top" title="Erebot_Module_Countdown v0.1.0.snapshot38 documentation" href="../index.html" />
+    <link rel="prev" title="Welcome to the documentation for Erebot_Module_Countdown!" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../index.html" title="Welcome to the documentation for Erebot_Module_Countdown!"
+             accesskey="P">previous</a></li>
+        <li><a href="../index.html">Erebot_Module_Countdown v0.1.0.snapshot38 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation">
+<h1><a class="toc-backref" href="#id1">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>This pages contains instructions on how to install this module on your machine.
+There are several ways to achieve that. Each method is described below.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You cannot mix the different methods. Especially, <strong>you must use the same
+method to install this module as the one you selected for Erebot itself</strong>.</p>
+</div>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="id1">Installation</a><ul>
+<li><a class="reference internal" href="#installation-from-erebot-s-pear-channel" id="id2">Installation from Erebot&#8217;s PEAR channel</a></li>
+<li><a class="reference internal" href="#installation-using-phar-archives" id="id3">Installation using PHAR archives</a></li>
+<li><a class="reference internal" href="#installation-from-source" id="id4">Installation from source</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We recommend that you install this module using <a class="reference external" href="https://pear.erebot.net/">Erebot&#8217;s PEAR channel</a>.
+This will result in a system-wide installation which can be upgraded
+very easily later.
+If this is not feasible for you or if you prefer to keep the installation
+local (for a single user), we recommend that you go the PHAR way.
+Installation from sources is reserved for advanced installations
+(developers).</p>
+</div>
+<div class="section" id="installation-from-erebot-s-pear-channel">
+<h2><a class="toc-backref" href="#id2">Installation from Erebot&#8217;s PEAR channel</a><a class="headerlink" href="#installation-from-erebot-s-pear-channel" title="Permalink to this headline">¶</a></h2>
+<p>This is by far the simplest way to install the module.
+Hence, it&#8217;s the recommended way for beginners.
+Just use whatever tool your distribution provides to manage PEAR packages:</p>
+<ul class="simple">
+<li>Either <a class="reference external" href="http://pear.php.net/package/PEAR">pear</a> (traditionnal tool)</li>
+<li>or <a class="reference external" href="http://pyrus.net/">pyrus</a> (new experimental tool meant to replace pear someday)</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Pyrus currently has issues with some PEAR packages. It is thus recommended
+that you use the regular pear tool to install Erebot.
+See <a class="reference external" href="https://github.com/pyrus/Pyrus/issues/26">https://github.com/pyrus/Pyrus/issues/26</a> for more information.</p>
+</div>
+<p>You can install (<strong>as a privileged user</strong>) either the latest stable release
+using a command such as:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pear channel-discover pear.erebot.net
+<span class="nv">$ </span>pear install erebot/Erebot_Module_Countdown
+</pre></div>
+</div>
+<p>... or you can install the latest unstable version instead, using:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pear channel-discover pear.erebot.net
+<span class="nv">$ </span>pear install erebot/Erebot_Module_Countdown-alpha
+</pre></div>
+</div>
+<p>Please note that the <tt class="docutils literal"><span class="pre">channel-discover</span></tt> command needs to be run only once
+(pear and pyrus will refuse to discover a PEAR channel more than once anyway).
+To use Pyrus to manage PEAR packages instead of the regular Pear tool,
+just replace <tt class="docutils literal"><span class="pre">pear</span></tt> with <tt class="docutils literal"><span class="pre">pyrus</span></tt> in the commands above.</p>
+</div>
+<div class="section" id="installation-using-phar-archives">
+<h2><a class="toc-backref" href="#id3">Installation using PHAR archives</a><a class="headerlink" href="#installation-using-phar-archives" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-todo admonition " id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Explain how to do this.</p>
+</div>
+</div>
+<div class="section" id="installation-from-source">
+<h2><a class="toc-backref" href="#id4">Installation from source</a><a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>First, make sure a git client is installed on your machine.
+Under Linux, <strong>from a root shell</strong>, run the command that most closely matches
+the tools provided by your distribution:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="c"># For apt-based distributions such as Debian or Ubuntu</span>
+<span class="nv">$ </span>apt-get install git
+
+<span class="c"># For yum-based distributions such as Fedora / RHEL (RedHat)</span>
+<span class="nv">$ </span>yum install git
+
+<span class="c"># For urpmi-based distributions such as SLES (SuSE) or MES (Mandriva)</span>
+<span class="nv">$ </span>urpmi git
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Windows users may be interested in installing <a class="reference external" href="http://code.google.com/p/msysgit/downloads/list">Git for Windows</a> to get
+an equivalent git client. Also, make sure that <tt class="docutils literal"><span class="pre">git.exe</span></tt> is present
+on your account&#8217;s <tt class="docutils literal"><span class="pre">PATH</span></tt>. If not, you&#8217;ll have to replace <tt class="docutils literal"><span class="pre">git</span></tt> by
+the full path to <tt class="docutils literal"><span class="pre">git.exe</span></tt> on every invocation
+(eg. <tt class="docutils literal"><span class="pre">&quot;C:\Program</span> <span class="pre">Files\Git\bin\git.exe&quot;</span> <span class="pre">clone</span> <span class="pre">...</span></tt>)</p>
+</div>
+<p>Now, clone the module&#8217;s repository:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /path/to/Erebot/vendor/
+<span class="nv">$ </span>git clone --recursive git://github.com/fpoirotte/Erebot_Module_Countdown.git
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Linux users (especially Erebot developers) may prefer to create a separate
+checkout for each component and then use symbolic links to join them
+together, like this:</p>
+<div class="last highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>git clone --recursive git://github.com/fpoirotte/Erebot_Module_Countdown.git
+<span class="nv">$ </span><span class="nb">cd </span>Erebot/vendor/
+<span class="nv">$ </span>ln -s ../../Erebot_Module_Countdown
+</pre></div>
+</div>
+</div>
+<p>Optionally, you can compile the translation files for each component.
+However, this requires that <a class="reference external" href="http://www.gnu.org/s/gettext/">gettext</a> and <a class="reference external" href="http://www.phing.info/">phing</a> be installed on your machine
+as well. See the documentation on <a class="reference external" href="/Erebot/Prerequisites.html">Erebot&#8217;s prerequisites</a> for additional
+information on how to install these tools depending on your system.</p>
+<p>Depending on the module, other additional tools may be required.
+Check out this module&#8217;s <a class="reference external" href="../Prerequisites.html">prerequisites</a> for more information.</p>
+<p>Once you got those two up and running, the translation files can be compiled
+using these commands:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /path/to/Erebot/vendor/Erebot_Module_Countdown
+<span class="nv">$ </span>phing
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#installation-from-erebot-s-pear-channel">Installation from Erebot&#8217;s PEAR channel</a></li>
+<li><a class="reference internal" href="#installation-using-phar-archives">Installation using PHAR archives</a></li>
+<li><a class="reference internal" href="#installation-from-source">Installation from source</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Welcome to the documentation for Erebot_Module_Countdown!</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../index.html" title="Welcome to the documentation for Erebot_Module_Countdown!"
+             >previous</a></li>
+        <li><a href="../index.html">Erebot_Module_Countdown v0.1.0.snapshot38 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Erebot.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>
