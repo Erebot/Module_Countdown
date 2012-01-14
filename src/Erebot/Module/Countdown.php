@@ -198,7 +198,8 @@ extends Erebot_Module_Base
         );
         $this->sendMessage($chan, $msg);
 
-        $timer  = new Erebot_Timer(
+        $timerCls = $this->getFactory('!Timer');
+        $timer  = new $timerCls(
             new Erebot_Callable(array($this, 'handleTimeOut')),
             $delay, FALSE,
             array($chan)
