@@ -59,10 +59,62 @@ just replace ``pear`` with ``pyrus`` in the commands above.
 Installation using PHAR archives
 --------------------------------
 
+Installing |project| from a PHAR archive is very easy.
+However, please note that Erebot must have been installed as a PHAR archive
+for this method to work properly.
+
+..  _`previously created`:
+
+Preparations
+~~~~~~~~~~~~
+
+If you haven't done so already, create a directory in Erebot's folder
+named ``modules``.
+
+Hence, your tree should look like this:
+
+    * Erebot/
+        * Erebot-X.Y.Z.phar
+        * modules/
+
+Also, make sure your installation fulfills all of the `prerequisites`_
+for this module.
 
 
-..  todo::
-    Explain how to do this.
+Downloading the achive
+~~~~~~~~~~~~~~~~~~~~~~
+
+First, select the version you want to install. Available versions are listed
+on `Erebot's PEAR channel`_.
+
+The PHAR archive for a certain version can be downloaded by using a URL
+such as |project_version| (replace `version` with the actual version you
+selected).
+
+As a special shortcut, the following link always points to the latest snapshot
+of |project|: |project_latest|.
+
+..  warning::
+    Using the latest snapshot available means that you may benefit from
+    very recent developments, but it also means that the code may be in
+    an unstable state. Use at your own risk.
+
+
+Installation
+~~~~~~~~~~~~
+
+Once you've selected and downloaded a release. Just drop the PHAR archive
+in the ``modules/`` directory we `previously created`_.
+
+Therefore, you're installation should look somewhat like that:
+
+    * Erebot/
+        * Erebot-X.Y.Z.phar
+        * modules/
+            * |project|-|release|.phar
+
+That's all folks! You can now add `configuration options`_ for this module
+in Erebot's configuration file.
 
 
 Installation from source
@@ -95,7 +147,7 @@ Now, clone the module's repository:
 ..  parsed-code:: bash
 
     $ cd /path/to/Erebot/vendor/
-    $ git clone --recursive git://github.com/fpoirotte/|project|.git
+    $ git clone git://github.com/fpoirotte/|project|.git
 
 ..  note::
     Linux users (especially Erebot developers) may prefer to create a separate
@@ -104,7 +156,7 @@ Now, clone the module's repository:
 
     ..  parsed-code:: bash
 
-        $ git clone --recursive git://github.com/fpoirotte/|project|.git
+        $ git clone git://github.com/fpoirotte/|project|.git
         $ cd Erebot/vendor/
         $ ln -s ../../|project|
 
@@ -141,6 +193,8 @@ using these commands:
     /Erebot/Prerequisites.html
 ..  _`prerequisites`:
     ../Prerequisites.html
+..  _`configuration options`:
+    ../Configuration.html
 
 .. vim: ts=4 et
 

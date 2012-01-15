@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &mdash; Erebot_Module_Countdown v0.1.0snapshot152 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0snapshot152',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="Search within Erebot_Module_Countdown v0.1.0snapshot152 documentation"
+          href="_static/opensearch.xml"/>
+    <link rel="top" title="Erebot_Module_Countdown v0.1.0snapshot152 documentation" href="index.html" />
+    <link rel="next" title="Usage" href="Usage.html" />
+    <link rel="prev" title="Installation" href="generic/Installation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="Usage.html" title="Usage"
+             accesskey="N">next</a></li>
+        <li class="right" >
+          <a href="generic/Installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Erebot_Module_Countdown v0.1.0snapshot152 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <blockquote>
+<div></div></blockquote>
+<div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="options">
+<span id="configuration-options"></span><h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<p>This module provides several configuration options.</p>
+<table border="1" class="docutils">
+<caption>Options for Erebot_Module_Countdown</caption>
+<colgroup>
+<col width="20%" />
+<col width="14%" />
+<col width="25%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Name</th>
+<th class="head">Type</th>
+<th class="head">Default value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>allowed</td>
+<td>string</td>
+<td>&#8220;1 2 3 4 5 6 7 8
+9 10 25 50 75
+100&#8221;</td>
+<td>A space-separated list of
+numbers from which the bot
+will randomly select values
+meant to help contestants.</td>
+</tr>
+<tr><td>delay</td>
+<td>integer</td>
+<td>60</td>
+<td>How many seconds contestants
+have before the game ends.</td>
+</tr>
+<tr><td>maximum</td>
+<td>integer</td>
+<td>999</td>
+<td>The target number may not
+exceed this value.</td>
+</tr>
+<tr><td>minimum</td>
+<td>integer</td>
+<td>100</td>
+<td>The target number may not be
+less than this value.</td>
+</tr>
+<tr><td>numbers</td>
+<td>integer</td>
+<td>7</td>
+<td>How many numbers will be
+given to help contestants.</td>
+</tr>
+<tr><td>solver</td>
+<td>boolean</td>
+<td>FALSE</td>
+<td>Whether the bot should try to
+solve the game or not.
+Enabling this option has a
+great impact on the bot&#8217;s
+responsiveness. Only use it
+if you understand the
+consequences.</td>
+</tr>
+<tr><td>solver_class</td>
+<td>string</td>
+<td>&#8220;Erebot_Module_Countdown_Solver&#8220;</td>
+<td>The class to use to solve the
+game (useless unless the
+<tt class="docutils literal"><span class="pre">solver</span></tt> option is set to
+TRUE).</td>
+</tr>
+<tr><td>trigger</td>
+<td>string</td>
+<td>&#8220;countdown&#8221;</td>
+<td>The command to use (without
+any prefix) to start a new
+Countdown game. This text
+should only contain
+alpha-numeric characters.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we enable the Erebot_Module_Countdown module at the general configuration
+level. Therefore, the game will be available on all networks/servers/channels.
+Of course, you can use a more restrictive configuration file if it suits your
+needs better.</p>
+<div class="highlight-xml"><div class="highlight"><pre><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;configuration</span>
+  <span class="na">xmlns=</span><span class="s">&quot;http://localhost/Erebot/&quot;</span>
+  <span class="na">version=</span><span class="s">&quot;...&quot;</span>
+  <span class="na">language=</span><span class="s">&quot;fr-FR&quot;</span>
+  <span class="na">timezone=</span><span class="s">&quot;Europe/Paris&quot;</span>
+  <span class="na">commands-prefix=</span><span class="s">&quot;!&quot;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;modules&gt;</span>
+    <span class="c">&lt;!-- Other modules ignored for clarity. --&gt;</span>
+
+    <span class="c">&lt;!--</span>
+<span class="c">      Configure the module:</span>
+<span class="c">      - the game will be started using the &quot;!count&quot; command.</span>
+<span class="c">      - contestants will have 2 minutes to make suggestions.</span>
+<span class="c">    --&gt;</span>
+    <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&quot;Erebot_Module_Countdown&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;trigger&quot;</span> <span class="na">value=</span><span class="s">&quot;count&quot;</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;delay&quot;</span>   <span class="na">value=</span><span class="s">&quot;120&quot;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/module&gt;</span>
+  <span class="nt">&lt;/modules&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="generic/Installation.html"
+                        title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Usage.html"
+                        title="next chapter">Usage</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="Usage.html" title="Usage"
+             >next</a></li>
+        <li class="right" >
+          <a href="generic/Installation.html" title="Installation"
+             >previous</a> |</li>
+        <li><a href="index.html">Erebot_Module_Countdown v0.1.0snapshot152 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Erebot.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.8.
+    </div>
+  </body>
+</html>
