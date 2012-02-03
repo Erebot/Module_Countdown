@@ -16,6 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An exception thrown whenever a formula uses
+ *      some number which is not part of the set of
+ *      available numbers.
+ */
 class   Erebot_Module_Countdown_UnavailableNumberException
 extends Erebot_Module_Countdown_Exception
 {

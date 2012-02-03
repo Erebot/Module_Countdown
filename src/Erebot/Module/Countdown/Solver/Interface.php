@@ -16,9 +16,40 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a solver meant to solve
+ *      a Countdown game.
+ */
 interface Erebot_Module_Countdown_Solver_Interface
 {
+    /**
+     * Creates a new instance of the solver.
+     *
+     * \param int $target
+     *      Target number to reach.
+     *
+     * \param array $numbers
+     *      A list of numbers that may be used
+     *      to reach the target number.
+     *
+     * \throw Erebot_Module_Countdown_Exception
+     *      Something was wrong with the parameters
+     *      given to this method. See the exception's
+     *      message for an explanation of what went
+     *      wrong.
+     */
     public function __construct($target, $numbers);
+
+    /**
+     * Solve the game (that is, find the closest result
+     * to the target number using only a restricted set
+     * of numbers and the four basic operators).
+     *
+     * \retval Erebot_Module_Countdown_Solver_Operation
+     *      A formula that gives the best result for this
+     *      game.
+     */
     public function solve();
 }
 

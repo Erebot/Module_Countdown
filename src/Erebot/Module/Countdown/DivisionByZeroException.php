@@ -16,6 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An exception thrown when an attempt is made
+ *      to divide a value by zero (eg. "2 / (1 - 1)").
+ */
 class   Erebot_Module_Countdown_DivisionByZeroException
 extends Erebot_Module_Countdown_Exception
 {

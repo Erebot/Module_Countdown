@@ -16,6 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An exception thrown when the given "formula"
+ *      is not even a string.
+ */
 class   Erebot_Module_Countdown_FormulaMustBeAStringException
 extends Erebot_Module_Countdown_Exception
 {

@@ -16,18 +16,37 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A lexer (tokenizer) for formulae.
+ */
 class Erebot_Module_Countdown_Lexer
 {
+    /// Formula to be tokenized.
     protected $_formula;
+
+    /// Length of the formula.
     protected $_length;
+
+    /// Current position in the formula.
     protected $_position;
-    protected $_skip;
+
+    /// Parser for the formula.
     protected $_parser;
+
+    /// List of number used in the formula.
     protected $_numbers;
 
-    // Allow stuff such as "1234".
+    /// A pattern used to recognize integers.
     const PATT_INTEGER  = '/^[0-9]+/';
 
+
+    /**
+     * Constructs a new lexer for some formula.
+     *
+     * \param string $formula
+     *      Some formula to tokenize.
+     */
     public function __construct($formula)
     {
         $this->_formula     = $formula;
@@ -38,16 +57,33 @@ class Erebot_Module_Countdown_Lexer
         $this->_tokenize();
     }
 
+    /**
+     * Returns the result of the formula.
+     *
+     * \retval int
+     *      Result of the formula.
+     */
     public function getResult()
     {
         return $this->_parser->getResult();
     }
 
+    /**
+     * Returns a list with all numbers used
+     * in the formula.
+     * A number may appear twice (or more) if it
+     * was used twice (or more) in the formula.
+     *
+     * \retval list
+     *      A list with the numbers used in
+     *      the formula.
+     */
     public function getNumbers()
     {
         return $this->_numbers;
     }
 
+    /// Does the actual work.
     protected function _tokenize()
     {
         $operators = array(

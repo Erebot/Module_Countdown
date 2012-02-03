@@ -16,14 +16,44 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An operation to be computed by the solver.
+ */
 class       Erebot_Module_Countdown_Solver_Operation
 implements  Erebot_Module_Countdown_Solver_ContainerInterface
 {
+    /// First operand for the operation.
     protected $_operand1;
+
+    /// Second operand for the operation.
     protected $_operand2;
+
+    /// Operator to use in the operation.
     protected $_operator;
+
+    /// Result of the operation.
     protected $_value;
 
+
+    /**
+     * Computes a new operation.
+     *
+     * \param Erebot_Module_Countdown_Solver_ContainerInterface $operand1
+     *      First operand for the operation.
+     *
+     * \param Erebot_Module_Countdown_Solver_ContainerInterface $operand2
+     *      Second operand for the operation.
+     *
+     * \param string $operator
+     *      Operator to be used in the operation.
+     *
+     * \thrown Erebot_Module_Countdown_Solver_SkipException
+     *      The operation is useless (overly simple).
+     *
+     * \thrown Erebot_Module_Countdown_Exception
+     *      An invalid operator was given.
+     */
     public function __construct(
         Erebot_Module_Countdown_Solver_ContainerInterface   $operand1,
         Erebot_Module_Countdown_Solver_ContainerInterface   $operand2,
@@ -64,21 +94,45 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
         $this->_operator = $operator;
     }
 
+    /**
+     * Returns the first operand for the operation.
+     *
+     * \retval Erebot_Module_Countdown_Solver_ContainerInterface
+     *      First operand for the operation.
+     */
     public function getOperand1()
     {
         return $this->_operand1;
     }
 
+    /**
+     * Returns the second operand for the operation.
+     *
+     * \retval Erebot_Module_Countdown_Solver_ContainerInterface
+     *      Second operand for the operation.
+     */
     public function getOperand2()
     {
         return $this->_operand2;
     }
 
+    /**
+     * Returns the value for this operation.
+     *
+     * \retval int
+     *      Result of this operation.
+     */
     public function getValue()
     {
         return $this->_value;
     }
 
+    /**
+     * Returns a string representation for this operation.
+     *
+     * \retval string
+     *      A representation of this operation.
+     */
     public function __toString()
     {
         return '('.

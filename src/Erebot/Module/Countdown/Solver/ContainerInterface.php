@@ -16,10 +16,28 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Interface for a generic container
+ *      used by the solver.
+ */
 interface Erebot_Module_Countdown_Solver_ContainerInterface
 {
+    /**
+     * Returns the value enclosed in this container.
+     *
+     * \retval mixed
+     *      The value kept by this container.
+     */
     public function getValue();
 
+    /**
+     * Returns the string representation of this
+     * container's content.
+     *
+     * \retval string
+     *      String representation of this container.
+     */
     public function __toString();
 }
 

@@ -16,6 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      Generic exception used by this module.
+ *
+ * This class is the base class for other exceptions
+ * provided by this module.
+ */
 class   Erebot_Module_Countdown_Exception
 extends Exception
 {

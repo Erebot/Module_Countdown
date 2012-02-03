@@ -16,6 +16,11 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An exception thrown whenever a formula
+ *      contains some syntax error.
+ */
 class   Erebot_Module_Countdown_SyntaxErrorException
 extends Erebot_Module_Countdown_Exception
 {

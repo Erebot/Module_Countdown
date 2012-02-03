@@ -16,6 +16,12 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      An exception thrown whenever an operation
+ *      in the solver can easily be simplified and
+ *      so should be ignored/skipped.
+ */
 class   Erebot_Module_Countdown_Solver_SkipException
 extends Erebot_Module_Countdown_Exception
 {

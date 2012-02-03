@@ -16,13 +16,24 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A very basic solver for the countdown game.
+ *
+ * This solver does not try to be smart and just does
+ * a plain old brute-force on the combination space.
+ */
 class       Erebot_Module_Countdown_Solver
 implements  Erebot_Module_Countdown_Solver_Interface
 {
+    /// Target to reach.
     protected $_target;
+
+    /// Numbers that may be used to reach the target.
     protected $_numbers;
 
 
+    /// \copydoc Erebot_Module_Countdown_Solver_Interface::__construct()
     public function __construct($target, $numbers)
     {
         if (!is_int($target) || $target <= 0) {
@@ -44,11 +55,27 @@ implements  Erebot_Module_Countdown_Solver_Interface
                 new Erebot_Module_Countdown_Solver_Number($number);
     }
 
+    /**
+     * Returns an integer that indicates how the two
+     * arguments compare to each other.
+     *
+     * \param int $a
+     *      First integer to use in the comparison.
+     *
+     * \param int $b
+     *      Second operand for the comparison.
+     *
+     * \retval int
+     *      Returns an integer that is < 0, equal to 0
+     *      or > 0 when the first argument is respectively,
+     *      less than, equal to or greater than the second.
+     */
     protected function _sortSet($a, $b)
     {
         return ($b->getValue() - $a->getValue());
     }
 
+    /// \copydoc Erebot_Module_Countdown_Solver_Interface::solve()
     public function solve()
     {
         $best           = NULL;
