@@ -48,10 +48,10 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      * \param string $operator
      *      Operator to be used in the operation.
      *
-     * \thrown Erebot_Module_Countdown_Solver_SkipException
+     * \throw Erebot_Module_Countdown_Solver_SkipException
      *      The operation is useless (overly simple).
      *
-     * \thrown Erebot_Module_Countdown_Exception
+     * \throw Erebot_Module_Countdown_Exception
      *      An invalid operator was given.
      */
     public function __construct(

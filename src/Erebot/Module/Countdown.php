@@ -16,16 +16,44 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/**
+ * \brief
+ *      A module for Erebot that provides
+ *      an implementation of the Countdown
+ *      TV gameshow.
+ */
 class   Erebot_Module_Countdown
 extends Erebot_Module_Base
 {
+    /// Trigger registered by this module.
     protected $_trigger;
+
+    /// Handler used to create a new game.
     protected $_startHandler;
+
+    /// Handler used when formulae are proposed.
     protected $_rawHandler;
+
+    /// Keeps track of currently running games.
     protected $_game;
 
+
+    /// A pattern that attempts to match valid formulae.
     const FORMULA_FILTER    = '@^[\\(\\)\\-\\+\\*/0-9 ]+$@';
 
+
+    /**
+     * This method is called whenever the module is (re)loaded.
+     *
+     * \param int $flags
+     *      A bitwise OR of the Erebot_Module_Base::RELOAD_*
+     *      constants. Your method should take proper actions
+     *      depending on the value of those flags.
+     *
+     * \note
+     *      See the documentation on individual RELOAD_*
+     *      constants for a list of possible values.
+     */
     public function _reload($flags)
     {
         if ($flags & self::RELOAD_HANDLERS) {
@@ -74,6 +102,9 @@ extends Erebot_Module_Base
         }
     }
 
+    /**
+     * Frees the resources associated with this module.
+     */
     protected function _unload()
     {
         foreach ($this->_game as $entry) {
@@ -82,6 +113,18 @@ extends Erebot_Module_Base
         }
     }
 
+    /**
+     * Provides help about this module.
+     *
+     * \param Erebot_Interface_Event_Base_TextMessage $event
+     *      Some help request.
+     *
+     * \param array $words
+     *      Parameters passed with the request. This is the same
+     *      as this module's name when help is requested on the
+     *      module itself (in opposition with help on a specific
+     *      command provided by the module).
+     */
     public function getHelp(Erebot_Interface_Event_Base_TextMessage $event, $words)
     {
         if ($event instanceof Erebot_Interface_Event_Base_Private) {
@@ -93,7 +136,6 @@ extends Erebot_Module_Base
 
         $fmt        = $this->getFormatter($chan);
         $trigger    = $this->parseString('trigger', 'countdown');
-        $bot        = $this->_connection->getBot();
         $moduleName = strtolower(get_class());
         $nbArgs     = count($words);
 
@@ -133,6 +175,17 @@ extends Erebot_Module_Base
         }
     }
 
+    /**
+     * Handles a request to create a new game.
+     *
+     * \param Erebot_Interface_EventHandler $handler
+     *      Handler that triggered this event.
+     *
+     * \param Erebot_Interface_Event_ChanText $event
+     *      Request for a new game.
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function handleCountdown(
         Erebot_Interface_EventHandler   $handler,
         Erebot_Interface_Event_ChanText $event
@@ -216,6 +269,18 @@ extends Erebot_Module_Base
         unset($filter);
     }
 
+    /**
+     * Handles a formula proposition.
+     *
+     * \param Erebot_Interface_EventHandler $handler
+     *      Handler that triggered this event.
+     *
+     * \param Erebot_Interface_Event_Base_ChanText $event
+     *      A message containing the formula being proposed.
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function handleRawText(
         Erebot_Interface_EventHandler   $handler,
         Erebot_Interface_Event_ChanText $event
@@ -310,6 +375,16 @@ extends Erebot_Module_Base
         $this->sendMessage($chan, $msg);
     }
 
+    /**
+     * Handles the timer that marks the end of the game.
+     *
+     * \param Erebot_Interface_Timer $timer
+     *      Timer that marks the end of the game.
+     *
+     * \param string $chan
+     *      Name of the IRC channel where the game
+     *      was taking place.
+     */
     public function handleTimeOut(Erebot_Interface_Timer $timer, $chan)
     {
         $this->removeTimer($timer);

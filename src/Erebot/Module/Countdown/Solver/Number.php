@@ -57,7 +57,7 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
     /**
      * String representation of this number.
      *
-     * \param string
+     * \retval string
      *      Representation of this container
      *      as a string.
      */
