@@ -399,7 +399,7 @@ extends Erebot_Module_Base
         unset($filter, $this->_game[$chan]);
         unset($key, $data);
 
-        $best =& $game->getBestProposal();
+        $best = $game->getBestProposal();
         if ($best === NULL) {
             $msg = $fmt->_("Time's up! Nobody has made any suggestion. :(");
             $this->sendMessage($chan, $msg);
@@ -414,7 +414,7 @@ extends Erebot_Module_Base
             'this formula: <b><var name="formula"/></b>.',
             array(
                 'nick' => $best->getOwner(),
-                'result' => $best->getResult(),
+                'result' => $best->getValue(),
                 'formula' => $best->getFormula(),
             )
         );
