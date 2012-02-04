@@ -94,7 +94,9 @@ extends Erebot_Module_Base
                 )
             );
             $this->_connection->addEventHandler($this->_rawHandler);
-            $this->registerHelpMethod(array($this, 'getHelp'));
+
+            $cls = $this->getFactory('!Callable');
+            $this->registerHelpMethod(new $cls(array($this, 'getHelp')));
         }
 
         if ($flags & self::RELOAD_MEMBERS) {

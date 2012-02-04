@@ -1,5 +1,6 @@
 /src/Erebot/Module/Countdown/Parser.php
 /src/Erebot/Module/Countdown/Parser.y
+/src/Erebot/Module/Countdown/Parser.out
 
 /data/i18n/*/LC_MESSAGES/*.mo
 
