@@ -414,7 +414,7 @@ extends Erebot_Module_Base
             'this formula: <b><var name="formula"/></b>.',
             array(
                 'nick' => $best->getOwner(),
-                'result' => $best->getValue(),
+                'result' => $best->getResult(),
                 'formula' => $best->getFormula(),
             )
         );
@@ -439,18 +439,18 @@ extends Erebot_Module_Base
                 return;
             }
 
-            $best   = $solver->solve();
+            $solved = $solver->solve();
             // Make sure the solver actually found a better result
             // before nagging the players.
-            if (abs($best->getValue() - $target) <
+            if (abs($solved->getValue() - $target) <
                 abs($best->getResult() - $target)) {
                 $msg = $fmt->_(
                     'However, a better result could be achieved '.
                     '(<var name="result"/>) by using this formula: '.
                     '<b><var name="formula"/></b>.',
                     array(
-                        'result' => $best->getValue(),
-                        'formula' => (string) $best,
+                        'result' => $solved->getValue(),
+                        'formula' => (string) $solved,
                     )
                 );
                 $this->sendMessage($chan, $msg);
