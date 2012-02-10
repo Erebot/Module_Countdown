@@ -24,10 +24,10 @@ class       Erebot_Module_Countdown_Solver_Operation
 implements  Erebot_Module_Countdown_Solver_ContainerInterface
 {
     /// First operand for the operation.
-    protected $_operand1;
+    protected $_first;
 
     /// Second operand for the operation.
-    protected $_operand2;
+    protected $_second;
 
     /// Operator to use in the operation.
     protected $_operator;
@@ -39,10 +39,10 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
     /**
      * Computes a new operation.
      *
-     * \param Erebot_Module_Countdown_Solver_ContainerInterface $operand1
+     * \param Erebot_Module_Countdown_Solver_ContainerInterface $first
      *      First operand for the operation.
      *
-     * \param Erebot_Module_Countdown_Solver_ContainerInterface $operand2
+     * \param Erebot_Module_Countdown_Solver_ContainerInterface $second
      *      Second operand for the operation.
      *
      * \param string $operator
@@ -55,34 +55,34 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      *      An invalid operator was given.
      */
     public function __construct(
-        Erebot_Module_Countdown_Solver_ContainerInterface   $operand1,
-        Erebot_Module_Countdown_Solver_ContainerInterface   $operand2,
+        Erebot_Module_Countdown_Solver_ContainerInterface   $first,
+        Erebot_Module_Countdown_Solver_ContainerInterface   $second,
                                                             $operator
     )
     {
-        $this->_operand1 = $operand1;
-        $this->_operand2 = $operand2;
+        $this->_first   = $first;
+        $this->_second  = $second;
 
         switch ($operator) {
             case '+':
-                $this->_value = $operand1->getValue() + $operand2->getValue();
+                $this->_value = $first->getValue() + $second->getValue();
                 break;
             case '-':
-                $this->_value = $operand1->getValue() - $operand2->getValue();
+                $this->_value = $first->getValue() - $second->getValue();
                 break;
             case '*':
-                if ($operand2->getValue() == 1)
+                if ($second->getValue() == 1)
                     throw new Erebot_Module_Countdown_Solver_SkipException(
                         'Skipped'
                     );
-                $this->_value = $operand1->getValue() * $operand2->getValue();
+                $this->_value = $first->getValue() * $second->getValue();
                 break;
             case '/':
-                if ($operand2->getValue() == 1)
+                if ($second->getValue() == 1)
                     throw new Erebot_Module_Countdown_Solver_SkipException(
                         'Skipped'
                     );
-                $this->_value = $operand1->getValue() / $operand2->getValue();
+                $this->_value = $first->getValue() / $second->getValue();
                 break;
             default:
                 throw new Erebot_Module_Countdown_Exception('Invalid operator');
@@ -100,9 +100,9 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      * \retval Erebot_Module_Countdown_Solver_ContainerInterface
      *      First operand for the operation.
      */
-    public function getOperand1()
+    public function getfirst()
     {
-        return $this->_operand1;
+        return $this->_first;
     }
 
     /**
@@ -111,9 +111,9 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      * \retval Erebot_Module_Countdown_Solver_ContainerInterface
      *      Second operand for the operation.
      */
-    public function getOperand2()
+    public function getsecond()
     {
-        return $this->_operand2;
+        return $this->_second;
     }
 
     /**
@@ -136,9 +136,9 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
     public function __toString()
     {
         return '('.
-            ((string) $this->_operand1).
+            ((string) $this->_first).
             $this->_operator.
-            ((string) $this->_operand2).
+            ((string) $this->_second).
         ')';
     }
 }

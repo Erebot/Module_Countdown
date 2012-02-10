@@ -82,6 +82,7 @@ implements  Erebot_Module_Countdown_Solver_Interface
         $bestDistance   = NULL;
         $numbersBefore  = array($this->_numbers);
         $operators      = array('+', '-', '*', '/');
+        $opCls          = "Erebot_Module_Countdown_Solver_Operation";
 
         while (count($numbersBefore)) {
             $numbersAfter   = array();
@@ -93,9 +94,7 @@ implements  Erebot_Module_Countdown_Solver_Interface
                         foreach ($operators as $operator) {
                             try {
                                 $result =
-                                    new Erebot_Module_Countdown_Solver_Operation(
-                                        $set[$j], $set[$i], $operator
-                                    );
+                                    new $opCls($set[$j], $set[$i], $operator);
                                 $distance = abs(
                                     $result->getValue() -
                                     $this->_target
@@ -125,7 +124,8 @@ implements  Erebot_Module_Countdown_Solver_Interface
                                 usort($newSet, array($this, '_sortSet'));
                                 $numbersAfter[] = $newSet;
                             }
-                            catch (Erebot_Module_Countdown_Solver_SkipException $e) {
+                            catch (Erebot_Module_Countdown_Solver_SkipException
+                                   $e) {
                                 // Do nothing.
                             }
                         }

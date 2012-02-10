@@ -240,7 +240,13 @@ extends Erebot_Module_Base
         );
         $allowed    = array_map('intval', array_filter(explode(' ', $allowed)));
 
-        $game   =   new Erebot_Module_Countdown_Game($minTarget, $maxTarget, $nbNumbers, $allowed);
+        $game   =   new Erebot_Module_Countdown_Game(
+            $minTarget,
+            $maxTarget,
+            $nbNumbers,
+            $allowed
+        );
+
         $delay  =   $this->parseInt('delay', 60);
         $msg    =   $fmt->_(
             'A new Countdown game has been started. '.
@@ -437,7 +443,8 @@ extends Erebot_Module_Base
             }
 
             $solver = new $solverCls($target, $game->getNumbers());
-            if (!($solver instanceof Erebot_Module_Countdown_Solver_Interface)) {
+            $iface  = "Erebot_Module_Countdown_Solver_Interface";
+            if (!($solver instanceof $iface)) {
                 unset($chan, $game);
                 return;
             }
