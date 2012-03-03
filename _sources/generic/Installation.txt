@@ -147,7 +147,7 @@ Now, clone the module's repository:
 ..  parsed-code:: bash
 
     $ cd /path/to/Erebot/vendor/
-    $ git clone git://github.com/fpoirotte/|project|.git
+    $ git clone git://github.com/Erebot/|project|.git
 
 ..  note::
     Linux users (especially Erebot developers) may prefer to create a separate
@@ -156,7 +156,7 @@ Now, clone the module's repository:
 
     ..  parsed-code:: bash
 
-        $ git clone git://github.com/fpoirotte/|project|.git
+        $ git clone git://github.com/Erebot/|project|.git
         $ cd Erebot/vendor/
         $ ln -s ../../|project|
 

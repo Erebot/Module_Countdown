@@ -14,6 +14,6 @@ Erebot (core) adds its own set of `prerequisites`_ which usually superseed
 those.
 
 ..  _`prerequisites`:
-    http://fpoirotte.github.com/Erebot/Prerequisites.html
+    http://erebot.github.com/Erebot/Prerequisites.html
 
 .. vim: ts=4 et
