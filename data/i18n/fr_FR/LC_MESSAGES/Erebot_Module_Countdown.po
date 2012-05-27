@@ -1,133 +1,118 @@
-#
+# SOME DESCRIPTIVE TITLE.
+# This file is put in the public domain.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Erebot 0.5.0\n"
-"Report-Msgid-Bugs-To: i18n@erebot.net\n"
+"Project-Id-Version: Erebot\n"
+"Report-Msgid-Bugs-To: https://github.com/fpoirotte/Erebot/issues\n"
 "POT-Creation-Date: 2012-05-20 23:02+0200\n"
-"PO-Revision-Date: 2011-04-14 01:37+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: fr_FR\n"
+"PO-Revision-Date: 2012-05-27 09:41+0000\n"
+"Last-Translator: François Poirotte <clicky@erebot.net>\n"
+"Language-Team: French (France) <i18n.fr_FR@erebot.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-#
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+# File: src/Erebot/Module/Countdown.php, line: 347
 msgid ""
-"<b>BINGO! <var name=\"nick\"/></b> has achieved <b><var name=\"result\"/></b> "
-"with this formula: <b><var name=\"formula\"/></b>."
-msgstr ""
-"<b>BINGO ! <var name=\"nick\"/></b> a obtenu <b><var name=\"result\"/></b> "
-"avec cette formule : <b><var name=\"formula\"/></b>."
-#
-# File: src/Erebot/Module/Countdown.php, line: 120
+"<b>BINGO! <var name=\"nick\"/></b> has achieved <b><var "
+"name=\"result\"/></b> with this formula: <b><var name=\"formula\"/></b>."
+msgstr "<b>BINGO ! <var name=\"nick\"/></b> a obtenu <b><var name=\"result\"/></b> avec cette formule : <b><var name=\"formula\"/></b>."
+
+# File: src/Erebot/Module/Countdown.php, line: 163
 msgid ""
 "<b>Usage:</b> !<var name='trigger'/>. Starts a new Countdown game. Given a "
 "set of numbers and a target result, contestants must propose formulae to be "
-"as close as possible to the result. The first one to get the target result or "
-"the closest result wins the game."
-msgstr ""
-"<b>Usage :</b> !<var name='trigger'/>. Lance une nouvelle partie Des Chiffres "
-"et Des Lettres. Étant donné un ensemble de nombres et un nombre cible, les "
-"participants doivent proposer des formules basées sur les nombres fournis "
-"pour s'approcher autant que possible du nombre cible. Le premier à atteindre "
-"le nombre cible ou qui obtient le résultat le plus proche remporte la partie."
-#
+"as close as possible to the result. The first one to get the target result "
+"or the closest result wins the game."
+msgstr "<b>Usage :</b> !<var name='trigger'/>. Lance une nouvelle partie Des Chiffres et Des Lettres. Étant donné un ensemble de nombres et un nombre cible, les participants doivent proposer des formules basées sur les nombres fournis pour s'approcher autant que possible du nombre cible. Le premier à atteindre le nombre cible ou qui obtient le résultat le plus proche remporte la partie."
+
+# File: src/Erebot/Module/Countdown.php, line: 252
 msgid ""
-"A new Countdown game has been started. You must get <b><var name=\"target\"/"
-"></b> using the following numbers <for from=\"numbers\" item=\"number"
-"\"><b><var name=\"number\"/></b></for>. You have <var name=\"delay\"/> "
-"seconds to make suggestions."
-msgstr ""
-"Une nouvelle partie des Chiffres et des Lettres commence. Vous devez obtenir "
-"<b><var name=\"target\"/></b> grâce aux nombres suivants : <for from=\"numbers"
-"\" item=\"number\"><b><var name=\"number\"/></b></for>. Vous avez <var name="
-"\"delay\"/> secondes pour faire des propositions."
-#
+"A new Countdown game has been started. You must get <b><var "
+"name=\"target\"/></b> using the following numbers <for from=\"numbers\" "
+"item=\"number\"><b><var name=\"number\"/></b></for>. You have <var "
+"name=\"delay\"/> seconds to make suggestions."
+msgstr "Une nouvelle partie des Chiffres et des Lettres commence. Vous devez obtenir <b><var name=\"target\"/></b> grâce aux nombres suivants : <for from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>. Vous avez <var name=\"delay\"/> secondes pour faire des propositions."
+
+# File: src/Erebot/Module/Countdown.php, line: 366
 msgid ""
-"Congratulations <b><var name=\"nick\"/></b>! You're the closest with <b><var "
-"name=\"result\"/></b>."
-msgstr ""
-"Félicitations <b><var name=\"nick\"/></b> ! Vous êtes le plus proche avec "
-"<b><var name=\"result\"/></b>."
-#
+"Congratulations <b><var name=\"nick\"/></b>! You're the closest with <b><var"
+" name=\"result\"/></b>."
+msgstr "Félicitations <b><var name=\"nick\"/></b> ! Vous êtes le plus proche avec <b><var name=\"result\"/></b>."
+
+# File: src/Erebot/Module/Countdown.php, line: 420
 msgid ""
-"Congratulations to <b><var name=\"nick\"/></b> who wins this Countdown game. "
-"<b><var name=\"nick\"/></b> has got <b><var name=\"result\"/></b> with this "
-"formula: <b><var name=\"formula\"/></b>."
-msgstr ""
-"Félicitations à <b><var name=\"nick\"/></b> qui remporte cette partie des "
-"Chiffres et des Lettres. <b><var name=\"nick\"/></b> a obtenu <b><var name="
-"\"result\"/></b> avec cette formule : <b><var name=\"formula\"/></b>."
-#
+"Congratulations to <b><var name=\"nick\"/></b> who wins this Countdown game."
+" <b><var name=\"nick\"/></b> has got <b><var name=\"result\"/></b> with this"
+" formula: <b><var name=\"formula\"/></b>."
+msgstr "Félicitations à <b><var name=\"nick\"/></b> qui remporte cette partie des Chiffres et des Lettres. <b><var name=\"nick\"/></b> a obtenu <b><var name=\"result\"/></b> avec cette formule : <b><var name=\"formula\"/></b>."
+
+# File: src/Erebot/Module/Countdown.php, line: 75
 msgid "Could not register Countdown trigger"
-msgstr ""
-"Impossible d'enregistrer le déclencheur pour le jeu des Chiffres et des "
-"Lettres"
-#
+msgstr "Impossible d'enregistrer le déclencheur pour le jeu des Chiffres et des Lettres"
+
+# File: src/Erebot/Module/Countdown.php, line: 317
 msgid "Division by zero"
 msgstr "Division par zéro"
-#
+
+# File: src/Erebot/Module/Countdown.php, line: 311
 msgid "Expected the formula to be a string"
 msgstr "La formule doit être une chaîne de caractères"
-#
-# File: src/Erebot/Module/Countdown.php, line: 131
+
+# File: src/Erebot/Module/Countdown.php, line: 173
 msgid ""
 "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - 7'). "
 "The four basic operators (+, -, *, /) and parenthesis are supported. "
 "Divisions with a remainder (eg. 5/2) are forbidden."
-msgstr ""
-"Les formules doivent être données selon la notation usuelle (p. ex. '(100+2) "
-"* 4 /2 - 7'). Les quatre opérateurs basiques (+, -, *, /) et les parenthèses "
-"sont supportés. Les divisions avec un reste (p. ex. : 5/2) sont interdites."
-#
-# File: src/Erebot/Module/Countdown.php, line: 337
+msgstr "Les formules doivent être données selon la notation usuelle (p. ex. '(100+2) * 4 /2 - 7'). Les quatre opérateurs basiques (+, -, *, /) et les parenthèses sont supportés. Les divisions avec un reste (p. ex. : 5/2) sont interdites."
+
+# File: src/Erebot/Module/Countdown.php, line: 458
 msgid ""
-"However, a better result could be achieved (<var name=\"result\"/>) by using "
-"this formula: <b><var name=\"formula\"/></b>."
-msgstr ""
-"Cependant, un meilleur résultat pouvait être obtenu (<var name=\"result\"/>) "
-"en utilisant cette formule : <b><var name=\"formula\"/></b>."
-#
+"However, a better result could be achieved (<var name=\"result\"/>) by using"
+" this formula: <b><var name=\"formula\"/></b>."
+msgstr "Cependant, un meilleur résultat pouvait être obtenu (<var name=\"result\"/>) en utilisant cette formule : <b><var name=\"formula\"/></b>."
+
+# File: src/Erebot/Module/Countdown.php, line: 340
 msgid "No such number or number already used"
 msgstr "Nombre inexistant ou déjà utilisé"
-#
+
+# File: src/Erebot/Module/Countdown.php, line: 323
 msgid "Non integral division"
 msgstr "Division non-entière"
-#
+
+# File: src/Erebot/Module/Countdown.php, line: 378
 msgid ""
-"Not bad <b><var name=\"nick\"/></b>, you actually got <b><var name=\"result\"/"
-"></b>, but this is not the best formula... Try again ;)"
-msgstr ""
-"Pas mal <b><var name=\"nick\"/></b>, vous avez obtenu <b><var name=\"result\"/"
-"></b>, mais ce n'est pas la meilleure formule... Réessayez ;)"
-#
-# File: src/Erebot/Module/Countdown.php, line: 105
+"Not bad <b><var name=\"nick\"/></b>, you actually got <b><var "
+"name=\"result\"/></b>, but this is not the best formula... Try again ;)"
+msgstr "Pas mal <b><var name=\"nick\"/></b>, vous avez obtenu <b><var name=\"result\"/></b>, mais ce n'est pas la meilleure formule... Réessayez ;)"
+
+# File: src/Erebot/Module/Countdown.php, line: 149
 msgid ""
 "Provides the <b><var name=\"trigger\"/></b> command which starts a new "
 "Countdown game where contestants must propose a formula to be as close as "
 "possible to a given number."
-msgstr ""
-"Fournit la commande <b><var name=\"trigger\"/></b> qui démarre une nouvelle "
-"partie Des Chiffres et Des Lettres dans laquelle les participants doivent "
-"proposer des formules approchant au maximum d'un nombre donné."
-#
+msgstr "Fournit la commande <b><var name=\"trigger\"/></b> qui démarre une nouvelle partie Des Chiffres et Des Lettres dans laquelle les participants doivent proposer des formules approchant au maximum d'un nombre donné."
+
+# File: src/Erebot/Module/Countdown.php, line: 221
 msgid ""
-"So far, <b><var name=\"nick\"/></b> has achieved <b><var name=\"result\"/></"
-"b> using this formula: <b><var name=\"formula\"/></b>"
-msgstr ""
-"Pour le moment <b><var name=\"nick\"/></b> a obtenu <b><var name=\"result\"/"
-"></b> avec cette formule : <b><var name=\"formula\"/></b>"
-#
+"So far, <b><var name=\"nick\"/></b> has achieved <b><var "
+"name=\"result\"/></b> using this formula: <b><var name=\"formula\"/></b>"
+msgstr "Pour le moment <b><var name=\"nick\"/></b> a obtenu <b><var name=\"result\"/></b> avec cette formule : <b><var name=\"formula\"/></b>"
+
+# File: src/Erebot/Module/Countdown.php, line: 329
 msgid "Syntax error"
 msgstr "Erreur de syntaxe"
-#
+
+# File: src/Erebot/Module/Countdown.php, line: 413
 msgid "Time's up! Nobody has made any suggestion. :("
 msgstr "Délai dépassé ! Personne n'a fait de proposition. :("
-#
+
+# File: src/Erebot/Module/Countdown.php, line: 206
 msgid ""
-"You must get <b><var name=\"target\"/></b> using the following numbers: <for "
-"from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
-msgstr ""
-"Vous devez obtenur <b><var name=\"target\"/></b> en utilisant les nombres "
-"suivants : <for from=\"numbers\" item=\"number\"><b><var name=\"number\"/></"
-"b></for>."
+"You must get <b><var name=\"target\"/></b> using the following numbers: <for"
+" from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
+msgstr "Vous devez obtenur <b><var name=\"target\"/></b> en utilisant les nombres suivants : <for from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
