@@ -2,12 +2,13 @@
 # This file is put in the public domain.
 # 
 # Translators:
+# François Poirotte <clicky@erebot.net>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Erebot\n"
-"Report-Msgid-Bugs-To: https://github.com/fpoirotte/Erebot/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/Erebot/Erebot/issues\n"
 "POT-Creation-Date: 2012-05-20 23:02+0200\n"
-"PO-Revision-Date: 2012-05-27 09:41+0000\n"
+"PO-Revision-Date: 2012-08-29 17:19+0000\n"
 "Last-Translator: François Poirotte <clicky@erebot.net>\n"
 "Language-Team: French (France) <i18n.fr_FR@erebot.net>\n"
 "MIME-Version: 1.0\n"
@@ -115,4 +116,4 @@ msgstr "Délai dépassé ! Personne n'a fait de proposition. :("
 msgid ""
 "You must get <b><var name=\"target\"/></b> using the following numbers: <for"
 " from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
-msgstr "Vous devez obtenur <b><var name=\"target\"/></b> en utilisant les nombres suivants : <for from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
+msgstr "Vous devez obtenir <b><var name=\"target\"/></b> en utilisant les nombres suivants : <for from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
