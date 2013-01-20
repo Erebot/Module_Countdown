@@ -1,5 +1,5 @@
 {
-    "name": "erebot/erebot-module-countdonw",
+    "name": "erebot/erebot-module-countdown",
     "description": "Erebot module providing the Countdown game",
     "keywords": ["Erebot", "IRC", "bot", "module"],
     "homepage": "https://github.com/Erebot/Erebot_Module_Countdown",
