@@ -27,7 +27,7 @@
     "require": {
         "php": ">=5.2.2",
         "erebot/erebot-api": "*",
-        "erebot/erebot-module-triggerregistry": "*",
+        "erebot/erebot-module-triggerregistry": "*"
     },
     "autoload": {
         "psr-0": {
