@@ -38,5 +38,5 @@
         <delete file="src/${module_dir}/Parser.y"/>
     </target>
 
-    <import file="buildenv/build.xml"/>
+    <import file="vendor/erebot/buildenv/build.xml"/>
 </project>

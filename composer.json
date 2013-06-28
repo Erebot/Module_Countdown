@@ -1,5 +1,5 @@
 {
-    "name": "erebot/erebot-module-countdown",
+    "name": "erebot/countdown-module",
     "description": "Erebot module providing the Countdown game",
     "keywords": ["Erebot", "IRC", "bot", "module"],
     "homepage": "https://github.com/Erebot/Erebot_Module_Countdown",
@@ -20,14 +20,20 @@
     },
     "repositories": [
         {
-            "type": "pear",
-            "url": "http://pear.php.net"
+            "type": "composer",
+            "url": "http://packages.erebot.net"
         }
     ],
     "require": {
         "php": ">=5.2.2",
-        "erebot/erebot-api": "*",
-        "erebot/erebot-module-triggerregistry": "*"
+        "erebot/triggerregistry-module": "dev-master",
+        "erebot/api": "dev-master",
+        "erebot/installers": "dev-master",
+        "erebot/generic-doc": "dev-master"
+    },
+    "require-dev": {
+        "erebot/buildenv": "dev-master",
+        "erebot/testenv": "dev-master"
     },
     "autoload": {
         "psr-0": {

@@ -1,3 +1,4 @@
+/vendor
 /src/Erebot/Module/Countdown/Parser.php
 /src/Erebot/Module/Countdown/Parser.y
 /src/Erebot/Module/Countdown/Parser.out
@@ -7,12 +8,9 @@
 /docs/api
 /docs/coverage
 /docs/enduser
+/docs/src/generic
 
 /*.pem
 /*.phar
 /*.pubkey
-/*.tgz
 /*.tagfile.xml
-
-/package.xml
-/package_compatible.xml
