@@ -5,62 +5,26 @@ This pages contains instructions on how to install this module on your machine.
 There are several ways to achieve that. Each method is described below.
 
 ..  warning::
+
     You cannot mix the different methods. Especially, **you must use the same
     method to install this module as the one you selected for Erebot itself**.
 
 ..  contents::
 
 ..  note::
-    We recommend that you install this module using `Erebot's PEAR channel`_.
-    This will result in a system-wide installation which can be upgraded
-    very easily later.
-    If this is not feasible for you or if you prefer to keep the installation
-    local (for a single user), we recommend that you go the PHAR way.
+
+    We recommend that you install this module using either its
+    :ref:`PHAR package <Installation using PHAR packages>`
+    or through :ref:`composer <Installation through composer>`_.
     Installation from sources is reserved for advanced installations
-    (developers).
+    (eg. Erebot developers).
 
 
-Installation from Erebot's PEAR channel
----------------------------------------
-
-This is by far the simplest way to install the module.
-Hence, it's the recommended way for beginners.
-Just use whatever tool your distribution provides to manage PEAR packages:
-
-* Either `pear`_ (traditionnal tool)
-* or `pyrus`_ (new experimental tool meant to replace pear someday)
-
-..  warning::
-    Pyrus currently has issues with some PEAR packages. It is thus recommended
-    that you use the regular pear tool to install Erebot.
-    See https://github.com/pyrus/Pyrus/issues/26 for more information.
-
-You can install (**as a privileged user**) either the latest stable release
-using a command such as:
-
-..  parsed-code:: bash
-
-        $ pear channel-discover pear.erebot.net
-        $ pear install erebot/|project|
-
-... or you can install the latest unstable version instead, using:
-
-..  parsed-code:: bash
-
-        $ pear channel-discover pear.erebot.net
-        $ pear install erebot/|project|-alpha
-
-Please note that the ``channel-discover`` command needs to be run only once
-(pear and pyrus will refuse to discover a PEAR channel more than once anyway).
-To use Pyrus to manage PEAR packages instead of the regular Pear tool,
-just replace ``pear`` with ``pyrus`` in the commands above.
-
-
-Installation using PHAR archives
+Installation using PHAR packages
 --------------------------------
 
-Installing |project| from a PHAR archive is very easy.
-However, please note that Erebot must have been installed as a PHAR archive
+Installing |project| from a PHAR package is very easy.
+However, please note that Erebot must have been installed as a PHAR package
 for this method to work properly.
 
 ..  _`previously created`:
@@ -81,13 +45,13 @@ Also, make sure your installation fulfills all of the `prerequisites`_
 for this module.
 
 
-Downloading the achive
-~~~~~~~~~~~~~~~~~~~~~~
+Downloading the package
+~~~~~~~~~~~~~~~~~~~~~~~
 
 First, select the version you want to install. Available versions are listed
 on `Erebot's PEAR channel`_.
 
-The PHAR archive for a certain version can be downloaded by using a URL
+The PHAR package for a certain version can be downloaded by using a URL
 such as |project_version| (replace `version` with the actual version you
 selected).
 
@@ -95,6 +59,7 @@ As a special shortcut, the following link always points to the latest snapshot
 of |project|: |project_latest|.
 
 ..  warning::
+
     Using the latest snapshot available means that you may benefit from
     very recent developments, but it also means that the code may be in
     an unstable state. Use at your own risk.
@@ -103,10 +68,10 @@ of |project|: |project_latest|.
 Installation
 ~~~~~~~~~~~~
 
-Once you've selected and downloaded a release. Just drop the PHAR archive
+Once you've selected and downloaded a release. Just drop the PHAR package
 in the ``modules/`` directory we `previously created`_.
 
-Therefore, you're installation should look somewhat like that:
+Therefore, your installation should look somewhat like that:
 
     * Erebot/
         * Erebot-X.Y.Z.phar
@@ -117,30 +82,38 @@ That's all folks! You can now add `configuration options`_ for this module
 in Erebot's configuration file.
 
 
+Installation through composer
+-----------------------------
+
+Installation through `composer <http://getcomposer.org/>` is very easy.
+
+First, make sure the git client is installed on your machine.
+
+..  include: Installation_git
+
+Now that git has been installed, we can proceed with the module's installation:
+
+*   Go to the directory where you installed Erebot.
+*   Edit :file:`composer.json` and add |project| to the list of
+    required dependencies.
+*   Update your installation with:
+
+    ..  parsed-code:: bash
+
+        $ php composer.phar install
+
+*   Enjoy!
+
+You can now add `configuration options`_ for this module in Erebot's
+configuration file.
+
+
 Installation from source
 ------------------------
 
-First, make sure a git client is installed on your machine.
-Under Linux, **from a root shell**, run the command that most closely matches
-the tools provided by your distribution:
+First, make sure the git client is installed on your machine.
 
-..  parsed-code:: bash
-
-    # For apt-based distributions such as Debian or Ubuntu
-    $ apt-get install git
-
-    # For yum-based distributions such as Fedora / RHEL (RedHat)
-    $ yum install git
-
-    # For urpmi-based distributions such as SLES (SuSE) or MES (Mandriva)
-    $ urpmi git
-
-..  note::
-    Windows users may be interested in installing `Git for Windows`_ to get
-    an equivalent git client. Also, make sure that ``git.exe`` is present
-    on your account's ``PATH``. If not, you'll have to replace ``git`` by
-    the full path to ``git.exe`` on every invocation
-    (eg. ``"C:\Program Files\Git\bin\git.exe" clone ...``)
+..  include: Installation_git
 
 Now, clone the module's repository:
 
@@ -150,6 +123,7 @@ Now, clone the module's repository:
     $ git clone git://github.com/Erebot/|project|.git
 
 ..  note::
+
     Linux users (especially Erebot developers) may prefer to create a separate
     checkout for each component and then use symbolic links to join them
     together, like this:
@@ -187,8 +161,6 @@ using these commands:
     http://www.gnu.org/s/gettext/
 ..  _`Phing`:
     http://www.phing.info/
-..  _`Git for Windows`:
-    http://code.google.com/p/msysgit/downloads/list
 ..  _`Erebot's prerequisites`:
     /Erebot/Prerequisites.html
 ..  _`prerequisites`:

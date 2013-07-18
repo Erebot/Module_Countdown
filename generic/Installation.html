@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Erebot_Module_Countdown 0.1.0dev726 documentation</title>
+    <title>Installation &mdash; Erebot_Module_Countdown dev-master-34 documentation</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.1.0dev726',
+        VERSION:     'dev-master-34',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Erebot_Module_Countdown 0.1.0dev726 documentation"
+          title="Search within Erebot_Module_Countdown dev-master-34 documentation"
           href="../_static/opensearch.xml"/>
-    <link rel="top" title="Erebot_Module_Countdown 0.1.0dev726 documentation" href="../index.html" />
+    <link rel="top" title="Erebot_Module_Countdown dev-master-34 documentation" href="../index.html" />
     <link rel="next" title="Configuration" href="../Configuration.html" />
     <link rel="prev" title="Prerequisites" href="../Prerequisites.html" /> 
   </head>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../Prerequisites.html" title="Prerequisites"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Erebot_Module_Countdown 0.1.0dev726 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Erebot_Module_Countdown dev-master-34 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -53,7 +53,7 @@
   <blockquote>
 <div></div></blockquote>
 <div class="section" id="installation">
-<h1><a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id4">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>This pages contains instructions on how to install this module on your machine.
 There are several ways to achieve that. Each method is described below.</p>
 <div class="admonition warning">
@@ -64,67 +64,34 @@ method to install this module as the one you selected for Erebot itself</strong>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><a class="reference internal" href="#installation" id="id2">Installation</a><ul>
-<li><a class="reference internal" href="#installation-from-erebot-s-pear-channel" id="id3">Installation from Erebot&#8217;s PEAR channel</a></li>
-<li><a class="reference internal" href="#installation-using-phar-archives" id="id4">Installation using PHAR archives</a><ul>
-<li><a class="reference internal" href="#preparations" id="id5">Preparations</a></li>
-<li><a class="reference internal" href="#downloading-the-achive" id="id6">Downloading the achive</a></li>
-<li><a class="reference internal" href="#id1" id="id7">Installation</a></li>
+<li><a class="reference internal" href="#installation" id="id4">Installation</a><ul>
+<li><a class="reference internal" href="#installation-using-phar-packages" id="id5">Installation using PHAR packages</a><ul>
+<li><a class="reference internal" href="#preparations" id="id6">Preparations</a></li>
+<li><a class="reference internal" href="#downloading-the-package" id="id7">Downloading the package</a></li>
+<li><a class="reference internal" href="#id3" id="id8">Installation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#installation-from-source" id="id8">Installation from source</a></li>
+<li><a class="reference internal" href="#installation-through-composer" id="id9">Installation through composer</a></li>
+<li><a class="reference internal" href="#installation-from-source" id="id10">Installation from source</a></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">We recommend that you install this module using <a class="reference external" href="https://pear.erebot.net/">Erebot&#8217;s PEAR channel</a>.
-This will result in a system-wide installation which can be upgraded
-very easily later.
-If this is not feasible for you or if you prefer to keep the installation
-local (for a single user), we recommend that you go the PHAR way.
+<p class="last">We recommend that you install this module using either its
+<em class="xref std std-ref">PHAR package</em>
+or through <a href="#id1"><span class="problematic" id="id2">:ref:`composer &lt;Installation through composer&gt;`_</span></a>.
 Installation from sources is reserved for advanced installations
-(developers).</p>
+(eg. Erebot developers).</p>
 </div>
-<div class="section" id="installation-from-erebot-s-pear-channel">
-<h2><a class="toc-backref" href="#id3">Installation from Erebot&#8217;s PEAR channel</a><a class="headerlink" href="#installation-from-erebot-s-pear-channel" title="Permalink to this headline">¶</a></h2>
-<p>This is by far the simplest way to install the module.
-Hence, it&#8217;s the recommended way for beginners.
-Just use whatever tool your distribution provides to manage PEAR packages:</p>
-<ul class="simple">
-<li>Either <a class="reference external" href="http://pear.php.net/package/PEAR">pear</a> (traditionnal tool)</li>
-<li>or <a class="reference external" href="http://pyrus.net/">pyrus</a> (new experimental tool meant to replace pear someday)</li>
-</ul>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Pyrus currently has issues with some PEAR packages. It is thus recommended
-that you use the regular pear tool to install Erebot.
-See <a class="reference external" href="https://github.com/pyrus/Pyrus/issues/26">https://github.com/pyrus/Pyrus/issues/26</a> for more information.</p>
-</div>
-<p>You can install (<strong>as a privileged user</strong>) either the latest stable release
-using a command such as:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pear channel-discover pear.erebot.net
-<span class="nv">$ </span>pear install erebot/Erebot_Module_Countdown
-</pre></div>
-</div>
-<p>... or you can install the latest unstable version instead, using:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>pear channel-discover pear.erebot.net
-<span class="nv">$ </span>pear install erebot/Erebot_Module_Countdown-alpha
-</pre></div>
-</div>
-<p>Please note that the <tt class="docutils literal"><span class="pre">channel-discover</span></tt> command needs to be run only once
-(pear and pyrus will refuse to discover a PEAR channel more than once anyway).
-To use Pyrus to manage PEAR packages instead of the regular Pear tool,
-just replace <tt class="docutils literal"><span class="pre">pear</span></tt> with <tt class="docutils literal"><span class="pre">pyrus</span></tt> in the commands above.</p>
-</div>
-<div class="section" id="installation-using-phar-archives">
-<h2><a class="toc-backref" href="#id4">Installation using PHAR archives</a><a class="headerlink" href="#installation-using-phar-archives" title="Permalink to this headline">¶</a></h2>
-<p>Installing Erebot_Module_Countdown from a PHAR archive is very easy.
-However, please note that Erebot must have been installed as a PHAR archive
+<div class="section" id="installation-using-phar-packages">
+<h2><a class="toc-backref" href="#id5">Installation using PHAR packages</a><a class="headerlink" href="#installation-using-phar-packages" title="Permalink to this headline">¶</a></h2>
+<p>Installing Erebot_Module_Countdown from a PHAR package is very easy.
+However, please note that Erebot must have been installed as a PHAR package
 for this method to work properly.</p>
 <div class="section" id="preparations">
-<span id="previously-created"></span><h3><a class="toc-backref" href="#id5">Preparations</a><a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h3>
+<span id="previously-created"></span><h3><a class="toc-backref" href="#id6">Preparations</a><a class="headerlink" href="#preparations" title="Permalink to this headline">¶</a></h3>
 <p>If you haven&#8217;t done so already, create a directory in Erebot&#8217;s folder
 named <tt class="docutils literal"><span class="pre">modules</span></tt>.</p>
 <p>Hence, your tree should look like this:</p>
@@ -144,11 +111,11 @@ named <tt class="docutils literal"><span class="pre">modules</span></tt>.</p>
 <p>Also, make sure your installation fulfills all of the <a class="reference external" href="../Prerequisites.html">prerequisites</a>
 for this module.</p>
 </div>
-<div class="section" id="downloading-the-achive">
-<h3><a class="toc-backref" href="#id6">Downloading the achive</a><a class="headerlink" href="#downloading-the-achive" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="downloading-the-package">
+<h3><a class="toc-backref" href="#id7">Downloading the package</a><a class="headerlink" href="#downloading-the-package" title="Permalink to this headline">¶</a></h3>
 <p>First, select the version you want to install. Available versions are listed
 on <a class="reference external" href="https://pear.erebot.net/">Erebot&#8217;s PEAR channel</a>.</p>
-<p>The PHAR archive for a certain version can be downloaded by using a URL
+<p>The PHAR package for a certain version can be downloaded by using a URL
 such as <tt class="samp docutils literal"><span class="pre">https://pear.erebot.net/get/Erebot_Module_Countdown-</span><em><span class="pre">version</span></em><span class="pre">.phar</span></tt> (replace <cite>version</cite> with the actual version you
 selected).</p>
 <p>As a special shortcut, the following link always points to the latest snapshot
@@ -160,11 +127,11 @@ very recent developments, but it also means that the code may be in
 an unstable state. Use at your own risk.</p>
 </div>
 </div>
-<div class="section" id="id1">
-<h3><a class="toc-backref" href="#id7">Installation</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p>Once you&#8217;ve selected and downloaded a release. Just drop the PHAR archive
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id8">Installation</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Once you&#8217;ve selected and downloaded a release. Just drop the PHAR package
 in the <tt class="docutils literal"><span class="pre">modules/</span></tt> directory we <a class="reference internal" href="#previously-created">previously created</a>.</p>
-<p>Therefore, you&#8217;re installation should look somewhat like that:</p>
+<p>Therefore, your installation should look somewhat like that:</p>
 <blockquote>
 <div><ul>
 <li><dl class="first docutils">
@@ -175,7 +142,7 @@ in the <tt class="docutils literal"><span class="pre">modules/</span></tt> direc
 <li><dl class="first docutils">
 <dt>modules/</dt>
 <dd><ul class="first last simple">
-<li>Erebot_Module_Countdown-0.1.0dev726.phar</li>
+<li>Erebot_Module_Countdown-dev-master-34.phar</li>
 </ul>
 </dd>
 </dl>
@@ -190,29 +157,31 @@ in the <tt class="docutils literal"><span class="pre">modules/</span></tt> direc
 in Erebot&#8217;s configuration file.</p>
 </div>
 </div>
-<div class="section" id="installation-from-source">
-<h2><a class="toc-backref" href="#id8">Installation from source</a><a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
-<p>First, make sure a git client is installed on your machine.
-Under Linux, <strong>from a root shell</strong>, run the command that most closely matches
-the tools provided by your distribution:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="c"># For apt-based distributions such as Debian or Ubuntu</span>
-<span class="nv">$ </span>apt-get install git
-
-<span class="c"># For yum-based distributions such as Fedora / RHEL (RedHat)</span>
-<span class="nv">$ </span>yum install git
-
-<span class="c"># For urpmi-based distributions such as SLES (SuSE) or MES (Mandriva)</span>
-<span class="nv">$ </span>urpmi git
+<div class="section" id="installation-through-composer">
+<h2><a class="toc-backref" href="#id9">Installation through composer</a><a class="headerlink" href="#installation-through-composer" title="Permalink to this headline">¶</a></h2>
+<p>Installation through <cite>composer &lt;http://getcomposer.org/&gt;</cite> is very easy.</p>
+<p>First, make sure the git client is installed on your machine.</p>
+<p>Now that git has been installed, we can proceed with the module&#8217;s installation:</p>
+<ul>
+<li><p class="first">Go to the directory where you installed Erebot.</p>
+</li>
+<li><p class="first">Edit <tt class="file docutils literal"><span class="pre">composer.json</span></tt> and add Erebot_Module_Countdown to the list of
+required dependencies.</p>
+</li>
+<li><p class="first">Update your installation with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>php composer.phar install
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Windows users may be interested in installing <a class="reference external" href="http://code.google.com/p/msysgit/downloads/list">Git for Windows</a> to get
-an equivalent git client. Also, make sure that <tt class="docutils literal"><span class="pre">git.exe</span></tt> is present
-on your account&#8217;s <tt class="docutils literal"><span class="pre">PATH</span></tt>. If not, you&#8217;ll have to replace <tt class="docutils literal"><span class="pre">git</span></tt> by
-the full path to <tt class="docutils literal"><span class="pre">git.exe</span></tt> on every invocation
-(eg. <tt class="docutils literal"><span class="pre">&quot;C:\Program</span> <span class="pre">Files\Git\bin\git.exe&quot;</span> <span class="pre">clone</span> <span class="pre">...</span></tt>)</p>
+</li>
+<li><p class="first">Enjoy!</p>
+</li>
+</ul>
+<p>You can now add <a class="reference external" href="../Configuration.html">configuration options</a> for this module in Erebot&#8217;s
+configuration file.</p>
 </div>
+<div class="section" id="installation-from-source">
+<h2><a class="toc-backref" href="#id10">Installation from source</a><a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>First, make sure the git client is installed on your machine.</p>
 <p>Now, clone the module&#8217;s repository:</p>
 <div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /path/to/Erebot/vendor/
 <span class="nv">$ </span>git clone git://github.com/Erebot/Erebot_Module_Countdown.git
@@ -253,13 +222,13 @@ using these commands:</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#installation-from-erebot-s-pear-channel">Installation from Erebot&#8217;s PEAR channel</a></li>
-<li><a class="reference internal" href="#installation-using-phar-archives">Installation using PHAR archives</a><ul>
+<li><a class="reference internal" href="#installation-using-phar-packages">Installation using PHAR packages</a><ul>
 <li><a class="reference internal" href="#preparations">Preparations</a></li>
-<li><a class="reference internal" href="#downloading-the-achive">Downloading the achive</a></li>
-<li><a class="reference internal" href="#id1">Installation</a></li>
+<li><a class="reference internal" href="#downloading-the-package">Downloading the package</a></li>
+<li><a class="reference internal" href="#id3">Installation</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#installation-through-composer">Installation through composer</a></li>
 <li><a class="reference internal" href="#installation-from-source">Installation from source</a></li>
 </ul>
 </li>
@@ -297,7 +266,7 @@ using these commands:</p>
         <li class="right" >
           <a href="../Prerequisites.html" title="Prerequisites"
              >previous</a> |</li>
-        <li><a href="../index.html">Erebot_Module_Countdown 0.1.0dev726 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Erebot_Module_Countdown dev-master-34 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
