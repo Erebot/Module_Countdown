@@ -33,7 +33,8 @@
     },
     "require-dev": {
         "erebot/buildenv": "dev-master",
-        "erebot/testenv": "dev-master"
+        "erebot/testenv": "dev-master",
+        "pear/php_parsergenerator": "dev-master"
     },
     "autoload": {
         "psr-0": {

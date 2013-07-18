@@ -3,6 +3,10 @@
     <property name="qa.coverage.force" value="false"/>
     <property name="tagfiles" value="Erebot"/>
 
+    <fileset dir="." id="phar.files">
+        <exclude name="**"/>
+    </fileset>
+
     <fileset dir="src/" id="sources">
         <include name="**/*.php"/>
         <exclude name="**/Parser.php"/>
@@ -22,19 +26,7 @@
             <param value="${phing.project.name}"/>
         </php>
         <copy file="data/Parser.y" todir="src/${module_dir}/"/>
-        <exec command="pear config-get php_dir system" outputProperty="php_dir"/>
-        <php function="putenv">
-            <param value="PHP_PEAR_INSTALL_DIR=${php_dir}"/>
-        </php>
-        <exec command="phplemon -q -s src/${module_dir}/Parser.y" logoutput="true"/>
-        <if>
-            <isset property="env.LANG"/>
-            <then>
-                <php function="putenv">
-                    <param value="PHP_PEAR_INSTALL_DIR=${env.PHP_PEAR_INSTALL_DIR}"/>
-                </php>
-            </then>
-        </if>
+        <exec command='"vendor/bin/phplemon" -q -s src/${module_dir}/Parser.y' logoutput="true"/>
         <delete file="src/${module_dir}/Parser.y"/>
     </target>
 
