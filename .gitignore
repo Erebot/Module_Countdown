@@ -1,5 +1,4 @@
 /vendor
-/src/Erebot/Module/Countdown/Parser.php
 /src/Erebot/Module/Countdown/Parser.y
 /src/Erebot/Module/Countdown/Parser.out
 
