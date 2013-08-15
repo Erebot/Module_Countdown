@@ -11,13 +11,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Erebot_API.git",
-                "reference": "6c7ed0a4a0c078604af97739a2dfc48d4eae1e18"
+                "reference": "8b5053181addb13e6de26974b2fb065ca7e80ad9"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://packages.erebot.net:943/composer/erebot-api-6c7ed0a4a0c078604af97739a2dfc48d4eae1e18-zip-decce0.tar",
+                "url": "https://packages.erebot.net:943/composer/erebot-api-8b5053181addb13e6de26974b2fb065ca7e80ad9-zip-5daf3b.tar",
                 "reference": "dev-master",
-                "shasum": "0dc96387d5683c928ba0ec386ed9146ad5a0f877"
+                "shasum": "1280a153539f38c49a4767662594010017fc0db7"
             },
             "require": {
                 "php": ">=5.2.2"
@@ -60,7 +60,7 @@
                 "irc": "irc://irc.iiens.net/Erebot",
                 "source": "https://github.com/Erebot/Erebot_API"
             },
-            "time": "2013-06-23 21:22:11"
+            "time": "2013-08-05 20:12:46"
         },
         {
             "name": "erebot/generic-doc",
@@ -171,13 +171,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Erebot_Module_TriggerRegistry.git",
-                "reference": "a90c504f05a14f5b8287f34deb7c233fd71e6e93"
+                "reference": "99896d71a267a5bfd42a357364c3e7c4954f942d"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://packages.erebot.net:943/composer/erebot-triggerregistry-module-a90c504f05a14f5b8287f34deb7c233fd71e6e93-zip-ecc255.tar",
+                "url": "https://packages.erebot.net:943/composer/erebot-triggerregistry-module-99896d71a267a5bfd42a357364c3e7c4954f942d-zip-04b7e3.tar",
                 "reference": "dev-master",
-                "shasum": "bb872872df2fb47107c94c8ea18ea08c18f0a040"
+                "shasum": "484269ea648263e58f43d4384bfc9686324e9c98"
             },
             "require": {
                 "erebot/api": "dev-master",
@@ -225,7 +225,7 @@
                 "irc": "irc://irc.iiens.net/Erebot",
                 "source": "https://github.com/Erebot/Erebot_Module_TriggerRegistry"
             },
-            "time": "2013-06-28 20:59:38"
+            "time": "2013-08-04 08:39:31"
         }
     ],
     "packages-dev": [
@@ -235,15 +235,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Erebot_Buildenv.git",
-                "reference": "658e6515fbb47f93832019dfdb4857e7b93ff9bb"
+                "reference": "8c394eb1f6e5fb7840e00b8f4bd91063fd7ef5ea"
             },
             "dist": {
                 "type": "tar",
-                "url": "https://packages.erebot.net:943/composer/erebot-buildenv-658e6515fbb47f93832019dfdb4857e7b93ff9bb-zip-443f35.tar",
+                "url": "https://packages.erebot.net:943/composer/erebot-buildenv-8c394eb1f6e5fb7840e00b8f4bd91063fd7ef5ea-zip-083900.tar",
                 "reference": "dev-master",
-                "shasum": "fa49523f82d7f0c0fb5266146fde1012a8c992e2"
+                "shasum": "0f240c2544ce890c51dfbeccf0c654e4c2d7999e"
             },
             "require": {
+                "ext-phar": "*",
                 "ext-xsl": "*",
                 "phing/phing": ">=2.4.3",
                 "php": ">=5.2.2"
@@ -283,7 +284,7 @@
                 "irc": "irc://irc.iiens.net/Erebot",
                 "source": "https://github.com/Erebot/Erebot_Buildenv"
             },
-            "time": "2013-07-17 12:48:51"
+            "time": "2013-08-15 12:34:34"
         },
         {
             "name": "erebot/testenv",

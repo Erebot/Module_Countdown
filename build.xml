@@ -4,7 +4,7 @@
     <property name="tagfiles" value="Erebot"/>
 
     <fileset dir="." id="phar.files">
-        <exclude name="**"/>
+        <include name="data/**"/>
     </fileset>
 
     <fileset dir="src/" id="sources">
