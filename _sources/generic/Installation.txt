@@ -14,11 +14,13 @@ There are several ways to achieve that. Each method is described below.
 ..  note::
 
     We recommend that you install this module using either its
-    :ref:`PHAR package <Installation using PHAR packages>`
-    or through :ref:`composer <Installation through composer>`_.
+    :ref:`PHAR package <install_phar>` or through
+    :ref:`composer <install_composer>`.
     Installation from sources is reserved for advanced installations
     (eg. Erebot developers).
 
+
+..  _`install_phar`:
 
 Installation using PHAR packages
 --------------------------------
@@ -44,12 +46,11 @@ Hence, your tree should look like this:
 Also, make sure your installation fulfills all of the `prerequisites`_
 for this module.
 
-
 Downloading the package
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 First, select the version you want to install. Available versions are listed
-on `Erebot's PEAR channel`_.
+on `Erebot's package repository`_.
 
 The PHAR package for a certain version can be downloaded by using a URL
 such as |project_version| (replace `version` with the actual version you
@@ -64,99 +65,137 @@ of |project|: |project_latest|.
     very recent developments, but it also means that the code may be in
     an unstable state. Use at your own risk.
 
+The PHAR package must be downloaded to your installation's :file:`modules/`
+directory.
 
-Installation
-~~~~~~~~~~~~
+Downloading the package's signature
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Once you've selected and downloaded a release. Just drop the PHAR package
-in the ``modules/`` directory we `previously created`_.
+All the packages delivered by Erebot's developers are cryptographically signed
+using the "OpenSSL" algorithm in PHP's Phar extension.
+This signature is used to detect corrupted packages and packages that have been
+tampered with.
 
-Therefore, your installation should look somewhat like that:
+You must retrieve the signature corresponding to the version of the PHAR
+package you downloaded and put it alongside the package.
+The signature can be downloaded by appending ``.pubkey`` at the end of the link
+to the package itself. Therefore, the signature for the latest version can be
+downloaded from |project_latest_pubkey|.
 
-    * Erebot/
-        * Erebot-X.Y.Z.phar
-        * modules/
-            * |project|-|release|.phar
+..  note::
 
-That's all folks! You can now add `configuration options`_ for this module
-in Erebot's configuration file.
+    PHP automatically checks the integrity of signed PHAR packages when they
+    are loaded. Neither the name of the PHAR package nor the name of the
+    signature file should be altered, as the integrity check would then fail.
 
+..  warning::
 
-Installation through composer
------------------------------
+    Although PHP automatically checks the integrity of cryptographically
+    signed phar archives when they are loaded using the signature file, 
+    you may also check an archive manually by using the :command:`phar`
+    command provided with the phar extension.
 
-Installation through `composer <http://getcomposer.org/>` is very easy.
-
-First, make sure the git client is installed on your machine.
-
-..  include: Installation_git
-
-Now that git has been installed, we can proceed with the module's installation:
-
-*   Go to the directory where you installed Erebot.
-*   Edit :file:`composer.json` and add |project| to the list of
-    required dependencies.
-*   Update your installation with:
+    For example, the following session shows a passing result.
 
     ..  parsed-code:: bash
 
-        $ php composer.phar install
+        $ phar info -f |project|-dev-master.phar
+        # Alias:              |project|
+        # Hash-type:          OpenSSL
+        # ... (other fields removed for clarity) ...
 
-*   Enjoy!
+    Note how the "Hash-type" field indicates that the "OpenSSL" algorithm
+    has been used to sign the archive. **Any other value should be considered
+    as if the check had failed**, unless the package was downloaded
+    from Erebot's website over a secure (SSL/TLS) connection.
 
-You can now add `configuration options`_ for this module in Erebot's
-configuration file.
+    On the other hand, the following example shows a session where
+    the verification failed.
+
+    ..  parsed-code:: bash
+
+        $ phar info -f |project|-dev-master.phar
+        # Exception while opening phar '|project|-dev-master.phar':
+        # phar "|project|-dev-master.phar" openssl signature could not be verified: openssl public key could not be read
+
+Conclusion
+~~~~~~~~~~
+
+Once the PHAR package and its signature have been downloaded,
+your installation should look somewhat like that:
+
+..  parsed-code:: text
+
+    Erebot/
+        Erebot-X.Y.Z.phar
+        modules/
+            |project|-|release|.phar
+            |project|-|release|.phar.pubkey
+
+That's all folks! You may now add `configuration options`_ for this module
+in Erebot's configuration file.
+
+
+..  _`install_composer`:
+
+Installation through Composer
+-----------------------------
+
+Installation through `Composer <http://getcomposer.org/>`_ is very easy.
+However, please note that Erebot itself must have been installed using Composer
+for this method to work properly.
+
+To install the new module:
+
+*   Go to the directory where you installed Erebot.
+*   Add this module to your installation's dependencies with:
+
+    ..  parsed-code:: bash
+
+        $ # Replace |version| with whatever version you want to install.
+        $ php composer.phar install |composer_name|\=\ |version|
+
+*   You may now add `configuration options`_ for this module in Erebot's
+    configuration file.
 
 
 Installation from source
 ------------------------
 
+Please note that Erebot itself must have been installed from source
+for this method to work.
+
+..  warning::
+
+    This method exists only for the sake of running Erebot on the now deprecated
+    PHP 5.2.x. Also, please note that depending on your environment, other actions
+    than the ones described here may be required to make this module work properly.
+
 First, make sure the git client is installed on your machine.
 
-..  include: Installation_git
+..  include:: Installation_git.inc
 
 Now, clone the module's repository:
 
 ..  parsed-code:: bash
 
     $ cd /path/to/Erebot/vendor/
-    $ git clone git://github.com/Erebot/|project|.git
+    $ mkdir -p erebot
+    $ git clone git://github.com/Erebot/|project|.git |composer_name|
 
-..  note::
-
-    Linux users (especially Erebot developers) may prefer to create a separate
-    checkout for each component and then use symbolic links to join them
-    together, like this:
-
-    ..  parsed-code:: bash
-
-        $ git clone git://github.com/Erebot/|project|.git
-        $ cd Erebot/vendor/
-        $ ln -s ../../|project|
-
-Optionally, you can compile the translation files for each component.
-However, this requires that `gettext`_ and `phing`_ be installed on your machine
-as well. See the documentation on `Erebot's prerequisites`_ for additional
-information on how to install these tools depending on your system.
-
-Depending on the module, other additional tools may be required.
-Check out this module's `prerequisites`_ for more information.
-
-Once you got those two up and running, the translation files can be compiled
-using these commands:
+Last but not least, install the rest of this module's `prerequisites`_
+and then run:
 
 ..  parsed-code:: bash
 
-    $ cd /path/to/Erebot/vendor/|project|
-    $ phing
+    $ cd /path/to/Erebot/vendor/|composer_name|
+    $ /path/to/phing
 
+You may now add `configuration options`_ for this module in Erebot's
+configuration file.
 
-..  _`pear`:
-    http://pear.php.net/package/PEAR
-..  _`Pyrus`:
-    http://pyrus.net/
-..  _`Erebot's PEAR channel`:
-    https://pear.erebot.net/
+..  _`Erebot's package repository`:
+    https://packages.erebot.net/
 ..  _`gettext`:
     http://www.gnu.org/s/gettext/
 ..  _`Phing`:
