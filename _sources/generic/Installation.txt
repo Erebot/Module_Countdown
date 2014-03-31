@@ -148,12 +148,13 @@ for this method to work properly.
 To install the new module:
 
 *   Go to the directory where you installed Erebot.
-*   Add this module to your installation's dependencies with:
+*   Add the module to your installation's dependencies with:
 
     ..  parsed-code:: bash
 
         $ # Replace |version| with whatever version you want to install.
-        $ php composer.phar install |composer_name|\=\ |version|
+        $ php composer.phar require --no-update |composer_name|\=\ |version|
+        $ php composer.phar update --no-dev
 
 *   You may now add `configuration options`_ for this module in Erebot's
     configuration file.

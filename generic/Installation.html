@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &mdash; Erebot_Module_Countdown dev-master-185 documentation</title>
+    <title>Installation &mdash; Erebot_Module_Countdown 1.0.x-dev-352 documentation</title>
     
     <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     'dev-master-185',
+        VERSION:     '1.0.x-dev-352',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="search" type="application/opensearchdescription+xml"
-          title="Search within Erebot_Module_Countdown dev-master-185 documentation"
+          title="Search within Erebot_Module_Countdown 1.0.x-dev-352 documentation"
           href="../_static/opensearch.xml"/>
-    <link rel="top" title="Erebot_Module_Countdown dev-master-185 documentation" href="../index.html" />
+    <link rel="top" title="Erebot_Module_Countdown 1.0.x-dev-352 documentation" href="../index.html" />
     <link rel="next" title="Configuration" href="../Configuration.html" />
     <link rel="prev" title="Prerequisites" href="../Prerequisites.html" /> 
   </head>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="../Prerequisites.html" title="Prerequisites"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">Erebot_Module_Countdown dev-master-185 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Erebot_Module_Countdown 1.0.x-dev-352 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -180,8 +180,8 @@ your installation should look somewhat like that:</p>
 <div class="highlight-text"><div class="highlight"><pre>Erebot/
     Erebot-X.Y.Z.phar
     modules/
-        Erebot_Module_Countdown-dev-master-185.phar
-        Erebot_Module_Countdown-dev-master-185.phar.pubkey
+        Erebot_Module_Countdown-1.0.x-dev-352.phar
+        Erebot_Module_Countdown-1.0.x-dev-352.phar.pubkey
 </pre></div>
 </div>
 <p>That&#8217;s all folks! You may now add <a class="reference external" href="../Configuration.html">configuration options</a> for this module
@@ -197,9 +197,10 @@ for this method to work properly.</p>
 <ul>
 <li><p class="first">Go to the directory where you installed Erebot.</p>
 </li>
-<li><p class="first">Add this module to your installation&#8217;s dependencies with:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="c"># Replace dev-master with whatever version you want to install.</span>
-<span class="nv">$ </span>php composer.phar install erebot/countdown-module<span class="o">=</span>dev-master
+<li><p class="first">Add the module to your installation&#8217;s dependencies with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="c"># Replace 1.0.x-dev with whatever version you want to install.</span>
+<span class="nv">$ </span>php composer.phar require --no-update erebot/countdown-module<span class="o">=</span>1.0.x-dev
+<span class="nv">$ </span>php composer.phar update --no-dev
 </pre></div>
 </div>
 </li>
@@ -311,11 +312,11 @@ configuration file.</p>
         <li class="right" >
           <a href="../Prerequisites.html" title="Prerequisites"
              >previous</a> |</li>
-        <li><a href="../index.html">Erebot_Module_Countdown dev-master-185 documentation</a> &raquo;</li> 
+        <li><a href="../index.html">Erebot_Module_Countdown 1.0.x-dev-352 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011-2013, Erebot.
+        &copy; Copyright 2011-2014, Erebot.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
