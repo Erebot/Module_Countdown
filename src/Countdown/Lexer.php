@@ -16,26 +16,28 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      A lexer (tokenizer) for formulae.
  */
-class Erebot_Module_Countdown_Lexer
+class Lexer
 {
     /// Formula to be tokenized.
-    protected $_formula;
+    protected $formula;
 
     /// Length of the formula.
-    protected $_length;
+    protected $length;
 
     /// Current position in the formula.
-    protected $_position;
+    protected $position;
 
     /// Parser for the formula.
-    protected $_parser;
+    protected $parser;
 
     /// List of number used in the formula.
-    protected $_numbers;
+    protected $numbers;
 
     /// A pattern used to recognize integers.
     const PATT_INTEGER  = '/^[0-9]+/';
@@ -49,12 +51,12 @@ class Erebot_Module_Countdown_Lexer
      */
     public function __construct($formula)
     {
-        $this->_formula     = $formula;
-        $this->_length      = strlen($formula);
-        $this->_position    = 0;
-        $this->_numbers     = array();
-        $this->_parser      = new Erebot_Module_Countdown_Parser();
-        $this->_tokenize();
+        $this->formula  = $formula;
+        $this->length   = strlen($formula);
+        $this->position = 0;
+        $this->numbers  = array();
+        $this->parser   = new \Erebot\Module\Countdown\Parser();
+        $this->tokenize();
     }
 
     /**
@@ -65,7 +67,7 @@ class Erebot_Module_Countdown_Lexer
      */
     public function getResult()
     {
-        return $this->_parser->getResult();
+        return $this->parser->getResult();
     }
 
     /**
@@ -80,38 +82,38 @@ class Erebot_Module_Countdown_Lexer
      */
     public function getNumbers()
     {
-        return $this->_numbers;
+        return $this->numbers;
     }
 
     /// Does the actual work.
-    protected function _tokenize()
+    protected function tokenize()
     {
         $operators = array(
-            '(' =>  Erebot_Module_Countdown_Parser::TK_PAR_OPEN,
-            ')' =>  Erebot_Module_Countdown_Parser::TK_PAR_CLOSE,
-            '+' =>  Erebot_Module_Countdown_Parser::TK_OP_ADD,
-            '-' =>  Erebot_Module_Countdown_Parser::TK_OP_SUB,
-            '*' =>  Erebot_Module_Countdown_Parser::TK_OP_MUL,
-            '/' =>  Erebot_Module_Countdown_Parser::TK_OP_DIV,
+            '(' =>  \Erebot\Module\Countdown\Parser::TK_PAR_OPEN,
+            ')' =>  \Erebot\Module\Countdown\Parser::TK_PAR_CLOSE,
+            '+' =>  \Erebot\Module\Countdown\Parser::TK_OP_ADD,
+            '-' =>  \Erebot\Module\Countdown\Parser::TK_OP_SUB,
+            '*' =>  \Erebot\Module\Countdown\Parser::TK_OP_MUL,
+            '/' =>  \Erebot\Module\Countdown\Parser::TK_OP_DIV,
 
         );
 
-        while ($this->_position < $this->_length) {
-            $c          = $this->_formula[$this->_position];
-            $subject    = substr($this->_formula, $this->_position);
+        while ($this->position < $this->length) {
+            $c          = $this->formula[$this->position];
+            $subject    = substr($this->formula, $this->position);
 
             if (isset($operators[$c])) {
-                $this->_parser->doParse($operators[$c], $c);
-                $this->_position++;
+                $this->parser->doParse($operators[$c], $c);
+                $this->position++;
                 continue;
             }
 
             if (preg_match(self::PATT_INTEGER, $subject, $matches)) {
-                $this->_position += strlen($matches[0]);
+                $this->position += strlen($matches[0]);
                 $integer = (int) $matches[0];
-                $this->_numbers[] = $integer;
-                $this->_parser->doParse(
-                    Erebot_Module_Countdown_Parser::TK_INTEGER,
+                $this->numbers[] = $integer;
+                $this->parser->doParse(
+                    \Erebot\Module\Countdown\Parser::TK_INTEGER,
                     $integer
                 );
                 continue;
@@ -119,11 +121,10 @@ class Erebot_Module_Countdown_Lexer
 
             // This will likely result in an exception
             // being thrown, which is actually good!
-            $this->_parser->doParse(0, 0);
+            $this->parser->doParse(0, 0);
         }
 
         // End of tokenization.
-        $this->_parser->doParse(0, 0);
+        $this->parser->doParse(0, 0);
     }
 }
-

@@ -16,13 +16,29 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown\Solver;
+
 /**
  * \brief
- *      An exception thrown when an attempt is made
- *      to divide a value by zero (eg. "2 / (1 - 1)").
+ *      Interface for a generic container
+ *      used by the solver.
  */
-class   Erebot_Module_Countdown_DivisionByZeroException
-extends Erebot_Module_Countdown_Exception
+interface ContainerInterface
 {
-}
+    /**
+     * Returns the value enclosed in this container.
+     *
+     * \retval mixed
+     *      The value kept by this container.
+     */
+    public function getValue();
 
+    /**
+     * Returns the string representation of this
+     * container's content.
+     *
+     * \retval string
+     *      String representation of this container.
+     */
+    public function __toString();
+}

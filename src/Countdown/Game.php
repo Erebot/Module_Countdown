@@ -16,33 +16,35 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      An implementation of the famous
  *      Countdown TV game show.
  */
-class Erebot_Module_Countdown_Game
+class Game
 {
     /// A list of numbers that may be used to reach the target number.
-    protected $_numbers;
+    protected $numbers;
 
     /// Target number to reach.
-    protected $_target;
+    protected $target;
 
     /// Best formula proposed so far.
-    protected $_bestProposal;
+    protected $bestProposal;
 
     /// Default set of allowed numbers.
-    protected $_allowedNumbers = array(
+    protected $allowedNumbers = array(
         1, 2,  3,  4,  5,  6,   7,
         8, 9, 10, 25, 50, 75, 100,
     );
 
     /// The target number may not be less than this.
-    protected $_minTarget;
+    protected $minTarget;
 
     /// The target number may not be greater than this.
-    protected $_maxTarget;
+    protected $maxTarget;
 
 
     /**
@@ -71,86 +73,91 @@ class Erebot_Module_Countdown_Game
      *      be selected to help contestants.
      *      Defaults to: 1-10, 25, 50, 75 & 100.
      */
-    public function __construct(
-        $minTarget          = 100,
-        $maxTarget          = 999,
-        $nbNumbers          = 7,
-        $allowedNumbers     = NULL
-    )
+    public function __construct($minTarget = 100, $maxTarget = 999, $nbNumbers = 7, $allowedNumbers = null)
     {
         /// @TODO: refactor checks to avoid redundancy.
-        if (!is_int($minTarget))
-            throw new Erebot_Module_Countdown_InvalidValue(
+        if (!is_int($minTarget)) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$minTarget',
                 'integer',
                 typeof($minTarget)
             );
-        if ($minTarget < 100)
-            throw new Erebot_Module_Countdown_InvalidValue(
+        }
+        if ($minTarget < 100) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$minTarget',
                 'number >= 100',
                 $minTarget
             );
-        $this->_minTarget = $minTarget;
+        }
+        $this->minTarget = $minTarget;
 
-        if (!is_int($maxTarget))
-            throw new Erebot_Module_Countdown_InvalidValue(
+        if (!is_int($maxTarget)) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$maxTarget',
                 'integer',
                 typeof($maxTarget)
             );
-        if ($maxTarget <= $this->_minTarget)
-            throw new Erebot_Module_Countdown_InvalidValue(
+        }
+        if ($maxTarget <= $this->minTarget) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$maxTarget',
                 'number > minTarget',
                 $maxTarget
             );
-        $this->_maxTarget = $maxTarget;
+        }
+        $this->maxTarget = $maxTarget;
 
-        if (!is_int($nbNumbers))
-            throw new Erebot_Module_Countdown_InvalidValue(
+        if (!is_int($nbNumbers)) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$nbNumbers',
                 'integer',
                 typeof($nbNumbers)
             );
-        if ($nbNumbers < 1)
-            throw new Erebot_Module_Countdown_InvalidValue(
+        }
+        if ($nbNumbers < 1) {
+            throw new \Erebot\Module\Countdown\InvalidValue(
                 '$nbNumbers',
                 'number > 1',
                 $nbNumbers
             );
+        }
 
-        if ($allowedNumbers !== NULL) {
-            if (!is_array($allowedNumbers))
-                throw new Erebot_Module_Countdown_InvalidValue(
+        if ($allowedNumbers !== null) {
+            if (!is_array($allowedNumbers)) {
+                throw new \Erebot\Module\Countdown\InvalidValue(
                     '$allowedNumbers',
                     'array',
                     typeof($allowedNumbers)
                 );
-            if (!count($allowedNumbers))
-                throw new Erebot_Module_Countdown_InvalidValue(
+            }
+            if (!count($allowedNumbers)) {
+                throw new \Erebot\Module\Countdown\InvalidValue(
                     '$allowedNumbers',
                     'non-empty array',
                     'empty array'
                 );
+            }
             foreach ($allowedNumbers as $allowedNumber) {
-                if (!is_int($allowedNumber))
-                    throw new Erebot_Module_Countdown_InvalidValue(
+                if (!is_int($allowedNumber)) {
+                    throw new \Erebot\Module\Countdown\InvalidValue(
                         '$allowedNumbers',
                         'array of int',
                         'array of '.typeof($allowedNumber)
                     );
-                if ($allowedNumber < 1)
-                    throw new Erebot_Module_Countdown_InvalidValue(
+                }
+                if ($allowedNumber < 1) {
+                    throw new \Erebot\Module\Countdown\InvalidValue(
                         '$allowedNumbers',
                         'array of int >= 1',
                         $allowedNumber
                     );
+                }
             }
-            $this->_allowedNumbers = $allowedNumbers;
+            $this->allowedNumbers = $allowedNumbers;
         }
-        $this->_bestProposal = NULL;
-        $this->_chooseNumbers($nbNumbers);
+        $this->bestProposal = null;
+        $this->chooseNumbers($nbNumbers);
     }
 
     /**
@@ -162,21 +169,21 @@ class Erebot_Module_Countdown_Game
      * \param int $nbNumbers
      *      How many numbers will be selected.
      */
-    protected function _chooseNumbers($nbNumbers)
+    protected function chooseNumbers($nbNumbers)
     {
-        $this->_numbers = array();
+        $this->numbers = array();
         for ($i = 0; $i < $nbNumbers; $i++) {
-            $key = array_rand($this->_allowedNumbers);
-            $this->_numbers[] = $this->_allowedNumbers[$key];
+            $key = array_rand($this->allowedNumbers);
+            $this->numbers[] = $this->allowedNumbers[$key];
         }
 
-        $this->_target = mt_rand($this->_minTarget, $this->_maxTarget);
+        $this->target = mt_rand($this->minTarget, $this->maxTarget);
     }
 
     /// Destructs the game.
     public function __destruct()
     {
-        unset($this->_bestProposal);
+        unset($this->bestProposal);
     }
 
     /**
@@ -190,7 +197,7 @@ class Erebot_Module_Countdown_Game
      */
     public function getNumbers()
     {
-        return $this->_numbers;
+        return $this->numbers;
     }
 
     /**
@@ -202,7 +209,7 @@ class Erebot_Module_Countdown_Game
      */
     public function getTarget()
     {
-        return $this->_target;
+        return $this->target;
     }
 
     /**
@@ -213,42 +220,42 @@ class Erebot_Module_Countdown_Game
      */
     public function getBestProposal()
     {
-        return $this->_bestProposal;
+        return $this->bestProposal;
     }
 
     /**
      * Formula proposal.
      *
-     * \param Erebot_Module_Countdown_Formula $formula
+     * \param Erebot::Module::Countdown::Formula $formula
      *      The proposed formula.
      *
      * \TODO: write an interface for formulae and use it there.
      */
-    public function proposeFormula(Erebot_Module_Countdown_Formula $formula)
+    public function proposeFormula(\Erebot\Module\Countdown\Formula $formula)
     {
-        $gameNumbers    = $this->_numbers;
+        $gameNumbers    = $this->numbers;
         $formulaNumbers = $formula->getNumbers();
 
         foreach ($formulaNumbers as $number) {
             $key = array_search($number, $gameNumbers);
-            if ($key === FALSE)
-                throw new Erebot_Module_Countdown_UnavailableNumberException();
+            if ($key === false) {
+                throw new \Erebot\Module\Countdown\UnavailableNumberException();
+            }
             unset($gameNumbers[$key]);
         }
 
-        if ($this->_bestProposal === NULL) {
-            $this->_bestProposal = $formula;
-            return TRUE;
+        if ($this->bestProposal === null) {
+            $this->bestProposal = $formula;
+            return true;
         }
 
-        $oldDst = abs($this->_bestProposal->getResult() - $this->_target);
-        $newDst = abs($formula->getResult() - $this->_target);
+        $oldDst = abs($this->bestProposal->getResult() - $this->target);
+        $newDst = abs($formula->getResult() - $this->target);
         if ($newDst < $oldDst) {
-            $this->_bestProposal = $formula;
-            return TRUE;
+            $this->bestProposal = $formula;
+            return true;
         }
 
-        return FALSE;
+        return false;
     }
 }
-

@@ -16,13 +16,14 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown\Solver;
+
 /**
  * \brief
- *      An exception thrown when the given "formula"
- *      is not even a string.
+ *      An exception thrown whenever an operation
+ *      in the solver can easily be simplified and
+ *      so should be ignored/skipped.
  */
-class   Erebot_Module_Countdown_FormulaMustBeAStringException
-extends Erebot_Module_Countdown_Exception
+class SkipException extends \Erebot\Module\Countdown\Exception
 {
 }
-

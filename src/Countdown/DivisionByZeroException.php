@@ -16,13 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
- *      An exception thrown whenever a formula
- *      contains some syntax error.
+ *      An exception thrown when an attempt is made
+ *      to divide a value by zero (eg. "2 / (1 - 1)").
  */
-class   Erebot_Module_Countdown_SyntaxErrorException
-extends Erebot_Module_Countdown_Exception
+class DivisionByZeroException extends \Erebot\Module\Countdown\Exception
 {
 }
-

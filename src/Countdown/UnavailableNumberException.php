@@ -16,14 +16,14 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
- *      An exception thrown whenever an operation
- *      in the solver can easily be simplified and
- *      so should be ignored/skipped.
+ *      An exception thrown whenever a formula uses
+ *      some number which is not part of the set of
+ *      available numbers.
  */
-class   Erebot_Module_Countdown_Solver_SkipException
-extends Erebot_Module_Countdown_Exception
+class UnavailableNumberException extends \Erebot\Module\Countdown\Exception
 {
 }
-

@@ -16,104 +16,107 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown\Solver;
+
 /**
  * \brief
  *      An operation to be computed by the solver.
  */
-class       Erebot_Module_Countdown_Solver_Operation
-implements  Erebot_Module_Countdown_Solver_ContainerInterface
+class Operation implements \Erebot\Module\Countdown\Solver\ContainerInterface
 {
     /// First operand for the operation.
-    protected $_first;
+    protected $first;
 
     /// Second operand for the operation.
-    protected $_second;
+    protected $second;
 
     /// Operator to use in the operation.
-    protected $_operator;
+    protected $operator;
 
     /// Result of the operation.
-    protected $_value;
+    protected $value;
 
 
     /**
      * Computes a new operation.
      *
-     * \param Erebot_Module_Countdown_Solver_ContainerInterface $first
+     * \param Erebot::Module::Countdown::Solver::ContainerInterface $first
      *      First operand for the operation.
      *
-     * \param Erebot_Module_Countdown_Solver_ContainerInterface $second
+     * \param Erebot::Module::Countdown::Solver::ContainerInterface $second
      *      Second operand for the operation.
      *
      * \param string $operator
      *      Operator to be used in the operation.
      *
-     * \throw Erebot_Module_Countdown_Solver_SkipException
+     * \throw Erebot::Module::Countdown::Solver::SkipException
      *      The operation is useless (overly simple).
      *
-     * \throw Erebot_Module_Countdown_Exception
+     * \throw Erebot::Module::Countdown::Exception
      *      An invalid operator was given.
      */
     public function __construct(
-        Erebot_Module_Countdown_Solver_ContainerInterface   $first,
-        Erebot_Module_Countdown_Solver_ContainerInterface   $second,
-                                                            $operator
-    )
-    {
-        $this->_first   = $first;
-        $this->_second  = $second;
+        \Erebot\Module\Countdown\Solver\ContainerInterface   $first,
+        \Erebot\Module\Countdown\Solver\ContainerInterface   $second,
+        $operator
+    ) {
+        $this->first    = $first;
+        $this->second   = $second;
 
         switch ($operator) {
             case '+':
-                $this->_value = $first->getValue() + $second->getValue();
+                $this->value = $first->getValue() + $second->getValue();
                 break;
             case '-':
-                $this->_value = $first->getValue() - $second->getValue();
+                $this->value = $first->getValue() - $second->getValue();
                 break;
             case '*':
-                if ($second->getValue() == 1)
-                    throw new Erebot_Module_Countdown_Solver_SkipException(
+                if ($second->getValue() == 1) {
+                    throw new \Erebot\Module\Countdown\Solver\SkipException(
                         'Skipped'
                     );
-                $this->_value = $first->getValue() * $second->getValue();
+                }
+                $this->value = $first->getValue() * $second->getValue();
                 break;
             case '/':
-                if ($second->getValue() == 1)
-                    throw new Erebot_Module_Countdown_Solver_SkipException(
+                if ($second->getValue() == 1) {
+                    throw new \Erebot\Module\Countdown\Solver\SkipException(
                         'Skipped'
                     );
-                $this->_value = $first->getValue() / $second->getValue();
+                }
+                $this->value = $first->getValue() / $second->getValue();
                 break;
             default:
-                throw new Erebot_Module_Countdown_Exception('Invalid operator');
+                throw new \Erebot\Module\Countdown\Exception('Invalid operator');
         }
 
         // Negative or non-integral results.
-        if ($this->_value <= 0 || !is_int($this->_value))
-            throw new Erebot_Module_Countdown_Solver_SkipException('Skipped');
-        $this->_operator = $operator;
+        if ($this->value <= 0 || !is_int($this->value)) {
+            throw new \Erebot\Module\Countdown\Solver\SkipException('Skipped');
+        }
+        $this->operator = $operator;
     }
 
     /**
      * Returns the first operand for the operation.
      *
-     * \retval Erebot_Module_Countdown_Solver_ContainerInterface
+     * \retval Erebot::Module::Countdown::Solver::ContainerInterface
      *      First operand for the operation.
      */
-    public function getfirst()
+    public function getFirst()
     {
-        return $this->_first;
+        return $this->first;
     }
 
     /**
      * Returns the second operand for the operation.
      *
-     * \retval Erebot_Module_Countdown_Solver_ContainerInterface
+     * \retval Erebot::Module::Countdown::Solver::ContainerInterface
      *      Second operand for the operation.
      */
-    public function getsecond()
+    public function getSecond()
     {
-        return $this->_second;
+        return $this->second;
     }
 
     /**
@@ -124,7 +127,7 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -136,10 +139,9 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
     public function __toString()
     {
         return '('.
-            ((string) $this->_first).
-            $this->_operator.
-            ((string) $this->_second).
+            ((string) $this->first).
+            $this->operator.
+            ((string) $this->second).
         ')';
     }
 }
-

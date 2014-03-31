@@ -23,8 +23,8 @@ extends PHPUnit_Framework_TestCase
     {
         // Preload Erebot_Module_Countdown_Parser so that underlying
         // classes like Erebot_Module_Countdown_Parser_yyToken become available.
-        class_exists('Erebot_Module_Countdown_Parser');
-        $obj = new Erebot_Module_Countdown_Parser_yyToken('foo');
+        class_exists('\\Erebot\\Module\\Countdown\\Parser');
+        $obj = new \Erebot\Module\Countdown\ParseyyToken('foo');
         $this->assertEquals('foo', (string) $obj);
 
         $obj[] = array('token');
@@ -34,8 +34,8 @@ extends PHPUnit_Framework_TestCase
         unset($obj[0]);
         $this->assertEquals(FALSE, isset($obj[0]));
 
-        $obj2 = new Erebot_Module_Countdown_Parser_yyToken($obj);
-        $obj2 = new Erebot_Module_Countdown_Parser_yyToken('foo', $obj2);
+        $obj2 = new \Erebot\Module\Countdown\ParseyyToken($obj);
+        $obj2 = new \Erebot\Module\Countdown\ParseyyToken('foo', $obj2);
         $obj2[] = NULL;
         $obj2[0] = NULL;
         $obj2[42] = 'foo';

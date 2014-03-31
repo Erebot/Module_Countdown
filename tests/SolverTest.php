@@ -45,7 +45,7 @@ extends PHPUnit_Framework_TestCase
      */
     public function testSolver($numbers, $target, $formula, $result)
     {
-        $solver = new Erebot_Module_Countdown_Solver($target, $numbers);
+        $solver = new \Erebot\Module\Countdown\Solver($target, $numbers);
         $best   = $solver->solve();
         $this->assertEquals($formula, (string) $best);
         $this->assertEquals($result, $best->getValue());

@@ -16,6 +16,8 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      A very basic solver for the countdown game.
@@ -23,66 +25,43 @@
  * This solver does not try to be smart and just does
  * a plain old brute-force on the combination space.
  */
-class       Erebot_Module_Countdown_Solver
-implements  Erebot_Module_Countdown_Solver_Interface
+class Solver implements \Erebot\Module\Countdown\SolverInterface
 {
     /// Target to reach.
-    protected $_target;
+    protected $target;
 
     /// Numbers that may be used to reach the target.
-    protected $_numbers;
+    protected $numbers;
 
 
-    /// \copydoc Erebot_Module_Countdown_Solver_Interface::__construct()
     public function __construct($target, $numbers)
     {
         if (!is_int($target) || $target <= 0) {
-            throw new Erebot_Module_Countdown_Exception(
+            throw new \Erebot\Module\Countdown\Exception(
                 'Invalid target number'
             );
         }
         if (!is_array($numbers)) {
-            throw new Erebot_Module_Countdown_Exception(
+            throw new \Erebot\Module\Countdown\Exception(
                 'An array of numbers was expected'
             );
         }
 
-        $this->_target  = $target;
-        $this->_numbers = array();
+        $this->target   = $target;
+        $this->numbers  = array();
         rsort($numbers, SORT_NUMERIC);
-        foreach ($numbers as $number)
-            $this->_numbers[] =
-                new Erebot_Module_Countdown_Solver_Number($number);
+        foreach ($numbers as $number) {
+            $this->numbers[] = new \Erebot\Module\Countdown\Solver\Number($number);
+        }
     }
 
-    /**
-     * Returns an integer that indicates how the two
-     * arguments compare to each other.
-     *
-     * \param int $a
-     *      First integer to use in the comparison.
-     *
-     * \param int $b
-     *      Second operand for the comparison.
-     *
-     * \retval int
-     *      Returns an integer that is < 0, equal to 0
-     *      or > 0 when the first argument is respectively,
-     *      less than, equal to or greater than the second.
-     */
-    protected function _sortSet($a, $b)
-    {
-        return ($b->getValue() - $a->getValue());
-    }
-
-    /// \copydoc Erebot_Module_Countdown_Solver_Interface::solve()
     public function solve()
     {
-        $best           = NULL;
-        $bestDistance   = NULL;
-        $numbersBefore  = array($this->_numbers);
+        $best           = null;
+        $bestDistance   = null;
+        $numbersBefore  = array($this->numbers);
         $operators      = array('+', '-', '*', '/');
-        $opCls          = "Erebot_Module_Countdown_Solver_Operation";
+        $opCls          = "\\Erebot\\Module\\Countdown\\Solver\\Operation";
 
         while (count($numbersBefore)) {
             $numbersAfter   = array();
@@ -97,7 +76,7 @@ implements  Erebot_Module_Countdown_Solver_Interface
                                     new $opCls($set[$j], $set[$i], $operator);
                                 $distance = abs(
                                     $result->getValue() -
-                                    $this->_target
+                                    $this->target
                                 );
 
                                 if (!$distance) {
@@ -105,15 +84,15 @@ implements  Erebot_Module_Countdown_Solver_Interface
                                     break 5;
                                 }
 
-                                if ($best === NULL ||
+                                if ($best === null ||
                                     $distance < $bestDistance) {
                                     $best = $result;
-                                    $bestDistance =
-                                        abs($best->getValue() - $this->_target);
+                                    $bestDistance = abs($best->getValue() - $this->target);
                                 }
 
-                                if ($nbNumbers == 2)
+                                if ($nbNumbers == 2) {
                                     continue;
+                                }
 
                                 $newSet = array_merge(
                                     array_slice($set, 0, $j),
@@ -121,11 +100,14 @@ implements  Erebot_Module_Countdown_Solver_Interface
                                     array_slice($set, $j + 1, $i - $j - 1),
                                     array_slice($set, $i + 1)
                                 );
-                                usort($newSet, array($this, '_sortSet'));
+                                usort(
+                                    $newSet,
+                                    function ($a, $b) {
+                                        return ($b->getValue() - $a->getValue());
+                                    }
+                                );
                                 $numbersAfter[] = $newSet;
-                            }
-                            catch (Erebot_Module_Countdown_Solver_SkipException
-                                   $e) {
+                            } catch (\Erebot\Module\Countdown\Solver\SkipException $e) {
                                 // Do nothing.
                             }
                         }
@@ -137,4 +119,3 @@ implements  Erebot_Module_Countdown_Solver_Interface
         return $best;
     }
 }
-

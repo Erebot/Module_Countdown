@@ -1,6 +1,14 @@
 <?php
-/* Driver template for the PHP_Erebot_Module_Countdown_Parser_rGenerator parser generator. (PHP port of LEMON)
+/* Driver template for the PHP_ParserGenerator parser generator. (PHP port of LEMON)
 */
+
+// code external to the class is included here
+#line 4 "src/Countdown/Parser.y"
+
+    // @codingStandardsIgnoreFile
+    namespace Erebot\Module\Countdown;
+    use \ArrayAccess;
+#line 13 "src/Countdown/Parser.php"
 
 /**
  * This can be used to store both the string representation of
@@ -8,19 +16,19 @@
  *
  * meta-data should be stored as an array
  */
-class Erebot_Module_Countdown_Parser_yyToken implements ArrayAccess
+class ParseyyToken implements ArrayAccess
 {
     public $string = '';
     public $metadata = array();
 
     function __construct($s, $m = array())
     {
-        if ($s instanceof Erebot_Module_Countdown_Parser_yyToken) {
+        if ($s instanceof ParseyyToken) {
             $this->string = $s->string;
             $this->metadata = $s->metadata;
         } else {
             $this->string = (string) $s;
-            if ($m instanceof Erebot_Module_Countdown_Parser_yyToken) {
+            if ($m instanceof ParseyyToken) {
                 $this->metadata = $m->metadata;
             } elseif (is_array($m)) {
                 $this->metadata = $m;
@@ -47,7 +55,7 @@ class Erebot_Module_Countdown_Parser_yyToken implements ArrayAccess
     {
         if ($offset === null) {
             if (isset($value[0])) {
-                $x = ($value instanceof Erebot_Module_Countdown_Parser_yyToken) ?
+                $x = ($value instanceof ParseyyToken) ?
                     $value->metadata : $value;
                 $this->metadata = array_merge($this->metadata, $x);
                 return;
@@ -57,7 +65,7 @@ class Erebot_Module_Countdown_Parser_yyToken implements ArrayAccess
         if ($value === null) {
             return;
         }
-        if ($value instanceof Erebot_Module_Countdown_Parser_yyToken) {
+        if ($value instanceof ParseyyToken) {
             if ($value->metadata) {
                 $this->metadata[$offset] = $value->metadata;
             }
@@ -84,7 +92,7 @@ class Erebot_Module_Countdown_Parser_yyToken implements ArrayAccess
  *      the information used by the action routines in the grammar.
  *      It is sometimes called the "minor" token.
  */
-class Erebot_Module_Countdown_Parser_yyStackEntry
+class ParseyyStackEntry
 {
     public $stateno;       /* The state-number */
     public $major;         /* The major token value.  This is the code
@@ -93,19 +101,17 @@ class Erebot_Module_Countdown_Parser_yyStackEntry
                      ** is the value of the token  */
 };
 
-// code external to the class is included here
-
 // declare_class is output here
-#line 2 "src/Erebot/Module/Countdown/Parser.y"
-class Erebot_Module_Countdown_Parser#line 102 "src/Erebot/Module/Countdown/Parser.php"
+#line 1 "src/Countdown/Parser.y"
+class Parser#line 109 "src/Countdown/Parser.php"
 {
 /* First off, code is included which follows the "include_class" declaration
 ** in the input file. */
-#line 5 "src/Erebot/Module/Countdown/Parser.y"
+#line 9 "src/Countdown/Parser.y"
 
-    private $_formulaResult = NULL;
-    public function getResult() { return $this->_formulaResult; }
-#line 111 "src/Erebot/Module/Countdown/Parser.php"
+    private $formulaResult = NULL;
+    public function getResult() { return $this->formulaResult; }
+#line 118 "src/Countdown/Parser.php"
 
 /* Next is all token values, as class constants
 */
@@ -386,7 +392,7 @@ static public $yy_action = array(
      * is popped from the stack, then call it.
      *
      * Return the major token number for the symbol popped.
-     * @param Erebot_Module_Countdown_Parser_yyParser
+     * @param ParseyyParser
      * @return int
      */
     function yy_pop_parser_stack()
@@ -465,7 +471,7 @@ static public $yy_action = array(
                     if ($nextstate < self::YYNSTATE) {
                         // we need to shift a non-terminal
                         $this->yyidx++;
-                        $x = new Erebot_Module_Countdown_Parser_yyStackEntry;
+                        $x = new ParseyyStackEntry;
                         $x->stateno = $nextstate;
                         $x->major = self::$yyRuleInfo[$yyruleno]['lhs'];
                         $this->yystack[$this->yyidx] = $x;
@@ -539,7 +545,7 @@ static public $yy_action = array(
                     if ($nextstate < self::YYNSTATE) {
                         // we need to shift a non-terminal
                         $this->yyidx++;
-                        $x = new Erebot_Module_Countdown_Parser_yyStackEntry;
+                        $x = new ParseyyStackEntry;
                         $x->stateno = $nextstate;
                         $x->major = self::$yyRuleInfo[$yyruleno]['lhs'];
                         $this->yystack[$this->yyidx] = $x;
@@ -669,7 +675,7 @@ static public $yy_action = array(
             ** stack ever overflows */
             return;
         }
-        $yytos = new Erebot_Module_Countdown_Parser_yyStackEntry;
+        $yytos = new ParseyyStackEntry;
         $yytos->stateno = $yyNewState;
         $yytos->major = $yyMajor;
         $yytos->minor = $yypMinor;
@@ -730,35 +736,37 @@ static public $yy_action = array(
     **   function yy_r0($yymsp){ ... }           // User supplied code
     **  #line <lineno> <thisfile>
     */
-#line 13 "src/Erebot/Module/Countdown/Parser.y"
-    function yy_r0(){ $this->_formulaResult = $this->yystack[$this->yyidx + 0]->minor;     }
-#line 740 "src/Erebot/Module/Countdown/Parser.php"
-#line 15 "src/Erebot/Module/Countdown/Parser.y"
+#line 17 "src/Countdown/Parser.y"
+    function yy_r0(){ $this->formulaResult = $this->yystack[$this->yyidx + 0]->minor;     }
+#line 747 "src/Countdown/Parser.php"
+#line 19 "src/Countdown/Parser.y"
     function yy_r1(){ $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;     }
-#line 743 "src/Erebot/Module/Countdown/Parser.php"
-#line 16 "src/Erebot/Module/Countdown/Parser.y"
+#line 750 "src/Countdown/Parser.php"
+#line 20 "src/Countdown/Parser.y"
     function yy_r2(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor + $this->yystack[$this->yyidx + 0]->minor;     }
-#line 746 "src/Erebot/Module/Countdown/Parser.php"
-#line 17 "src/Erebot/Module/Countdown/Parser.y"
+#line 753 "src/Countdown/Parser.php"
+#line 21 "src/Countdown/Parser.y"
     function yy_r3(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor - $this->yystack[$this->yyidx + 0]->minor;     }
-#line 749 "src/Erebot/Module/Countdown/Parser.php"
-#line 18 "src/Erebot/Module/Countdown/Parser.y"
+#line 756 "src/Countdown/Parser.php"
+#line 22 "src/Countdown/Parser.y"
     function yy_r4(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor * $this->yystack[$this->yyidx + 0]->minor;     }
-#line 752 "src/Erebot/Module/Countdown/Parser.php"
-#line 19 "src/Erebot/Module/Countdown/Parser.y"
+#line 759 "src/Countdown/Parser.php"
+#line 23 "src/Countdown/Parser.y"
     function yy_r5(){
-    if (!$this->yystack[$this->yyidx + 0]->minor)
-        throw new Erebot_Module_Countdown_DivisionByZeroException();
+    if (!$this->yystack[$this->yyidx + 0]->minor) {
+        throw new \Erebot\Module\Countdown\DivisionByZeroException();
+    }
 
-    if ($this->yystack[$this->yyidx + -2]->minor % $this->yystack[$this->yyidx + 0]->minor)
-        throw new Erebot_Module_Countdown_NonIntegralDivisionException();
+    if ($this->yystack[$this->yyidx + -2]->minor % $this->yystack[$this->yyidx + 0]->minor) {
+        throw new \Erebot\Module\Countdown\NonIntegralDivisionException();
+    }
 
     $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor / $this->yystack[$this->yyidx + 0]->minor;
     }
-#line 763 "src/Erebot/Module/Countdown/Parser.php"
-#line 28 "src/Erebot/Module/Countdown/Parser.y"
+#line 772 "src/Countdown/Parser.php"
+#line 34 "src/Countdown/Parser.y"
     function yy_r6(){ $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;     }
-#line 766 "src/Erebot/Module/Countdown/Parser.php"
+#line 775 "src/Countdown/Parser.php"
 
     /**
      * placeholder for the left hand side in a reduce operation.
@@ -799,7 +807,7 @@ static public $yy_action = array(
         //int $yygoto;                     /* The next state */
         //int $yyact;                      /* The next action */
         //mixed $yygotominor;        /* The LHS of the rule reduced */
-        //Erebot_Module_Countdown_Parser_yyStackEntry $yymsp;            /* The top of the parser's stack */
+        //ParseyyStackEntry $yymsp;            /* The top of the parser's stack */
         //int $yysize;                     /* Amount to pop the stack */
         $yymsp = $this->yystack[$this->yyidx];
         if (self::$yyTraceFILE && $yyruleno >= 0 
@@ -831,7 +839,7 @@ static public $yy_action = array(
             ** That gives a significant speed improvement. */
             if (!self::$yyTraceFILE && $yysize) {
                 $this->yyidx++;
-                $x = new Erebot_Module_Countdown_Parser_yyStackEntry;
+                $x = new ParseyyStackEntry;
                 $x->stateno = $yyact;
                 $x->major = $yygoto;
                 $x->minor = $yy_lefthand_side;
@@ -870,8 +878,8 @@ static public $yy_action = array(
      */
     function yy_syntax_error($yymajor, $TOKEN)
     {
-#line 3 "src/Erebot/Module/Countdown/Parser.y"
- throw new Erebot_Module_Countdown_SyntaxErrorException(); #line 880 "src/Erebot/Module/Countdown/Parser.php"
+#line 2 "src/Countdown/Parser.y"
+ throw new \Erebot\Module\Countdown\SyntaxErrorException(); #line 889 "src/Countdown/Parser.php"
     }
 
     /**
@@ -914,7 +922,7 @@ static public $yy_action = array(
             /* if ($yymajor == 0) return; // not sure why this was here... */
             $this->yyidx = 0;
             $this->yyerrcnt = -1;
-            $x = new Erebot_Module_Countdown_Parser_yyStackEntry;
+            $x = new ParseyyStackEntry;
             $x->stateno = 0;
             $x->major = 0;
             $this->yystack = array();

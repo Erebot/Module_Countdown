@@ -16,22 +16,23 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      An exception thrown whenever an
  *      unexpected value was given.
  */
-class   Erebot_Module_Countdown_InvalidValueException
-extends Erebot_Module_Countdown_Exception
+class InvalidValueException extends \Erebot\Module\Countdown\Exception
 {
     /// Location where some value expected.
-    protected $_location;
+    protected $location;
 
     /// The value that was expected.
-    protected $_expectedData;
+    protected $expectedData;
 
     /// THe actual value received.
-    protected $_givenData;
+    protected $givenData;
 
 
     /**
@@ -48,16 +49,16 @@ extends Erebot_Module_Countdown_Exception
      */
     public function __construct($location, $expected, $given)
     {
-        $this->_location        = $location;
-        $this->_expectedData    = $expected;
-        $this->_givenData       = $given;
+        $this->location       = $location;
+        $this->expectedData   = $expected;
+        $this->givenData      = $given;
 
         parent::__construct(
             sprintf(
                 "Invalid value, expected %s, got %s for %s",
-                $this->_expectedData,
-                $this->_givenData,
-                $this->_location
+                $this->expectedData,
+                $this->givenData,
+                $this->location
             )
         );
     }
@@ -71,7 +72,7 @@ extends Erebot_Module_Countdown_Exception
      */
     public function getLocation()
     {
-        return $this->_location;
+        return $this->location;
     }
 
     /**
@@ -82,7 +83,7 @@ extends Erebot_Module_Countdown_Exception
      */
     public function getExpectedData()
     {
-        return $this->_expectedData;
+        return $this->expectedData;
     }
 
     /**
@@ -93,7 +94,6 @@ extends Erebot_Module_Countdown_Exception
      */
     public function getGivenData()
     {
-        return $this->_givenData;
+        return $this->givenData;
     }
 }
-

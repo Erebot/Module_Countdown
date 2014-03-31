@@ -16,15 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
- *      Generic exception used by this module.
- *
- * This class is the base class for other exceptions
- * provided by this module.
+ *      An exception thrown whenever an attempt is made
+ *      to compute a non-integral division (eg. "5 / 2").
  */
-class   Erebot_Module_Countdown_Exception
-extends Exception
+class NonIntegralDivisionException extends \Erebot\Module\Countdown\Exception
 {
 }
-

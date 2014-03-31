@@ -16,12 +16,14 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      Interface for a solver meant to solve
  *      a Countdown game.
  */
-interface Erebot_Module_Countdown_Solver_Interface
+interface SolverInterface
 {
     /**
      * Creates a new instance of the solver.
@@ -33,7 +35,7 @@ interface Erebot_Module_Countdown_Solver_Interface
      *      A list of numbers that may be used
      *      to reach the target number.
      *
-     * \throw Erebot_Module_Countdown_Exception
+     * \throw Erebot::Module::Countdown::Exception
      *      Something was wrong with the parameters
      *      given to this method. See the exception's
      *      message for an explanation of what went
@@ -46,10 +48,9 @@ interface Erebot_Module_Countdown_Solver_Interface
      * to the target number using only a restricted set
      * of numbers and the four basic operators).
      *
-     * \retval Erebot_Module_Countdown_Solver_Operation
+     * \retval Erebot::Module::Countdown::Solver::Operation
      *      A formula that gives the best result for this
      *      game.
      */
     public function solve();
 }
-

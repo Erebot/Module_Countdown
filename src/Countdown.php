@@ -16,26 +16,27 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module;
+
 /**
  * \brief
  *      A module for Erebot that provides
  *      an implementation of the Countdown
  *      TV gameshow.
  */
-class   Erebot_Module_Countdown
-extends Erebot_Module_Base
+class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEnabled
 {
     /// Trigger registered by this module.
-    protected $_trigger;
+    protected $trigger;
 
     /// Handler used to create a new game.
-    protected $_startHandler;
+    protected $startHandler;
 
     /// Handler used when formulae are proposed.
-    protected $_rawHandler;
+    protected $rawHandler;
 
     /// Keeps track of currently running games.
-    protected $_game;
+    protected $game;
 
 
     /// A pattern that attempts to match valid formulae.
@@ -46,7 +47,7 @@ extends Erebot_Module_Base
      * This method is called whenever the module is (re)loaded.
      *
      * \param int $flags
-     *      A bitwise OR of the Erebot_Module_Base::RELOAD_*
+     *      A bitwise OR of the Erebot::Module::Base::RELOAD_*
      *      constants. Your method should take proper actions
      *      depending on the value of those flags.
      *
@@ -54,90 +55,89 @@ extends Erebot_Module_Base
      *      See the documentation on individual RELOAD_*
      *      constants for a list of possible values.
      */
-    public function _reload($flags)
+    public function reload($flags)
     {
         if ($flags & self::RELOAD_HANDLERS) {
-            $registry   = $this->_connection->getModule(
-                'Erebot_Module_TriggerRegistry'
+            $registry   = $this->connection->getModule(
+                '\\Erebot\\Module\\TriggerRegistry'
             );
-            $matchAny  = Erebot_Utils::getVStatic($registry, 'MATCH_ANY');
 
             if (!($flags & self::RELOAD_INIT)) {
                 $this->connection->removeEventHandler($this->startHandler);
-                $registry->freeTriggers($this->_trigger, $matchAny);
+                $registry->freeTriggers($this->trigger, $registry::MATCH_ANY);
             }
 
             $trigger        = $this->parseString('trigger', 'countdown');
-            $this->_trigger = $registry->registerTriggers($trigger, $matchAny);
-            if ($this->_trigger === NULL) {
-                $fmt = $this->getFormatter(FALSE);
-                throw new Exception(
+            $this->trigger = $registry->registerTriggers($trigger, $registry::MATCH_ANY);
+            if ($this->trigger === null) {
+                $fmt = $this->getFormatter(false);
+                throw new \Exception(
                     $fmt->_('Could not register Countdown trigger')
                 );
             }
 
-            $this->_startHandler    = new Erebot_EventHandler(
-                new Erebot_Callable(array($this, 'handleCountdown')),
-                new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
-                    new Erebot_Event_Match_TextStatic($trigger, TRUE)
+            $this->startHandler    = new \Erebot\EventHandler(
+                \Erebot\CallableWrapper::wrap(array($this, 'handleCountdown')),
+                new \Erebot\Event\Match\All(
+                    new \Erebot\Event\Match\Type('\\Erebot\\Event\\ChanText'),
+                    new \Erebot\Event\Match\TextStatic($trigger, true)
                 )
             );
-            $this->_connection->addEventHandler($this->_startHandler);
+            $this->connection->addEventHandler($this->startHandler);
 
-            $this->_rawHandler  = new Erebot_EventHandler(
-                new Erebot_Callable(array($this, 'handleRawText')),
-                new Erebot_Event_Match_All(
-                    new Erebot_Event_Match_Any(),
-                    new Erebot_Event_Match_InstanceOf('Erebot_Event_ChanText'),
-                    new Erebot_Event_Match_TextRegex(self::FORMULA_FILTER)
+            $this->rawHandler  = new \Erebot\EventHandler(
+                \Erebot\CallableWrapper::wrap(array($this, 'handleRawText')),
+                new \Erebot\Event\Match\All(
+                    new \Erebot\Event\Match\Any(),
+                    new \Erebot\Event\Match\Type('\\Erebot\\Event\\ChanText'),
+                    new \Erebot\Event\Match\TextRegex(self::FORMULA_FILTER)
                 )
             );
-            $this->_connection->addEventHandler($this->_rawHandler);
+            $this->connection->addEventHandler($this->rawHandler);
 
             $cls = $this->getFactory('!Callable');
             $this->registerHelpMethod(new $cls(array($this, 'getHelp')));
         }
 
         if ($flags & self::RELOAD_MEMBERS) {
-            $this->_game = array();
+            $this->game = array();
         }
     }
 
     /**
      * Frees the resources associated with this module.
      */
-    protected function _unload()
+    protected function unload()
     {
-        foreach ($this->_game as $entry) {
-            if (isset($entry['timer']))
+        foreach ($this->game as $entry) {
+            if (isset($entry['timer'])) {
                 $this->removeTimer($entry['timer']);
+            }
         }
     }
 
     /**
      * Provides help about this module.
      *
-     * \param Erebot_Interface_Event_Base_TextMessage $event
+     * \param Erebot::Interfaces::Event::Base::TextMessage $event
      *      Some help request.
      *
-     * \param Erebot_Interface_TextWrapper $words
+     * \param Erebot::Interfaces::TextWrapper $words
      *      Parameters passed with the request. This is the same
      *      as this module's name when help is requested on the
      *      module itself (in opposition with help on a specific
      *      command provided by the module).
      */
     public function getHelp(
-        Erebot_Interface_Event_Base_TextMessage $event,
-        Erebot_Interface_TextWrapper            $words
-    )
-    {
-        if ($event instanceof Erebot_Interface_Event_Base_Private) {
+        \Erebot\Interfaces\Event\Base\TextMessage   $event,
+        \Erebot\Interfaces\TextWrapper              $words
+    ) {
+        if ($event instanceof \Erebot\Interfaces\Event\Base\PrivateMessage) {
             $target = $event->getSource();
-            $chan   = NULL;
-        }
-        else
+            $chan   = null;
+        } else {
             $target = $chan = $event->getChan();
+        }
 
         $fmt        = $this->getFormatter($chan);
         $trigger    = $this->parseString('trigger', 'countdown');
@@ -152,11 +152,12 @@ extends Erebot_Module_Base
                 array('trigger' => $trigger)
             );
             $this->sendMessage($target, $msg);
-            return TRUE;
+            return true;
         }
 
-        if ($nbArgs < 2)
-            return FALSE;
+        if ($nbArgs < 2) {
+            return false;
+        }
 
         if ($words[1] == $trigger) {
             $msg = $fmt->_(
@@ -176,32 +177,31 @@ extends Erebot_Module_Base
                 "with a remainder (eg. 5/2) are forbidden."
             );
             $this->sendMessage($target, $msg);
-            return TRUE;
+            return true;
         }
     }
 
     /**
      * Handles a request to create a new game.
      *
-     * \param Erebot_Interface_EventHandler $handler
+     * \param Erebot::Interfaces::EventHandler $handler
      *      Handler that triggered this event.
      *
-     * \param Erebot_Interface_Event_ChanText $event
+     * \param Erebot::Interfaces::Event::ChanText $event
      *      Request for a new game.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function handleCountdown(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler     $handler,
+        \Erebot\Interfaces\Event\ChanText   $event
+    ) {
         $chan   = $event->getChan();
         $fmt    = $this->getFormatter($chan);
 
-        if (isset($this->_game[$chan])) {
+        if (isset($this->game[$chan])) {
             // Display current status.
-            $game   =&  $this->_game[$chan]['game'];
+            $game   =&  $this->game[$chan]['game'];
             $msg    =   $fmt->_(
                 'You must get <b><var name="target"/>'.
                 '</b> using the following numbers: '.
@@ -214,8 +214,9 @@ extends Erebot_Module_Base
             );
             $this->sendMessage($chan, $msg);
             $best = $game->getBestProposal();
-            if ($best === NULL)
+            if ($best === null) {
                 return;
+            }
 
             $msg = $fmt->_(
                 'So far, <b><var name="nick"/></b> has '.
@@ -240,7 +241,7 @@ extends Erebot_Module_Base
         );
         $allowed    = array_map('intval', array_filter(explode(' ', $allowed)));
 
-        $game   =   new Erebot_Module_Countdown_Game(
+        $game   =   new \Erebot\Module\Countdown\Game(
             $minTarget,
             $maxTarget,
             $nbNumbers,
@@ -264,77 +265,72 @@ extends Erebot_Module_Base
 
         $timerCls = $this->getFactory('!Timer');
         $timer  = new $timerCls(
-            new Erebot_Callable(array($this, 'handleTimeOut')),
-            $delay, FALSE,
+            \Erebot\CallableWrapper::wrap(array($this, 'handleTimeOut')),
+            $delay,
+            false,
             array($chan)
         );
-        $this->_game[$chan] = array(
+        $this->game[$chan] = array(
             'game'      => $game,
             'timer'     => $timer,
-            'filter'    => new Erebot_Event_Match_Chan($chan)
+            'filter'    => new \Erebot\Event\Match\Chan($chan)
         );
         $this->addTimer($timer);
 
-        $filter = $this->_rawHandler->getFilter();
-        $filter[0]->add($this->_game[$chan]['filter']);
+        $filter = $this->rawHandler->getFilter();
+        $filter[0]->add($this->game[$chan]['filter']);
         unset($filter);
     }
 
     /**
      * Handles a formula proposition.
      *
-     * \param Erebot_Interface_EventHandler $handler
+     * \param Erebot::Interfaces::EventHandler $handler
      *      Handler that triggered this event.
      *
-     * \param Erebot_Interface_Event_Base_ChanText $event
+     * \param Erebot::Interfaces::Event::Base::ChanText $event
      *      A message containing the formula being proposed.
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     public function handleRawText(
-        Erebot_Interface_EventHandler   $handler,
-        Erebot_Interface_Event_ChanText $event
-    )
-    {
+        \Erebot\Interfaces\EventHandler     $handler,
+        \Erebot\Interfaces\Event\ChanText   $event
+    ) {
         $chan   = $event->getChan();
         $nick   = $event->getSource();
         $text   = (string) $event->getText();
         $fmt    = $this->getFormatter($chan);
 
         try {
-            $formula = new Erebot_Module_Countdown_Formula($nick, $text);
-        }
-        catch (Erebot_Module_Countdown_FormulaMustBeAStringException $e) {
+            $formula = new \Erebot\Module\Countdown\Formula($nick, $text);
+        } catch (\Erebot\Module\Countdown\FormulaMustBeAStringException $e) {
             return $this->sendMessage(
                 $chan,
                 $fmt->_('Expected the formula to be a string')
             );
-        }
-        catch (Erebot_Module_Countdown_DivisionByZeroException $e) {
+        } catch (\Erebot\Module\Countdown\DivisionByZeroException $e) {
             return $this->sendMessage(
                 $chan,
                 $fmt->_('Division by zero')
             );
-        }
-        catch (Erebot_Module_Countdown_NonIntegralDivisionException $e) {
+        } catch (\Erebot\Module\Countdown\NonIntegralDivisionException $e) {
             return $this->sendMessage(
                 $chan,
                 $fmt->_('Non integral division')
             );
-        }
-        catch (Erebot_Module_Countdown_SyntaxErrorException $e) {
+        } catch (\Erebot\Module\Countdown\SyntaxErrorException $e) {
             return $this->sendMessage(
                 $chan,
                 $fmt->_('Syntax error')
             );
         }
 
-        $game   =&  $this->_game[$chan]['game'];
+        $game   =&  $this->game[$chan]['game'];
         try {
             $best = $game->proposeFormula($formula);
-        }
-        catch (Erebot_Module_Countdown_UnavailableNumberException $e) {
+        } catch (\Erebot\Module\Countdown\UnavailableNumberException $e) {
             return $this->sendMessage(
                 $chan,
                 $fmt->_('No such number or number already used')
@@ -355,10 +351,10 @@ extends Erebot_Module_Base
                 );
                 $this->sendMessage($chan, $msg);
 
-                $this->removeTimer($this->_game[$chan]['timer']);
-                $filter = $this->_rawHandler->getFilter();
-                $filter[0]->remove($this->_game[$chan]['filter']);
-                unset($this->_game[$chan], $filter);
+                $this->removeTimer($this->game[$chan]['timer']);
+                $filter = $this->rawHandler->getFilter();
+                $filter[0]->remove($this->game[$chan]['filter']);
+                unset($this->game[$chan], $filter);
                 return;
             }
 
@@ -389,27 +385,29 @@ extends Erebot_Module_Base
     /**
      * Handles the timer that marks the end of the game.
      *
-     * \param Erebot_Interface_Timer $timer
+     * \param Erebot::TimerInterface $timer
      *      Timer that marks the end of the game.
      *
      * \param string $chan
      *      Name of the IRC channel where the game
      *      was taking place.
      */
-    public function handleTimeOut(Erebot_Interface_Timer $timer, $chan)
+    public function handleTimeOut(\Erebot\TimerInterface $timer, $chan)
     {
         $this->removeTimer($timer);
-        if (!isset($this->_game[$chan])) return;
-        $game =& $this->_game[$chan]['game'];
+        if (!isset($this->game[$chan])) {
+            return;
+        }
+        $game =& $this->game[$chan]['game'];
 
         $fmt    = $this->getFormatter($chan);
-        $filter = $this->_rawHandler->getFilter();
-        $filter[0]->remove($this->_game[$chan]['filter']);
-        unset($filter, $this->_game[$chan]);
+        $filter = $this->rawHandler->getFilter();
+        $filter[0]->remove($this->game[$chan]['filter']);
+        unset($filter, $this->game[$chan]);
         unset($key, $data);
 
         $best = $game->getBestProposal();
-        if ($best === NULL) {
+        if ($best === null) {
             $msg = $fmt->_("Time's up! Nobody has made any suggestion. :(");
             $this->sendMessage($chan, $msg);
             unset($chan, $game);
@@ -430,11 +428,10 @@ extends Erebot_Module_Base
         $this->sendMessage($chan, $msg);
 
         $target = $game->getTarget();
-        if ($this->parseBool('solver', FALSE) &&
-            $best->getResult() != $target) {
+        if ($this->parseBool('solver', false) && $best->getResult() != $target) {
             $solverCls = $this->parseString(
                 'solver_class',
-                'Erebot_Module_Countdown_Solver'
+                '\\Erebot\\Module\\Countdown\\Solver'
             );
 
             if (!class_exists($solverCls)) {
@@ -443,8 +440,7 @@ extends Erebot_Module_Base
             }
 
             $solver = new $solverCls($target, $game->getNumbers());
-            $iface  = "Erebot_Module_Countdown_Solver_Interface";
-            if (!($solver instanceof $iface)) {
+            if (!($solver instanceof \Erebot\Module\Countdown\SolverInterface)) {
                 unset($chan, $game);
                 return;
             }
@@ -470,4 +466,3 @@ extends Erebot_Module_Base
         unset($chan, $game);
     }
 }
-

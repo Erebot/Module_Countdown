@@ -16,17 +16,17 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown\Solver;
+
 /**
  * \brief
  *      A container for a number that may be used
  *      by the solver.
  */
-class       Erebot_Module_Countdown_Solver_Number
-implements  Erebot_Module_Countdown_Solver_ContainerInterface
+class Number implements \Erebot\Module\Countdown\Solver\ContainerInterface
 {
     /// The number in this container.
-    protected $_value;
-
+    protected $value;
 
     /**
      * Constructs a new container for a number.
@@ -36,11 +36,12 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      */
     public function __construct($value)
     {
-        if (!is_int($value) || $value <= 0)
-            throw new Erebot_Module_Countdown_Exception(
+        if (!is_int($value) || $value <= 0) {
+            throw new \Erebot\Module\Countdown\Exception(
                 'Not a strictly positive integer'
             );
-        $this->_value = $value;
+        }
+        $this->value = $value;
     }
 
     /**
@@ -51,7 +52,7 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      */
     public function getValue()
     {
-        return $this->_value;
+        return $this->value;
     }
 
     /**
@@ -63,7 +64,6 @@ implements  Erebot_Module_Countdown_Solver_ContainerInterface
      */
     public function __toString()
     {
-        return (string) $this->_value;
+        return (string) $this->value;
     }
 }
-

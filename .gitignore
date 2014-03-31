@@ -1,6 +1,6 @@
 /vendor
-/src/Erebot/Module/Countdown/Parser.y
-/src/Erebot/Module/Countdown/Parser.out
+/src/Countdown/Parser.y
+/src/Countdown/Parser.out
 
 /data/i18n/*/LC_MESSAGES/*.mo
 

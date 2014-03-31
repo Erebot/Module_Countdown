@@ -16,13 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
- *      An exception thrown whenever an attempt is made
- *      to compute a non-integral division (eg. "5 / 2").
+ *      An exception thrown whenever a formula
+ *      contains some syntax error.
  */
-class   Erebot_Module_Countdown_NonIntegralDivisionException
-extends Erebot_Module_Countdown_Exception
+class SyntaxErrorException extends \Erebot\Module\Countdown\Exception
 {
 }
-

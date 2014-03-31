@@ -16,20 +16,22 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
  *      A class that stores information about a formula.
  */
-class Erebot_Module_Countdown_Formula
+class Formula
 {
     /// Lexer that was used to analyze the formula.
-    protected $_lexer;
+    protected $lexer;
 
     /// Owner of this formula.
-    protected $_owner;
+    protected $owner;
 
     /// The actual formula, as a string.
-    protected $_formula;
+    protected $formula;
 
 
     /**
@@ -43,25 +45,26 @@ class Erebot_Module_Countdown_Formula
      * \param string $formula
      *      The actual formula (eg. "5 * 4 + 1").
      *
-     * \throw Erebot_Module_Countdown_FormulaMustBeAStringException
+     * \throw Erebot::Module::Countdown::FormulaMustBeAStringException
      *      The given "formula" is not a string
      *      or is an empty string.
      */
     public function __construct($owner, $formula)
     {
-        if (!is_string($formula) || $formula == '')
-            throw new Erebot_Module_Countdown_FormulaMustBeAStringException();
+        if (!is_string($formula) || $formula == '') {
+            throw new \Erebot\Module\Countdown\FormulaMustBeAStringException();
+        }
 
-        $this->_owner   = $owner;
-        $this->_formula = $formula;
+        $this->owner    = $owner;
+        $this->formula  = $formula;
         $formula        = str_replace(' ', '', $formula);
-        $this->_lexer   = new Erebot_Module_Countdown_Lexer($formula);
+        $this->lexer    = new \Erebot\Module\Countdown\Lexer($formula);
     }
 
     /// Destructs the formula.
     public function __destruct()
     {
-        unset($this->_lexer);
+        unset($this->lexer);
     }
 
     /**
@@ -72,7 +75,7 @@ class Erebot_Module_Countdown_Formula
      */
     public function getResult()
     {
-        return $this->_lexer->getResult();
+        return $this->lexer->getResult();
     }
 
     /**
@@ -87,7 +90,7 @@ class Erebot_Module_Countdown_Formula
      */
     public function getNumbers()
     {
-        return $this->_lexer->getNumbers();
+        return $this->lexer->getNumbers();
     }
 
     /**
@@ -99,7 +102,7 @@ class Erebot_Module_Countdown_Formula
      */
     public function getFormula()
     {
-        return $this->_formula;
+        return $this->formula;
     }
 
     /**
@@ -111,7 +114,6 @@ class Erebot_Module_Countdown_Formula
      */
     public function getOwner()
     {
-        return $this->_owner;
+        return $this->owner;
     }
 }
-

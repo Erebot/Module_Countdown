@@ -17,13 +17,13 @@
 */
 
 class   CountdownStub
-extends Erebot_Module_Countdown_Game
+extends \Erebot\Module\Countdown\Game
 {
     public function __construct()
     {
         parent::__construct(100, 110, 7, array(1));
-        $this->_min = 7;
-        $this->_max = 10;
+        $this->min = 7;
+        $this->max = 10;
     }
 }
 
@@ -34,7 +34,7 @@ extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_countdown = new Erebot_Module_Countdown_Game();
+        $this->_countdown = new \Erebot\Module\Countdown\Game();
     }
 
     public function tearDown()
@@ -70,14 +70,14 @@ extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Erebot_Module_Countdown_UnavailableNumberException
+     * @expectedException \Erebot\Module\Countdown\UnavailableNumberException
      */
     public function testCannotReuseNumber()
     {
         $numbers    = $this->_countdown->getNumbers();
         $numbers[]  = $numbers[0];
         $formula    = implode(' + ', $numbers);
-        $obj        = new Erebot_Module_Countdown_Formula('foo', $formula);
+        $obj        = new \Erebot\Module\Countdown\Formula('foo', $formula);
         $this->_countdown->proposeFormula($obj);
     }
 
@@ -86,23 +86,23 @@ extends PHPUnit_Framework_TestCase
         unset($this->_countdown);
         $this->_countdown = new CountdownStub();
 
-        $obj        = new Erebot_Module_Countdown_Formula('foo', '1+1');
+        $obj        = new \Erebot\Module\Countdown\Formula('foo', '1+1');
         $this->_countdown->proposeFormula($obj);
         $this->assertSame($obj, $this->_countdown->getBestProposal());
 
         $numbers    = $this->_countdown->getNumbers();
         $formula    = implode(' + ', $numbers);
-        $obj        = new Erebot_Module_Countdown_Formula('bar', $formula);
+        $obj        = new \Erebot\Module\Countdown\Formula('bar', $formula);
         $this->_countdown->proposeFormula($obj);
         $this->assertSame($obj, $this->_countdown->getBestProposal());
     }
 
     /**
-     * @expectedException Erebot_Module_Countdown_SyntaxErrorException
+     * @expectedException \Erebot\Module\Countdown\SyntaxErrorException
      */
     public function testInvalidSyntax()
     {
-        $obj        = new Erebot_Module_Countdown_Formula('foo', 'foo');
+        new Erebot\Module\Countdown\Formula('foo', 'foo');
     }
 }
 

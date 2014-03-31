@@ -16,14 +16,13 @@
     along with Erebot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+namespace Erebot\Module\Countdown;
+
 /**
  * \brief
- *      An exception thrown whenever a formula uses
- *      some number which is not part of the set of
- *      available numbers.
+ *      An exception thrown when the given "formula"
+ *      is not even a string.
  */
-class   Erebot_Module_Countdown_UnavailableNumberException
-extends Erebot_Module_Countdown_Exception
+class FormulaMustBeAStringException extends \Erebot\Module\Countdown\Exception
 {
 }
-

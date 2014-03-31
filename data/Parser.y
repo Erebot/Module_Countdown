@@ -1,27 +1,33 @@
-%name Erebot_Module_Countdown_Parser_
-%declare_class {class Erebot_Module_Countdown_Parser}
-%syntax_error { throw new Erebot_Module_Countdown_SyntaxErrorException(); }
+%declare_class {class Parser}
+%syntax_error { throw new \Erebot\Module\Countdown\SyntaxErrorException(); }
 %token_prefix TK_
+%include {
+    // @codingStandardsIgnoreFile
+    namespace Erebot\Module\Countdown;
+    use \ArrayAccess;
+}
 %include_class {
-    private $_formulaResult = NULL;
-    public function getResult() { return $this->_formulaResult; }
+    private $formulaResult = NULL;
+    public function getResult() { return $this->formulaResult; }
 }
 
 %left OP_ADD OP_SUB.
 %left OP_MUL OP_DIV.
 
-formula ::= expr(e).                        { $this->_formulaResult = e; }
+formula ::= expr(e).                        { $this->formulaResult = e; }
 
 expr(res) ::= PAR_OPEN expr(e) PAR_CLOSE.   { res = e; }
 expr(res) ::= expr(opd1) OP_ADD expr(opd2). { res = opd1 + opd2; }
 expr(res) ::= expr(opd1) OP_SUB expr(opd2). { res = opd1 - opd2; }
 expr(res) ::= expr(opd1) OP_MUL expr(opd2). { res = opd1 * opd2; }
 expr(res) ::= expr(opd1) OP_DIV expr(opd2). {
-    if (!opd2)
-        throw new Erebot_Module_Countdown_DivisionByZeroException();
+    if (!opd2) {
+        throw new \Erebot\Module\Countdown\DivisionByZeroException();
+    }
 
-    if (opd1 % opd2)
-        throw new Erebot_Module_Countdown_NonIntegralDivisionException();
+    if (opd1 % opd2) {
+        throw new \Erebot\Module\Countdown\NonIntegralDivisionException();
+    }
 
     res = opd1 / opd2;
 }
