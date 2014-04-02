@@ -94,9 +94,6 @@ class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEn
                 )
             );
             $this->connection->addEventHandler($this->rawHandler);
-
-            $cls = $this->getFactory('!Callable');
-            $this->registerHelpMethod(new $cls(array($this, 'getHelp')));
         }
 
         if ($flags & self::RELOAD_MEMBERS) {
@@ -141,10 +138,9 @@ class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEn
 
         $fmt        = $this->getFormatter($chan);
         $trigger    = $this->parseString('trigger', 'countdown');
-        $moduleName = strtolower(get_class());
         $nbArgs     = count($words);
 
-        if ($nbArgs == 1 && $words[0] == $moduleName) {
+        if ($nbArgs == 1 && $words[0] === get_called_class()) {
             $msg = $fmt->_(
                 'Provides the <b><var name="trigger"/></b> command which '.
                 'starts a new Countdown game where contestants must propose '.
