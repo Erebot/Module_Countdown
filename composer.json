@@ -1,9 +1,9 @@
 {
-    "minimum-stability": "dev",
+    "prefer-stable": true,
     "name": "erebot/countdown-module",
     "description": "Erebot module providing the Countdown game",
     "keywords": ["Erebot", "IRC", "bot", "module"],
-    "homepage": "https://github.com/Erebot/Erebot_Module_Countdown",
+    "homepage": "https://github.com/Erebot/Module_Countdown",
     "license": "GPL-3.0+",
     "authors": [
         {
@@ -13,23 +13,20 @@
         }
     ],
     "support": {
-        "email": "erebot@erebot.net",
-        "issues": "https://github.com/Erebot/Erebot_Module_Countdown/issues",
-        "wiki": "http://erebot.github.io/Erebot_Module_Countdown/",
+        "issues": "https://github.com/Erebot/Module_Countdown/issues",
         "irc": "irc://irc.iiens.net/Erebot",
-        "source": "https://github.com/Erebot/Erebot_Module_Countdown"
+        "source": "https://github.com/Erebot/Module_Countdown"
     },
     "require": {
         "php": ">=5.3.0",
-        "erebot/triggerregistry-module": "dev-master",
-        "erebot/api": "dev-master",
-        "erebot/installers": "dev-master",
-        "erebot/generic-doc": "dev-master"
+        "erebot/triggerregistry-module": "*",
+        "erebot/api": "^0.7.1"
     },
     "require-dev": {
-        "erebot/buildenv": "dev-master",
-        "erebot/testenv": "dev-master",
-        "fpoirotte/php_parsergenerator": "dev-master"
+        "erebot/buildenv": "^1.1.0",
+        "erebot/testenv": "^1.1.2",
+        "fpoirotte/php_parsergenerator": "*",
+        "erebot/generic-doc": "*"
     },
     "autoload": {
         "psr-4": {
