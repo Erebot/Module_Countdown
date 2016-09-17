@@ -7,8 +7,7 @@
 
     // @codingStandardsIgnoreFile
     namespace Erebot\Module\Countdown;
-    use \ArrayAccess;
-#line 13 "src/Countdown/Parser.php"
+use ArrayAccess; #line 12 "src/Countdown/Parser.php"
 
 /**
  * This can be used to store both the string representation of
@@ -103,15 +102,15 @@ class ParseyyStackEntry
 
 // declare_class is output here
 #line 1 "src/Countdown/Parser.y"
-class Parser#line 109 "src/Countdown/Parser.php"
+class Parser#line 108 "src/Countdown/Parser.php"
 {
 /* First off, code is included which follows the "include_class" declaration
 ** in the input file. */
-#line 9 "src/Countdown/Parser.y"
+#line 8 "src/Countdown/Parser.y"
 
     private $formulaResult = NULL;
     public function getResult() { return $this->formulaResult; }
-#line 118 "src/Countdown/Parser.php"
+#line 117 "src/Countdown/Parser.php"
 
 /* Next is all token values, as class constants
 */
@@ -736,22 +735,22 @@ static public $yy_action = array(
     **   function yy_r0($yymsp){ ... }           // User supplied code
     **  #line <lineno> <thisfile>
     */
-#line 17 "src/Countdown/Parser.y"
+#line 16 "src/Countdown/Parser.y"
     function yy_r0(){ $this->formulaResult = $this->yystack[$this->yyidx + 0]->minor;     }
-#line 747 "src/Countdown/Parser.php"
-#line 19 "src/Countdown/Parser.y"
+#line 746 "src/Countdown/Parser.php"
+#line 18 "src/Countdown/Parser.y"
     function yy_r1(){ $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;     }
-#line 750 "src/Countdown/Parser.php"
-#line 20 "src/Countdown/Parser.y"
+#line 749 "src/Countdown/Parser.php"
+#line 19 "src/Countdown/Parser.y"
     function yy_r2(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor + $this->yystack[$this->yyidx + 0]->minor;     }
-#line 753 "src/Countdown/Parser.php"
-#line 21 "src/Countdown/Parser.y"
+#line 752 "src/Countdown/Parser.php"
+#line 20 "src/Countdown/Parser.y"
     function yy_r3(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor - $this->yystack[$this->yyidx + 0]->minor;     }
-#line 756 "src/Countdown/Parser.php"
-#line 22 "src/Countdown/Parser.y"
+#line 755 "src/Countdown/Parser.php"
+#line 21 "src/Countdown/Parser.y"
     function yy_r4(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor * $this->yystack[$this->yyidx + 0]->minor;     }
-#line 759 "src/Countdown/Parser.php"
-#line 23 "src/Countdown/Parser.y"
+#line 758 "src/Countdown/Parser.php"
+#line 22 "src/Countdown/Parser.y"
     function yy_r5(){
     if (!$this->yystack[$this->yyidx + 0]->minor) {
         throw new \Erebot\Module\Countdown\DivisionByZeroException();
@@ -763,10 +762,10 @@ static public $yy_action = array(
 
     $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor / $this->yystack[$this->yyidx + 0]->minor;
     }
-#line 772 "src/Countdown/Parser.php"
-#line 34 "src/Countdown/Parser.y"
+#line 771 "src/Countdown/Parser.php"
+#line 33 "src/Countdown/Parser.y"
     function yy_r6(){ $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;     }
-#line 775 "src/Countdown/Parser.php"
+#line 774 "src/Countdown/Parser.php"
 
     /**
      * placeholder for the left hand side in a reduce operation.
@@ -879,7 +878,7 @@ static public $yy_action = array(
     function yy_syntax_error($yymajor, $TOKEN)
     {
 #line 2 "src/Countdown/Parser.y"
- throw new \Erebot\Module\Countdown\SyntaxErrorException(); #line 889 "src/Countdown/Parser.php"
+ throw new \Erebot\Module\Countdown\SyntaxErrorException(); #line 888 "src/Countdown/Parser.php"
     }
 
     /**

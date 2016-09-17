@@ -4,7 +4,6 @@
 %include {
     // @codingStandardsIgnoreFile
     namespace Erebot\Module\Countdown;
-    use \ArrayAccess;
 }
 %include_class {
     private $formulaResult = NULL;
