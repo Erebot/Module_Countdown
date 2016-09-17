@@ -17,10 +17,6 @@ php:
     - nightly
     - hhvm
 
-matrix:
-    allow_failures:
-        - php: hhvm
-
 notifications:
     email: false
     irc: "irc.iiens.net#Erebot"
