@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[Erebot.Erebot_Module_Countdown]
+source_file = data/i18n/Erebot_Module_Countdown.pot
+source_lang = en_US
+type = PO
+file_filter = data/i18n/<lang>/LC_MESSAGES/Erebot_Module_Countdown.po
+minimum_perc = 20

@@ -5,9 +5,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Erebot_Module_Countdown dev-master\n"
+"Project-Id-Version: Erebot_Module_Countdown 1.0.x-dev\n"
 "Report-Msgid-Bugs-To: i18n@erebot.net\n"
-"POT-Creation-Date: 2013-08-15 14:41+0200\n"
+"POT-Creation-Date: 2016-12-17 22:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 #
-# File: src/Erebot/Module/Countdown.php, line: 347
+# File: src/Countdown.php, line: 339
 msgid ""
 "<b>BINGO! <var name=\"nick\"/></b> has achieved <b><var name=\"result\"/></b> "
 "with this formula: <b><var name=\"formula\"/></b>."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 163
+# File: src/Countdown.php, line: 160
 msgid ""
 "<b>Usage:</b> !<var name='trigger'/>. Starts a new Countdown game. Given a "
 "set of numbers and a target result, contestants must propose formulae to be "
@@ -30,7 +30,7 @@ msgid ""
 "the closest result wins the game."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 252
+# File: src/Countdown.php, line: 249
 msgid ""
 "A new Countdown game has been started. You must get <b><var name=\"target\"/"
 "></b> using the following numbers <for from=\"numbers\" item=\"number"
@@ -38,80 +38,80 @@ msgid ""
 "seconds to make suggestions."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 366
+# File: src/Countdown.php, line: 358
 msgid ""
 "Congratulations <b><var name=\"nick\"/></b>! You're the closest with <b><var "
 "name=\"result\"/></b>."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 420
+# File: src/Countdown.php, line: 414
 msgid ""
 "Congratulations to <b><var name=\"nick\"/></b> who wins this Countdown game. "
 "<b><var name=\"nick\"/></b> has got <b><var name=\"result\"/></b> with this "
 "formula: <b><var name=\"formula\"/></b>."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 75
+# File: src/Countdown.php, line: 75
 msgid "Could not register Countdown trigger"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 317
+# File: src/Countdown.php, line: 312
 msgid "Division by zero"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 311
+# File: src/Countdown.php, line: 307
 msgid "Expected the formula to be a string"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 173
+# File: src/Countdown.php, line: 170
 msgid ""
 "Formulae must be given with the usual notation (eg. '(100+2) * 4 /2 - 7'). "
 "The four basic operators (+, -, *, /) and parenthesis are supported. "
 "Divisions with a remainder (eg. 5/2) are forbidden."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 458
+# File: src/Countdown.php, line: 450
 msgid ""
 "However, a better result could be achieved (<var name=\"result\"/>) by using "
 "this formula: <b><var name=\"formula\"/></b>."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 340
+# File: src/Countdown.php, line: 332
 msgid "No such number or number already used"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 323
+# File: src/Countdown.php, line: 317
 msgid "Non integral division"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 378
+# File: src/Countdown.php, line: 370
 msgid ""
 "Not bad <b><var name=\"nick\"/></b>, you actually got <b><var name=\"result\"/"
 "></b>, but this is not the best formula... Try again ;)"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 149
+# File: src/Countdown.php, line: 145
 msgid ""
 "Provides the <b><var name=\"trigger\"/></b> command which starts a new "
 "Countdown game where contestants must propose a formula to be as close as "
 "possible to a given number."
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 221
+# File: src/Countdown.php, line: 218
 msgid ""
 "So far, <b><var name=\"nick\"/></b> has achieved <b><var name=\"result\"/></"
 "b> using this formula: <b><var name=\"formula\"/></b>"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 329
+# File: src/Countdown.php, line: 322
 msgid "Syntax error"
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 413
+# File: src/Countdown.php, line: 407
 msgid "Time's up! Nobody has made any suggestion. :("
 msgstr ""
 #
-# File: src/Erebot/Module/Countdown.php, line: 206
+# File: src/Countdown.php, line: 202
 msgid ""
 "You must get <b><var name=\"target\"/></b> using the following numbers: <for "
 "from=\"numbers\" item=\"number\"><b><var name=\"number\"/></b></for>."
