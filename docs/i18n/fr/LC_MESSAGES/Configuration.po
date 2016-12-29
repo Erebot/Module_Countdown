@@ -1,0 +1,142 @@
+# French translations for Erebot_Module_Countdown package.
+# Copyright (C) 2011-2016, Erebot
+# This file is distributed under the same license as the Erebot_Module_Countdown package.
+# Automatically generated, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_Countdown 1.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-29 21:38+0100\n"
+"PO-Revision-Date: 2016-12-29 21:38+0100\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+#
+msgid "Configuration"
+msgstr ""
+#
+msgid "Options"
+msgstr ""
+#
+msgid "This module provides several configuration options."
+msgstr ""
+#
+msgid "Options for |project|"
+msgstr ""
+#
+msgid "Name"
+msgstr ""
+#
+msgid "Type"
+msgstr ""
+#
+msgid "Default value"
+msgstr ""
+#
+msgid "Description"
+msgstr ""
+#
+msgid "allowed"
+msgstr ""
+#
+msgid "string"
+msgstr ""
+#
+msgid "\"1 2 3 4 5 6 7 8 9 10 25 50 75 100\""
+msgstr ""
+#
+msgid ""
+"A space-separated list of numbers from which the bot will randomly select "
+"values meant to help contestants."
+msgstr ""
+#
+msgid "delay"
+msgstr ""
+#
+msgid "integer"
+msgstr ""
+#
+msgid "60"
+msgstr ""
+#
+msgid "How many seconds contestants have before the game ends."
+msgstr ""
+#
+msgid "maximum"
+msgstr ""
+#
+msgid "999"
+msgstr ""
+#
+msgid "The target number may not exceed this value."
+msgstr ""
+#
+msgid "minimum"
+msgstr ""
+#
+msgid "100"
+msgstr ""
+#
+msgid "The target number may not be less than this value."
+msgstr ""
+#
+msgid "numbers"
+msgstr ""
+#
+msgid "7"
+msgstr ""
+#
+msgid "How many numbers will be given to help contestants."
+msgstr ""
+#
+msgid "solver"
+msgstr ""
+#
+msgid "boolean"
+msgstr ""
+#
+msgid "FALSE"
+msgstr ""
+#
+msgid ""
+"Whether the bot should try to solve the game or not. Enabling this option has "
+"a great impact on the bot's responsiveness. Only use it if you understand the "
+"consequences."
+msgstr ""
+#
+msgid "solver_class"
+msgstr ""
+#
+msgid "\"|solver_class|\""
+msgstr ""
+#
+msgid ""
+"The class to use to solve the game (useless unless the ``solver`` option is "
+"set to TRUE)."
+msgstr ""
+#
+msgid "trigger"
+msgstr ""
+#
+msgid "\"countdown\""
+msgstr ""
+#
+msgid ""
+"The command to use (without any prefix) to start a new Countdown game. This "
+"text should only contain alpha-numeric characters."
+msgstr ""
+#
+msgid "Example"
+msgstr ""
+#
+msgid ""
+"In this example, we enable the |project| module at the general configuration "
+"level. Therefore, the game will be available on all networks/servers/"
+"channels. Of course, you can use a more restrictive configuration file if it "
+"suits your needs better."
+msgstr ""

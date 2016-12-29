@@ -1,0 +1,88 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2011-2016, Erebot
+# This file is distributed under the same license as the Erebot_Module_Countdown package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Erebot_Module_Countdown 1.0.x-dev\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-29 21:38+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+#
+# File: ../src/Usage.rst, line: 10
+msgid "Usage"
+msgstr "Usage"
+#
+# File: ../src/Usage.rst, line: 12
+msgid ""
+"This section assumes default values are used for all triggers. Please refer "
+"to :ref:`configuration options <configuration options>` for more information "
+"on how to customize triggers."
+msgstr ""
+"This section assumes default values are used for all triggers. Please refer "
+"to :ref:`configuration options <configuration options>` for more information "
+"on how to customize triggers."
+#
+# File: ../src/Usage.rst, line: 18
+msgid "Provided commands"
+msgstr "Provided commands"
+#
+# File: ../src/Usage.rst, line: 20
+msgid "This module provides the following commands:"
+msgstr "This module provides the following commands:"
+#
+# File: ../src/Usage.rst, line: 0
+msgid "Commands provided by |project|"
+msgstr "Commands provided by |project|"
+#
+# File: ../src/Usage.rst, line: 25
+msgid "Command"
+msgstr "Command"
+#
+# File: ../src/Usage.rst, line: 25
+msgid "Description"
+msgstr "Description"
+#
+# File: ../src/Usage.rst, line: 27
+msgid "``!countdown``"
+msgstr "``!countdown``"
+#
+# File: ../src/Usage.rst, line: 27
+msgid ""
+"Starts a new game. If a game is already running, displays the target number, "
+"usable numbers and current leader of the game."
+msgstr ""
+"Starts a new game. If a game is already running, displays the target number, "
+"usable numbers and current leader of the game."
+#
+# File: ../src/Usage.rst, line: 32
+msgid ""
+"Once a new game has been created, contestants can make propositions directly "
+"by sending a new formula in the channel the game was started in."
+msgstr ""
+"Once a new game has been created, contestants can make propositions directly "
+"by sending a new formula in the channel the game was started in."
+#
+# File: ../src/Usage.rst, line: 35
+msgid ""
+"The four basic operators (+ - / \\*) and parenthesis may be used in the "
+"formula."
+msgstr ""
+"The four basic operators (+ - / \\*) and parenthesis may be used in the "
+"formula."
+#
+# File: ../src/Usage.rst, line: 39
+msgid "Examples"
+msgstr "Examples"
+#
+# File: ../src/Usage.rst, line: 41
+msgid "The listing below shows a game played in french."
+msgstr "The listing below shows a game played in french."

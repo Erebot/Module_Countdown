@@ -1,9 +1,41 @@
 [main]
 host = https://www.transifex.com
 
-[Erebot.Erebot_Module_Countdown]
+[countdown-module.erebot_module_countdown]
 source_file = data/i18n/Erebot_Module_Countdown.pot
 source_lang = en_US
 type = PO
 file_filter = data/i18n/<lang>/LC_MESSAGES/Erebot_Module_Countdown.po
 minimum_perc = 20
+
+[countdown-module.docs_configuration]
+source_file = docs/pot/Configuration.pot
+source_lang = en
+type = PO
+file_filter = docs/i18n/<lang>/LC_MESSAGES/Configuration.po
+minimum_perc = 20
+lang_map = en_US:en, fr_FR:fr
+
+[countdown-module.docs_index]
+source_file = docs/pot/index.pot
+source_lang = en
+type = PO
+file_filter = docs/i18n/<lang>/LC_MESSAGES/index.po
+minimum_perc = 20
+lang_map = en_US:en, fr_FR:fr
+
+[countdown-module.docs_prerequisites]
+source_file = docs/pot/Prerequisites.pot
+source_lang = en
+type = PO
+file_filter = docs/i18n/<lang>/LC_MESSAGES/Prerequisites.po
+minimum_perc = 20
+lang_map = en_US:en, fr_FR:fr
+
+[countdown-module.docs_usage]
+source_file = docs/pot/Usage.pot
+source_lang = en
+type = PO
+file_filter = docs/i18n/<lang>/LC_MESSAGES/Usage.po
+minimum_perc = 20
+lang_map = en_US:en, fr_FR:fr
