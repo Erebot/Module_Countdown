@@ -8,3 +8,7 @@ require_once(
     DIRECTORY_SEPARATOR . 'testenv' .
     DIRECTORY_SEPARATOR . 'bootstrap.php'
 );
+
+if (!class_exists('PHPUnit_Framework_TestCase')) {
+    class_alias('\\PHPUnit\\Framework\\TestCase', 'PHPUnit_Framework_TestCase');
+}
