@@ -28,7 +28,7 @@ extends \Erebot\Module\Countdown\Game
 }
 
 class   CountdownGameTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     protected $_countdown = NULL;
 

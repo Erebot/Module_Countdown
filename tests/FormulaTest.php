@@ -17,7 +17,7 @@
 */
 
 class   CountdownFormulaTest
-extends PHPUnit_Framework_TestCase
+extends \PHPUnit\Framework\TestCase
 {
     protected $formula = NULL;
 
