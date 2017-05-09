@@ -8,6 +8,7 @@
 /README.rst      export-ignore
 /.travis.yml     export-ignore
 /.coveralls.yml  export-ignore
+/data/i18n/*.pot export-ignore
 
 /build           export-ignore
 /docs            export-ignore
