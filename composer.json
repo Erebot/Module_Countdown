@@ -23,7 +23,7 @@
         "erebot/api": "^0.7.1"
     },
     "require-dev": {
-        "erebot/buildenv": "^1.1.0",
+        "erebot/buildenv": "^1.4.0",
         "erebot/testenv": "^1.1.2",
         "fpoirotte/php_parsergenerator": "^0.1.7-patch3",
         "erebot/generic-doc": "*"
