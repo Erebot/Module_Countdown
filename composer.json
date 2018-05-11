@@ -1,6 +1,7 @@
 {
     "prefer-stable": true,
     "name": "erebot/countdown-module",
+    "type": "php-parsers",
     "description": "Erebot module providing the Countdown game",
     "keywords": ["Erebot", "IRC", "bot", "module"],
     "homepage": "https://github.com/Erebot/Module_Countdown",
@@ -19,13 +20,13 @@
     },
     "require": {
         "php": ">=5.3.0",
+        "fpoirotte/php_parsergenerator_installer": "^0.1.0",
         "erebot/triggerregistry-module": "*",
         "erebot/api": "^0.7.1"
     },
     "require-dev": {
         "erebot/buildenv": "^1.4.0",
-        "erebot/testenv": "^1.1.2",
-        "fpoirotte/php_parsergenerator": "^0.1.7-patch3"
+        "erebot/testenv": "^1.1.2"
     },
     "autoload": {
         "psr-4": {
@@ -33,6 +34,9 @@
         }
     },
     "extra": {
+        "php-parsers": {
+            "src/Countdown/Parser.php": "data/Parser.y"
+        },
         "branch-alias": {
             "dev-master": "1.0.x-dev"
         }

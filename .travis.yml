@@ -29,8 +29,6 @@ before_script:
     - rm composer.lock
     - composer self-update -n
     - composer install -n
-    - cp data/Parser.y src/Countdown/Parser.y
-    - vendor/bin/phplemon -q -s src/Countdown/Parser.y
 
 script:
     - vendor/bin/phpunit --coverage-clover clover.xml

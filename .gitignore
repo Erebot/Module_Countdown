@@ -1,7 +1,6 @@
 /build/
 /vendor/
-/src/Countdown/Parser.y
-/src/Countdown/Parser.out
+/src/Countdown/Parser.*
 
 *.mo
 
