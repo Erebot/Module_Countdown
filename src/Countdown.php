@@ -77,7 +77,7 @@ class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEn
             }
 
             $this->startHandler    = new \Erebot\EventHandler(
-                \Erebot\CallableWrapper::wrap(array($this, 'handleCountdown')),
+                array($this, 'handleCountdown'),
                 new \Erebot\Event\Match\All(
                     new \Erebot\Event\Match\Type('\\Erebot\\Event\\ChanText'),
                     new \Erebot\Event\Match\TextStatic($trigger, true)
@@ -86,7 +86,7 @@ class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEn
             $this->connection->addEventHandler($this->startHandler);
 
             $this->rawHandler  = new \Erebot\EventHandler(
-                \Erebot\CallableWrapper::wrap(array($this, 'handleRawText')),
+                array($this, 'handleRawText'),
                 new \Erebot\Event\Match\All(
                     new \Erebot\Event\Match\Any(),
                     new \Erebot\Event\Match\Type('\\Erebot\\Event\\ChanText'),
@@ -261,7 +261,7 @@ class Countdown extends \Erebot\Module\Base implements \Erebot\Interfaces\HelpEn
 
         $timerCls = $this->getFactory('!Timer');
         $timer  = new $timerCls(
-            \Erebot\CallableWrapper::wrap(array($this, 'handleTimeOut')),
+            array($this, 'handleTimeOut'),
             $delay,
             false,
             array($chan)
