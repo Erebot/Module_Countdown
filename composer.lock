@@ -4,34 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3a968539a53c328e91dacf0294d86d1",
+    "content-hash": "a1c7c536a2e3eca6a56bc6f25d120f3f",
     "packages": [
         {
             "name": "erebot/api",
-            "version": "0.7.4",
+            "version": "0.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/API.git",
-                "reference": "e91f3ed7ca3d11160639695d841ca4cd14b3ff77"
+                "reference": "8712b3f53509c987c7356ce0ef4109e864753d09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/API/zipball/e91f3ed7ca3d11160639695d841ca4cd14b3ff77",
-                "reference": "e91f3ed7ca3d11160639695d841ca4cd14b3ff77",
+                "url": "https://api.github.com/repos/Erebot/API/zipball/8712b3f53509c987c7356ce0ef4109e864753d09",
+                "reference": "8712b3f53509c987c7356ce0ef4109e864753d09",
                 "shasum": ""
             },
             "require": {
-                "erebot/callable-wrapper": "*",
-                "erebot/intl": "^0.1.0",
+                "erebot/intl": "^0.2.0",
                 "erebot/timer": "*",
                 "erebot/uri": "*",
                 "ext-spl": "*",
                 "fpoirotte/natives4doxygen": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "erebot/buildenv": "^1.5.0",
-                "erebot/testenv": "*"
+                "erebot/testenv": "^2.0.0"
             },
             "type": "library",
             "extra": {
@@ -62,93 +61,46 @@
                 "bot",
                 "irc"
             ],
-            "time": "2018-05-11T12:18:10+00:00"
-        },
-        {
-            "name": "erebot/callable-wrapper",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Erebot/CallableWrapper.git",
-                "reference": "501653f83427f2867ef3ffef497710ad0779bba2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/CallableWrapper/zipball/501653f83427f2867ef3ffef497710ad0779bba2",
-                "reference": "501653f83427f2867ef3ffef497710ad0779bba2",
-                "shasum": ""
-            },
-            "require": {
-                "ext-spl": "*",
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "*",
-                "squizlabs/php_codesniffer": "*"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Erebot\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "François Poirotte",
-                    "email": "clicky@erebot.net",
-                    "role": "lead"
-                }
-            ],
-            "description": "Callable wrapper for PHP < 5.4.0",
-            "homepage": "https://github.com/Erebot/CallableWrapper",
-            "keywords": [
-                "callable"
-            ],
-            "time": "2016-07-16T16:21:59+00:00"
+            "time": "2018-05-11T22:03:26+00:00"
         },
         {
             "name": "erebot/intl",
-            "version": "0.1.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Intl.git",
-                "reference": "58572c4bc21dc63e7ba9f0a4e398dc76a8a92501"
+                "reference": "6356e72e5e301faf49a20a22c55aeccfe30613ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Intl/zipball/58572c4bc21dc63e7ba9f0a4e398dc76a8a92501",
-                "reference": "58572c4bc21dc63e7ba9f0a4e398dc76a8a92501",
+                "url": "https://api.github.com/repos/Erebot/Intl/zipball/6356e72e5e301faf49a20a22c55aeccfe30613ff",
+                "reference": "6356e72e5e301faf49a20a22c55aeccfe30613ff",
                 "shasum": ""
             },
             "require": {
+                "ext-iconv": "*",
                 "ext-intl": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
-                "fpoirotte/file_gettext": "*",
-                "php": ">=5.3.0"
+                "fpoirotte/php_parsergenerator_installer": "^0.1.0",
+                "php": ">=7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "*",
                 "squizlabs/php_codesniffer": "*"
             },
-            "type": "library",
+            "type": "php-parsers",
             "extra": {
+                "php-parsers": {
+                    "src/PluralParser.php": "data/PluralParser.y"
+                },
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Erebot\\": "src/"
+                    "Erebot\\Intl\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -171,26 +123,25 @@
                 "l10n",
                 "translations"
             ],
-            "time": "2016-12-24T15:26:42+00:00"
+            "time": "2018-05-11T11:40:34+00:00"
         },
         {
             "name": "erebot/timer",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Timer.git",
-                "reference": "003845e0b2fc1025b949b1e79792122593ba16d5"
+                "reference": "cd04905d859221f9e216deba25693bc8906441f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Timer/zipball/003845e0b2fc1025b949b1e79792122593ba16d5",
-                "reference": "003845e0b2fc1025b949b1e79792122593ba16d5",
+                "url": "https://api.github.com/repos/Erebot/Timer/zipball/cd04905d859221f9e216deba25693bc8906441f5",
+                "reference": "cd04905d859221f9e216deba25693bc8906441f5",
                 "shasum": ""
             },
             "require": {
-                "erebot/callable-wrapper": "^1.0",
                 "ext-spl": "*",
-                "php": ">=5.3.0"
+                "php": ">=7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "*",
@@ -223,30 +174,29 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2016-08-02T19:32:31+00:00"
+            "time": "2018-05-11T21:59:50+00:00"
         },
         {
             "name": "erebot/triggerregistry-module",
-            "version": "0.2.0",
+            "version": "0.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Module_TriggerRegistry.git",
-                "reference": "a60270118457a7c9a3acc58429629417260fa83f"
+                "reference": "a315e157adfd5bfdec827b73ca7688ec91097452"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Module_TriggerRegistry/zipball/a60270118457a7c9a3acc58429629417260fa83f",
-                "reference": "a60270118457a7c9a3acc58429629417260fa83f",
+                "url": "https://api.github.com/repos/Erebot/Module_TriggerRegistry/zipball/a315e157adfd5bfdec827b73ca7688ec91097452",
+                "reference": "a315e157adfd5bfdec827b73ca7688ec91097452",
                 "shasum": ""
             },
             "require": {
-                "erebot/api": "^0.7.1",
-                "php": ">=5.3.0"
+                "erebot/api": "^0.9.0",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "erebot/buildenv": "^1.1.0",
-                "erebot/generic-doc": "*",
-                "erebot/testenv": "^1.1.2"
+                "erebot/buildenv": "^1.5.0",
+                "erebot/testenv": "^2.0.0"
             },
             "type": "library",
             "extra": {
@@ -278,7 +228,7 @@
                 "irc",
                 "module"
             ],
-            "time": "2016-09-11T21:23:30+00:00"
+            "time": "2018-05-12T12:29:03+00:00"
         },
         {
             "name": "erebot/uri",
@@ -331,53 +281,6 @@
                 "uri"
             ],
             "time": "2016-08-07T18:28:04+00:00"
-        },
-        {
-            "name": "fpoirotte/file_gettext",
-            "version": "0.4.2-patch2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fpoirotte/File_Gettext.git",
-                "reference": "6fe84d13a1f07216e0a1eb6facfe68f502ec3303"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fpoirotte/File_Gettext/zipball/6fe84d13a1f07216e0a1eb6facfe68f502ec3303",
-                "reference": "6fe84d13a1f07216e0a1eb6facfe68f502ec3303",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pcre": "*",
-                "php": ">=5.0.0"
-            },
-            "provide": {
-                "pear/file_gettext": "0.4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "File_Gettext": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                ""
-            ],
-            "license": [
-                "BSD"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Wallner",
-                    "email": "mike@php.net"
-                }
-            ],
-            "description": "Reader and writer for GNU PO and MO files",
-            "homepage": "https://github.com/fpoirotte/File_Gettext",
-            "keywords": [
-                "gettext"
-            ],
-            "time": "2016-07-16T18:24:30+00:00"
         },
         {
             "name": "fpoirotte/natives4doxygen",
@@ -758,38 +661,38 @@
         },
         {
             "name": "erebot/styling",
-            "version": "0.1.2",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Styling.git",
-                "reference": "a69440b0a2e041fe9596799e6c8fd974ccc5a182"
+                "reference": "5192da42143eb407dc3e1d04e690c1b10ca1bf7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Styling/zipball/a69440b0a2e041fe9596799e6c8fd974ccc5a182",
-                "reference": "a69440b0a2e041fe9596799e6c8fd974ccc5a182",
+                "url": "https://api.github.com/repos/Erebot/Styling/zipball/5192da42143eb407dc3e1d04e690c1b10ca1bf7f",
+                "reference": "5192da42143eb407dc3e1d04e690c1b10ca1bf7f",
                 "shasum": ""
             },
             "require": {
                 "erebot/dom": "*",
-                "erebot/intl": "^0.1.0",
+                "erebot/intl": "^0.2.0",
                 "ext-intl": "*",
                 "ext-pcre": "*",
                 "ext-reflection": "*",
                 "ext-spl": "*",
-                "fpoirotte/file_gettext": "*",
-                "php": ">=5.3.0"
+                "fpoirotte/php_parsergenerator_installer": "^0.1.0",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "fpoirotte/php_parsergenerator": "^0.1.7-patch3",
+                "erebot/plop": "^0.6",
                 "phpunit/phpunit": "*",
                 "squizlabs/php_codesniffer": "*"
             },
-            "suggest": {
-                "erebot/plop": "~0.6"
-            },
-            "type": "library",
+            "type": "php-parsers",
             "extra": {
+                "php-parsers": {
+                    "src/Styling/Parser.php": "data/Styling.y"
+                },
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
@@ -818,26 +721,25 @@
                 "templates",
                 "templating"
             ],
-            "time": "2018-05-11T11:57:12+00:00"
+            "time": "2018-05-11T11:50:17+00:00"
         },
         {
             "name": "erebot/testenv",
-            "version": "1.1.7",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Erebot/Testenv.git",
-                "reference": "b4fcbb5a73af01fc7c213c5553fcf2e166285eb8"
+                "reference": "3c1df86c62f170ada26ddf50eb51eb1bc8510a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Erebot/Testenv/zipball/b4fcbb5a73af01fc7c213c5553fcf2e166285eb8",
-                "reference": "b4fcbb5a73af01fc7c213c5553fcf2e166285eb8",
+                "url": "https://api.github.com/repos/Erebot/Testenv/zipball/3c1df86c62f170ada26ddf50eb51eb1bc8510a63",
+                "reference": "3c1df86c62f170ada26ddf50eb51eb1bc8510a63",
                 "shasum": ""
             },
             "require": {
-                "erebot/callable-wrapper": "*",
                 "erebot/plop": "^0.6",
-                "erebot/styling": "^0.1.0",
+                "erebot/styling": "^0.2.0",
                 "erebot/timer": "*",
                 "pdepend/pdepend": "*",
                 "php": ">=5.3.0",
@@ -849,7 +751,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -868,7 +770,7 @@
             "keywords": [
                 "Erebot"
             ],
-            "time": "2018-05-11T12:01:23+00:00"
+            "time": "2018-05-11T22:02:25+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3121,7 +3023,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }
