@@ -12,6 +12,7 @@ php:
     - 7.0
     - 7.1
     - 7.2
+    - 7.3
     - nightly
 
 notifications:
@@ -42,6 +43,7 @@ jobs:
       script:
         - git clone --depth=1 --branch=build https://github.com/Erebot/erebot.github.io.git docs/trigger
         - "export TRIGGER_DOC_BUILD=$( (git show --pretty=format: --name-only $TRAVIS_COMMIT | grep -q '^docs/' && echo 1) || echo 0 )"
+        - if [ -n "$TRAVIS_TAG" ]; then export TRIGGER_DOC_BUILD=1; fi
         - if [ $TRAVIS_PULL_REQUEST != "false" ]; then export TRIGGER_DOC_BUILD=0; fi
       deploy:
         provider: pages
